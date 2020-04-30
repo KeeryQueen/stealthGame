@@ -44,4 +44,11 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     @objc open var borderColor = NSUIColor.black
     @objc open var borderLineWidth: CGFloat = 1.0
     
+    /// flag indicating if the grid background should be drawn or not
+    @objc open var drawGridBackgroundEnabled = false
     
+    /// When enabled, the borders rectangle will be rendered.
+    /// If this is enabled, there is no point drawing the axis-lines of x- and y-axis.
+    @objc open var drawBordersEnabled = false
+    
+    /// When enabled, the values will be clipped to contentRect, otherwise they can bleed outside the con
