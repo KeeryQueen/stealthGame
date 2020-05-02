@@ -51,4 +51,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// If this is enabled, there is no point drawing the axis-lines of x- and y-axis.
     @objc open var drawBordersEnabled = false
     
-    /// When enabled, the values will be clipped to contentRect, otherwise they can bleed outside the con
+    /// When enabled, the values will be clipped to contentRect, otherwise they can bleed outside the content rect.
+    @objc open var clipValuesToContentEnabled: Bool = false
+
+    /// When disabled, the data and/or highlights will not be clipped to contentRect. Disabling this option can
+    /// be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
+    /// that there is unwanted clipping.
+    @objc open var clipDataToContentEnabled: Bool = true
+
+    /// Sets the minimum o
