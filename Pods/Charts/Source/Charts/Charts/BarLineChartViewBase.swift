@@ -59,4 +59,13 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// that there is unwanted clipping.
     @objc open var clipDataToContentEnabled: Bool = true
 
-    /// Sets the minimum o
+    /// Sets the minimum offset (padding) around the chart, defaults to 10
+    @objc open var minOffset = CGFloat(10.0)
+    
+    /// Sets whether the chart should keep its position (zoom / scroll) after a rotation (orientation change)
+    /// **default**: false
+    @objc open var keepPositionOnRotation: Bool = false
+    
+    /// The left y-axis object. In the horizontal bar-chart, this is the
+    /// top axis.
+    @objc open internal
