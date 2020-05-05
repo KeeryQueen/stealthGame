@@ -82,4 +82,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// **default**: An instance of YAxisRenderer
     @objc open lazy var rightYAxisRenderer = YAxisRenderer(viewPortHandler: _viewPortHandler, yAxis: rightAxis, transformer: _rightAxisTransformer)
     
-    internal var _leftAxisTransformer: Transfo
+    internal var _leftAxisTransformer: Transformer!
+    internal var _rightAxisTransformer: Transformer!
+    
+    /// The X axis renderer. This is a read-write property so you can set your own custom renderer here.
+    /// **default**: An instance of XAxisRenderer
+    @objc open lazy var xAxisRenderer = XAxisRenderer(viewPortHandler: _viewPortHandler, xAxis: _xAxis, transformer: _leftAxisTransformer)
+    
+    internal var _tapGestureRecognizer: NSUITapGestureRecognizer!
+    internal var _doubleT
