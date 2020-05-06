@@ -101,4 +101,24 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     
     public override init(frame: CGRect)
     {
-        super.init(f
+        super.init(frame: frame)
+    }
+    
+    public required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    deinit
+    {
+        stopDeceleration()
+    }
+    
+    internal override func initialize()
+    {
+        super.initialize()
+
+        _leftAxisTransformer = Transformer(viewPortHandler: _viewPortHandler)
+        _rightAxisTransformer = Transformer(viewPortHandler: _viewPortHandler)
+        
+        self.highlighter = 
