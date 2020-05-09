@@ -145,4 +145,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         #endif
     }
     
-    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+    {
+        // Saving current position of chart.
+        var oldPoint: CGPoint?
+        if (keepPositionOnRotation && (keyPath == "frame" || keyPath == "bounds"))
+        {
+            oldPoint = viewPortHandler.contentRect.origin
+            getTransformer(forAxis: .left).pixelToValues(&oldPoint!)
+        }
+        
+        // Superclass transforms chart.
+        super.observeValue(forKe
