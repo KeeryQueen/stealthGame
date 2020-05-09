@@ -156,4 +156,14 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
         
         // Superclass transforms chart.
-        super.observeValue(forKe
+        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        
+        // Restoring old position of chart
+        if var newPoint = oldPoint , keepPositionOnRotation
+        {
+            getTransformer(forAxis: .left).pointValueToPixel(&newPoint)
+            viewPortHandler.centerViewPort(pt: newPoint, chart: self)
+        }
+        else
+        {
+            viewPortHandler.refresh(newMatrix: viewPortHandler.touchMatrix, chart: 
