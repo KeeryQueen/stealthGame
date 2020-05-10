@@ -166,4 +166,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
         else
         {
-            viewPortHandler.refresh(newMatrix: viewPortHandler.touchMatrix, chart: 
+            viewPortHandler.refresh(newMatrix: viewPortHandler.touchMatrix, chart: self, invalidate: true)
+        }
+    }
+    
+    open override func draw(_ rect: CGRect)
+    {
+        super.draw(rect)
+
+        guard data != nil, let renderer = renderer else { return }
+        
+        let optionalContext = NSUIGraphicsGetCurrentContext()
+        guard let context = optionalContext else { return }
+
+        // execute all drawing commands
+        drawGridBackground(context: context)
+   
