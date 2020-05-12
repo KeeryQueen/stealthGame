@@ -181,4 +181,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
 
         // execute all drawing commands
         drawGridBackground(context: context)
-   
+        
+
+        if _autoScaleMinMaxEnabled
+        {
+            autoScale()
+        }
+
+        if leftAxis.isEnabled
+        {
+            leftYAxisRenderer.computeAxis(min: leftAxis._axisMinimum, max: leftAxis._axisMaximum, inverted: leftAxis.isInverted)
+        }
+        
+        if rightAxis.isEnabled
+        {
+            rightYAxisRenderer.computeAxis(min: rightAxis._axisMinimum, max: rightAxis._axisMaximum
