@@ -231,4 +231,14 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
         
         context.saveGState()
-        // make sure the data 
+        // make sure the data cannot be drawn outside the content-rect
+        if clipDataToContentEnabled {
+            context.clip(to: _viewPortHandler.contentRect)
+        }
+        renderer.drawData(context: context)
+        
+        // The renderers are responsible for clipping, to account for line-width center etc.
+        if !xAxis.drawGridLinesBehindDataEnabled
+        {
+            xAxisRenderer.renderGridLines(context: context)
+            leftYAx
