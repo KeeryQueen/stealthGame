@@ -241,4 +241,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         if !xAxis.drawGridLinesBehindDataEnabled
         {
             xAxisRenderer.renderGridLines(context: context)
-            leftYAx
+            leftYAxisRenderer.renderGridLines(context: context)
+            rightYAxisRenderer.renderGridLines(context: context)
+        }
+        
+        // if highlighting is enabled
+        if (valuesToHighlight())
+        {
+            renderer.drawHighlighted(context: context, indices: _indicesToHighlight)
+        }
+        
+        context.restoreGState()
+        
+        renderer.drawExtras(context: context)
+        
+        if _xAxis.isEnabled && !_xAxis.isDrawLimitLinesBehi
