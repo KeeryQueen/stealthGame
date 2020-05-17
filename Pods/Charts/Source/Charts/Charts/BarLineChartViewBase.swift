@@ -267,4 +267,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         if rightAxis.isEnabled && !rightAxis.isDrawLimitLinesBehindDataEnabled
         {
-            rightYAxisRenderer.renderLimitLines(context: contex
+            rightYAxisRenderer.renderLimitLines(context: context)
+        }
+        
+        xAxisRenderer.renderAxisLabels(context: context)
+        leftYAxisRenderer.renderAxisLabels(context: context)
+        rightYAxisRenderer.renderAxisLabels(context: context)
+
+        if clipValuesToContentEnabled
+        {
+            context.saveGState()
+            context.clip(to: _viewPortHandler.contentRect)
+            
+            renderer.drawValues(context: context)
+            
+            context.restoreGState()
+      
