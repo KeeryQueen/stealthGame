@@ -282,4 +282,20 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             renderer.drawValues(context: context)
             
             context.restoreGState()
-      
+        }
+        else
+        {
+            renderer.drawValues(context: context)
+        }
+
+        _legendRenderer.renderLegend(context: context)
+
+        drawDescription(context: context)
+        
+        drawMarkers(context: context)
+    }
+    
+    private var _autoScaleLastLowestVisibleX: Double?
+    private var _autoScaleLastHighestVisibleX: Double?
+    
+    /// Performs auto scaling of the axis by recalculating the min
