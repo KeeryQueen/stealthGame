@@ -312,4 +312,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         if leftAxis.isEnabled
         {
-      
+            leftAxis.calculate(min: data.getYMin(axis: .left), max: data.getYMax(axis: .left))
+        }
+        
+        if rightAxis.isEnabled
+        {
+            rightAxis.calculate(min: data.getYMin(axis: .right), max: data.getYMax(axis: .right))
+        }
+        
+        calculateOffsets()
+    }
+    
+    internal func prepareValuePxMatrix()
+    {
+        _rightAxisTransformer.prepareMatrixValuePx(chartXMin: _xAxis._axisMinimum, deltaX: CGFloat(
