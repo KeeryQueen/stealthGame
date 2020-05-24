@@ -343,4 +343,22 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         leftYAxisRenderer.computeAxis(min: leftAxis._axisMinimum, max: leftAxis._axisMaximum, inverted: leftAxis.isInverted)
         rightYAxisRenderer.computeAxis(min: rightAxis._axisMinimum, max: rightAxis._axisMaximum, inverted: rightAxis.isInverted)
-     
+        
+        if let data = _data
+        {
+            xAxisRenderer.computeAxis(
+                min: _xAxis._axisMinimum,
+                max: _xAxis._axisMaximum,
+                inverted: false)
+
+            if _legend !== nil
+            {
+                legendRenderer?.computeLegend(data: data)
+            }
+        }
+        
+        calculateOffsets()
+        
+        setNeedsDisplay()
+    }
+    
