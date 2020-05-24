@@ -332,4 +332,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     internal func prepareOffsetMatrix()
     {
         _rightAxisTransformer.prepareMatrixOffset(inverted: rightAxis.isInverted)
-        _leftAxisTransformer.prepareM
+        _leftAxisTransformer.prepareMatrixOffset(inverted: leftAxis.isInverted)
+    }
+    
+    open override func notifyDataSetChanged()
+    {
+        renderer?.initBuffers()
+        
+        calcMinMax()
+        
+        leftYAxisRenderer.computeAxis(min: leftAxis._axisMinimum, max: leftAxis._axisMaximum, inverted: leftAxis.isInverted)
+        rightYAxisRenderer.computeAxis(min: rightAxis._axisMinimum, max: rightAxis._axisMaximum, inverted: rightAxis.isInverted)
+     
