@@ -362,3 +362,11 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         setNeedsDisplay()
     }
     
+    internal override func calcMinMax()
+    {
+        // calculate / set x-axis range
+        _xAxis.calculate(min: _data?.xMin ?? 0.0, max: _data?.xMax ?? 0.0)
+        
+        // calculate axis range (min / max) according to provided data
+        leftAxis.calculate(min: _data?.getYMin(axis: .left) ?? 0.0, max: _data?.getYMax(axis: .left) ?? 0.0)
+        rightAxis.calculate(min: _data?.getYMin(axis: .right) ?? 0.0, max: _data?.getYM
