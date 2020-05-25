@@ -369,4 +369,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         // calculate axis range (min / max) according to provided data
         leftAxis.calculate(min: _data?.getYMin(axis: .left) ?? 0.0, max: _data?.getYMax(axis: .left) ?? 0.0)
-        rightAxis.calculate(min: _data?.getYMin(axis: .right) ?? 0.0, max: _data?.getYM
+        rightAxis.calculate(min: _data?.getYMin(axis: .right) ?? 0.0, max: _data?.getYMax(axis: .right) ?? 0.0)
+    }
+    
+    internal func calculateLegendOffsets(offsetLeft: inout CGFloat, offsetTop: inout CGFloat, offsetRight: inout CGFloat, offsetBottom: inout CGFloat)
+    {
+        // setup offsets for legend
+        if _legend !== nil && _legend.isEnabled && !_legend.drawInside
+        {
+            switch _legend.orientation
+            {
+            case .vertical:
+                
+               
