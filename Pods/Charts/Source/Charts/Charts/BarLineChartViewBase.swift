@@ -397,4 +397,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                         offsetTop += min(_legend.neededHeight, _viewPortHandler.chartHeight * _legend.maxSizePercent) + _legend.yOffset
                         
                     case .bottom:
-                        offsetBottom += min(_legend.neededHeight, _viewPortHan
+                        offsetBottom += min(_legend.neededHeight, _viewPortHandler.chartHeight * _legend.maxSizePercent) + _legend.yOffset
+                        
+                    default:
+                        break
+                    }
+                }
+                
+            case .horizontal:
+                
+                switch _legend.verticalAlignment
+                {
+                case .top:
+                    offsetTop += min(_legend.neededHeight, _viewPortHandler.chartHeight
