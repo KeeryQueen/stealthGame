@@ -423,4 +423,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     
     internal override func calculateOffsets()
     {
-        if !_cust
+        if !_customViewPortEnabled
+        {
+            var offsetLeft = CGFloat(0.0)
+            var offsetRight = CGFloat(0.0)
+            var offsetTop = CGFloat(0.0)
+            var offsetBottom = CGFloat(0.0)
+            
+            calculateLegendOffsets(offsetLeft: &offsetLeft,
+                                   offsetTop: &offsetTop,
+                                   offsetRight: &offsetRight,
+                                   offsetBottom: &offsetBottom)
+       
