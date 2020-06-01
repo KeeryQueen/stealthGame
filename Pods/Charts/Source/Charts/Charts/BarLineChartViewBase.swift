@@ -434,4 +434,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                                    offsetTop: &offsetTop,
                                    offsetRight: &offsetRight,
                                    offsetBottom: &offsetBottom)
-       
+            
+            // offsets for y-labels
+            if leftAxis.needsOffset
+            {
+                offsetLeft += leftAxis.requiredSize().width
+            }
+            
+            if rightAxis.needsOffset
+            {
+                offsetRight += rightAxis.requiredSize().width
+            }
+
+            if xAxis.isEnabled && xAxis.isDrawLabelsEnabled
+            {
+                let xlabelheight = xAxis.label
