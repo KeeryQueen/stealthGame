@@ -461,4 +461,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 }
                 else if xAxis.labelPosition == .bothSided
                 {
-     
+                    offsetBottom += xlabelheight
+                    offsetTop += xlabelheight
+                }
+            }
+            
+            offsetTop += self.extraTopOffset
+            offsetRight += self.extraRightOffset
+            offsetBottom += self.extraBottomOffset
+            offsetLeft += self.extraLeftOffset
+
+            _viewPortHandler.restrainViewPort(
+                offsetLeft: max(self.minOffset, offsetLeft),
+                offsetTop: m
