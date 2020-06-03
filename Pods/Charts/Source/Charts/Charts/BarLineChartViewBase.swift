@@ -473,4 +473,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
 
             _viewPortHandler.restrainViewPort(
                 offsetLeft: max(self.minOffset, offsetLeft),
-                offsetTop: m
+                offsetTop: max(self.minOffset, offsetTop),
+                offsetRight: max(self.minOffset, offsetRight),
+                offsetBottom: max(self.minOffset, offsetBottom))
+        }
+        
+        prepareOffsetMatrix()
+        prepareValuePxMatrix()
+    }
+    
+    /// draws the grid background
+    internal func drawGridBackground(context: CGContext)
+    {
+        if drawGridBackgroundEnabled || drawBordersEnabled
+        {
+            context.sa
