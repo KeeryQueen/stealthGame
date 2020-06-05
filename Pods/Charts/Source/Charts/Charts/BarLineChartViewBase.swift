@@ -502,4 +502,25 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             context.setLineWidth(borderLineWidth)
             context.setStrokeColor(borderColor.cgColor)
             context.stroke(_viewPortHandler.contentRect)
-       
+        }
+        
+        if drawGridBackgroundEnabled || drawBordersEnabled
+        {
+            context.restoreGState()
+        }
+    }
+    
+    // MARK: - Gestures
+    
+    private enum GestureScaleAxis
+    {
+        case both
+        case x
+        case y
+    }
+    
+    private var _isDragging = false
+    private var _isScaling = false
+    private var _gestureScaleAxis = GestureScaleAxis.both
+    private var _closestDataSetToTouch: IChartDataSet!
+    pri
