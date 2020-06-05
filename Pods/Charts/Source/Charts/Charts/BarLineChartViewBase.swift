@@ -523,4 +523,13 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     private var _isScaling = false
     private var _gestureScaleAxis = GestureScaleAxis.both
     private var _closestDataSetToTouch: IChartDataSet!
-    pri
+    private var _panGestureReachedEdge: Bool = false
+    private weak var _outerScrollView: NSUIScrollView?
+    
+    private var _lastPanPoint = CGPoint() /// This is to prevent using setTranslation which resets velocity
+    
+    private var _decelerationLastTime: TimeInterval = 0.0
+    private var _decelerationDisplayLink: NSUIDisplayLink!
+    private var _decelerationVelocity = CGPoint()
+    
+    @objc private func tapGestureRecognized(
