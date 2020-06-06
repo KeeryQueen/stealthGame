@@ -532,4 +532,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     private var _decelerationDisplayLink: NSUIDisplayLink!
     private var _decelerationVelocity = CGPoint()
     
-    @objc private func tapGestureRecognized(
+    @objc private func tapGestureRecognized(_ recognizer: NSUITapGestureRecognizer)
+    {
+        if _data === nil
+        {
+            return
+        }
+        
+        if recognizer.state == NSUIGestureRecognizerState.ended
+        {
+            if !isHighLightPerTapEnabled { return }
+            
+            let h = getHighlightByTouchPoint(recognizer.location(in: self))
+            
+            if h === nil || h == self.lastHighlighted
+            {
+                lastHighlighted = 
