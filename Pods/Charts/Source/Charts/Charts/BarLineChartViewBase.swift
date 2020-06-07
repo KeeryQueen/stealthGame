@@ -547,4 +547,22 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             
             if h === nil || h == self.lastHighlighted
             {
-                lastHighlighted = 
+                lastHighlighted = nil
+                highlightValue(nil, callDelegate: true)
+            }
+            else
+            {
+                lastHighlighted = h
+                highlightValue(h, callDelegate: true)
+            }
+        }
+    }
+    
+    @objc private func doubleTapGestureRecognized(_ recognizer: NSUITapGestureRecognizer)
+    {
+        if _data === nil
+        {
+            return
+        }
+        
+        if recognizer.state == NSUIGestureRecognizerS
