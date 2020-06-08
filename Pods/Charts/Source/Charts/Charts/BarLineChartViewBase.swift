@@ -565,4 +565,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             return
         }
         
-        if recognizer.state == NSUIGestureRecognizerS
+        if recognizer.state == NSUIGestureRecognizerState.ended
+        {
+            if _data !== nil && _doubleTapToZoomEnabled && (data?.entryCount ?? 0) > 0
+            {
+                var location = recognizer.location(in: self)
+                location.x = location.x - _viewPortHandler.offsetLeft
+                
+                if isTouchInverted()
+                {
+                    location.y = -(location.y - _viewPortHandler.offsetTop)
+                }
+                else
+                {
+ 
