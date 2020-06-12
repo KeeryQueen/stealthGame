@@ -589,4 +589,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             }
         }
     }
+    
+    #if !os(tvOS)
+    @objc private func pinchGestureRecognized(_ recognizer: NSUIPinchGestureRecognizer)
+    {
+        if recognizer.state == NSUIGestureRecognizerState.began
+        {
+            stopDeceleration()
+            
+            if _data !== nil &&
+                (_pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled)
+            {
+                _isScaling = true
+                
+                if _pinchZoomEnabled
+                {
  
