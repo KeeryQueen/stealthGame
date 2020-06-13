@@ -604,4 +604,13 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 
                 if _pinchZoomEnabled
                 {
- 
+                    _gestureScaleAxis = .both
+                }
+                else
+                {
+                    let x = abs(recognizer.location(in: self).x - recognizer.nsuiLocationOfTouch(1, inView: self).x)
+                    let y = abs(recognizer.location(in: self).y - recognizer.nsuiLocationOfTouch(1, inView: self).y)
+                    
+                    if _scaleXEnabled != _scaleYEnabled
+                    {
+            
