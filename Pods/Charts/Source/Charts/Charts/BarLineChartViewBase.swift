@@ -613,4 +613,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     
                     if _scaleXEnabled != _scaleYEnabled
                     {
-            
+                        _gestureScaleAxis = _scaleXEnabled ? .x : .y
+                    }
+                    else
+                    {
+                        _gestureScaleAxis = x > y ? .x : .y
+                    }
+                }
+            }
+        }
+        else if recognizer.state == NSUIGestureRecognizerState.ended ||
+            recognizer.state == NSUIGestureRecognizerState.cancelled
+        {
+            if _isScaling
+           
