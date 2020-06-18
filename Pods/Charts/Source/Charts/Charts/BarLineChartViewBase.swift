@@ -626,4 +626,14 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             recognizer.state == NSUIGestureRecognizerState.cancelled
         {
             if _isScaling
-           
+            {
+                _isScaling = false
+                
+                // Range might have changed, which means that Y-axis labels could have changed in size, affecting Y-axis size. So we need to recalculate offsets.
+                calculateOffsets()
+                setNeedsDisplay()
+            }
+        }
+        else if recognizer.state == NSUIGestureRecognizerState.changed
+        {
+            let isZoomingOut = (recogni
