@@ -636,4 +636,10 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
         else if recognizer.state == NSUIGestureRecognizerState.changed
         {
-            let isZoomingOut = (recogni
+            let isZoomingOut = (recognizer.nsuiScale < 1)
+            var canZoomMoreX = isZoomingOut ? _viewPortHandler.canZoomOutMoreX : _viewPortHandler.canZoomInMoreX
+            var canZoomMoreY = isZoomingOut ? _viewPortHandler.canZoomOutMoreY : _viewPortHandler.canZoomInMoreY
+            
+            if _isScaling
+            {
+                canZoomMoreX = canZoomMoreX && _scaleXEnabled && (_gestureScaleAxis == .both || _
