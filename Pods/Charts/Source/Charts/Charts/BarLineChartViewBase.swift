@@ -642,4 +642,11 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             
             if _isScaling
             {
-                canZoomMoreX = canZoomMoreX && _scaleXEnabled && (_gestureScaleAxis == .both || _
+                canZoomMoreX = canZoomMoreX && _scaleXEnabled && (_gestureScaleAxis == .both || _gestureScaleAxis == .x)
+                canZoomMoreY = canZoomMoreY && _scaleYEnabled && (_gestureScaleAxis == .both || _gestureScaleAxis == .y)
+                if canZoomMoreX || canZoomMoreY
+                {
+                    var location = recognizer.location(in: self)
+                    location.x = location.x - _viewPortHandler.offsetLeft
+                    
+                    if isTouchInv
