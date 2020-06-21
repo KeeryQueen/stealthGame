@@ -649,4 +649,14 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     var location = recognizer.location(in: self)
                     location.x = location.x - _viewPortHandler.offsetLeft
                     
-                    if isTouchInv
+                    if isTouchInverted()
+                    {
+                        location.y = -(location.y - _viewPortHandler.offsetTop)
+                    }
+                    else
+                    {
+                        location.y = -(_viewPortHandler.chartHeight - location.y - _viewPortHandler.offsetBottom)
+                    }
+                    
+                    let scaleX = canZoomMoreX ? recognizer.nsuiScale : 1.0
+      
