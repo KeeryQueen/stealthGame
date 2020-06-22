@@ -667,4 +667,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     
                     matrix = _viewPortHandler.touchMatrix.concatenating(matrix)
                     
-             
+                    _viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: true)
+                    
+                    if delegate !== nil
+                    {
+                        delegate?.chartScaled?(self, scaleX: scaleX, scaleY: scaleY)
+                    }
+                }
+                
+                recognizer.nsuiScale = 1.0
+            }
+        }
+    }
+    #endif
+    
+    @objc private func panGestureR
