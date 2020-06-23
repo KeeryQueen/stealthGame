@@ -681,4 +681,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     #endif
     
-    @objc private func panGestureR
+    @objc private func panGestureRecognized(_ recognizer: NSUIPanGestureRecognizer)
+    {
+        if recognizer.state == NSUIGestureRecognizerState.began && recognizer.nsuiNumberOfTouches() > 0
+        {
+            stopDeceleration()
+            
+            if _data === nil || !self.isDragEnabled
+            { // If we have no data, we have nothing to pan and no data to highlight
+                return
+            }
+            
+            // If drag is enabled and we are in a position 
