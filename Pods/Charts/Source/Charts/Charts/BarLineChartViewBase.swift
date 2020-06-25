@@ -692,4 +692,11 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 return
             }
             
-            // If drag is enabled and we are in a position 
+            // If drag is enabled and we are in a position where there's something to drag:
+            //  * If we're zoomed in, then obviously we have something to drag.
+            //  * If we have a drag offset - we always have something to drag
+            if !self.hasNoDragOffset || !self.isFullyZoomedOut
+            {
+                _isDragging = true
+                
+                _closestDataSetToTouch = getDataSetByTouchPoint(point: recognizer.nsuiLocat
