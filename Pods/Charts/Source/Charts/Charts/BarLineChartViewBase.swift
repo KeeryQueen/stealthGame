@@ -720,4 +720,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     {
                         // We can stop dragging right now, and let the scroll view take control
                         _outerScrollView = nil
-                        _isDragg
+                        _isDragging = false
+                    }
+                }
+                else
+                {
+                    if _outerScrollView !== nil
+                    {
+                        // Prevent the parent scroll view from scrolling
+                        _outerScrollView?.nsuiIsScrollEnabled = false
+                    }
+                }
+                
+                _lastPanPoint = recognizer.translation(i
