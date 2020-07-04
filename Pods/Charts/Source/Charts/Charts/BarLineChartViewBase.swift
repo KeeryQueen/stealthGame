@@ -732,4 +732,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     }
                 }
                 
-                _lastPanPoint = recognizer.translation(i
+                _lastPanPoint = recognizer.translation(in: self)
+            }
+            else if self.isHighlightPerDragEnabled
+            {
+                // We will only handle highlights on NSUIGestureRecognizerState.Changed
+                
+                _isDragging = false
+            }
+        }
+        else if recognizer.state == NSUIGestureRecognizerState.changed
+        {
+            if _isDragging
+            {
+                let originalTranslation = recognizer.translation(in: se
