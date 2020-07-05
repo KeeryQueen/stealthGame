@@ -745,4 +745,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         {
             if _isDragging
             {
-                let originalTranslation = recognizer.translation(in: se
+                let originalTranslation = recognizer.translation(in: self)
+                var translation = CGPoint(x: originalTranslation.x - _lastPanPoint.x, y: originalTranslation.y - _lastPanPoint.y)
+                
+                if !self.dragXEnabled
+                {
+                    translation.x = 0.0
+                }
+                else if !self.dragYEnabled
+                {
+                    translation.y = 0.0
+                }
+               
