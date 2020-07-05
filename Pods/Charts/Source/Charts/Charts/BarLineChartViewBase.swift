@@ -756,4 +756,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 {
                     translation.y = 0.0
                 }
+                
+                let _ = performPanChange(translation: translation)
+                
+                _lastPanPoint = originalTranslation
+            }
+            else if isHighlightPerDragEnabled
+            {
+                let h = getHighlightByTouchPoint(recognizer.location(in: self))
+                
+                let lastHighlighted = self.lastHighlighted
+                
+                if h != lastHighlighted
+                {
                
