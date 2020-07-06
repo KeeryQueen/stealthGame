@@ -779,4 +779,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             if _isDragging
             {
                 if recognizer.state == NSUIGestureRecognizerState.ended && isDragDecelerationEnabled
-          
+                {
+                    stopDeceleration()
+                    
+                    _decelerationLastTime = CACurrentMediaTime()
+                    _decelerationVelocity = recognizer.velocity(in: self)
+                    
+                    _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(BarLineChartViewBase.decelerationLoop))
+                    _decelerationDisplayLink.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
+         
