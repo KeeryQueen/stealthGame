@@ -769,4 +769,14 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 
                 if h != lastHighlighted
                 {
-               
+                    self.lastHighlighted = h
+                    self.highlightValue(h, callDelegate: true)
+                }
+            }
+        }
+        else if recognizer.state == NSUIGestureRecognizerState.ended || recognizer.state == NSUIGestureRecognizerState.cancelled
+        {
+            if _isDragging
+            {
+                if recognizer.state == NSUIGestureRecognizerState.ended && isDragDecelerationEnabled
+          
