@@ -804,4 +804,20 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     
     private func performPanChange(translation: CGPoint) -> Bool
     {
-        var tra
+        var translation = translation
+        
+        if isTouchInverted()
+        {
+            if self is HorizontalBarChartView
+            {
+                translation.x = -translation.x
+            }
+            else
+            {
+                translation.y = -translation.y
+            }
+        }
+        
+        let originalMatrix = _viewPortHandler.touchMatrix
+        
+        var matrix = CGAffineTransform(translationX: tra
