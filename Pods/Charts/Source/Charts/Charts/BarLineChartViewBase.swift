@@ -831,4 +831,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
         
         // Did we managed to actually drag or did we reach the edge?
-        return matrix.tx != o
+        return matrix.tx != originalMatrix.tx || matrix.ty != originalMatrix.ty
+    }
+    
+    private func isTouchInverted() -> Bool
+    {
+        return isAnyAxisInverted &&
+            _closestDataSetToTouch !== nil &&
+            getAxis(_closestDataSetToTouch.axisDependency).isInverted
+    }
+    
+    @objc open func stopDeceleration()
+    {
+        if _decelerationDisplayLink !== nil
+        {
+            _decelerationDisplayLink.remove(from: RunLoop.main,
