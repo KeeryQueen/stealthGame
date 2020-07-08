@@ -820,4 +820,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         let originalMatrix = _viewPortHandler.touchMatrix
         
-        var matrix = CGAffineTransform(translationX: tra
+        var matrix = CGAffineTransform(translationX: translation.x, y: translation.y)
+        matrix = originalMatrix.concatenating(matrix)
+        
+        matrix = _viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: true)
+        
+        if matrix != originalMatrix
+        {
+            delegate?.chartTranslated?(self, dX: translation.x, dY: translation.y)
+        }
+        
+        // Did we managed to actually drag or did we reach the edge?
+        return matrix.tx != o
