@@ -845,4 +845,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     {
         if _decelerationDisplayLink !== nil
         {
-            _decelerationDisplayLink.remove(from: RunLoop.main,
+            _decelerationDisplayLink.remove(from: RunLoop.main, forMode: RunLoop.Mode.common)
+            _decelerationDisplayLink = nil
+        }
+    }
+    
+    @objc private func decelerationLoop()
+    {
+        let currentTime = CACurrentMediaTime()
+        
+        _decelerationVelocity.x *= self.dragDecelerationFrictionCoef
+        _decelerationVelocity.y *= self.dragDecelerationFrictionCoef
+        
+        let timeInterval = CGFloat(currentTime - _decelerationLastTime)
+        
+        let distance = 
