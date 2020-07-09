@@ -859,4 +859,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         let timeInterval = CGFloat(currentTime - _decelerationLastTime)
         
-        let distance = 
+        let distance = CGPoint(
+            x: _decelerationVelocity.x * timeInterval,
+            y: _decelerationVelocity.y * timeInterval
+        )
+        
+        if !performPanChange(translation: distance)
+        {
+            // We reached the edge, stop
+            _decelerationVelocity.x = 0.0
+            _decelerationVelocity.y = 0.0
+        }
+        
+        _decelerationLastTime = currentTime
+        
+        if abs(_decelerationVelocity.x) < 0
