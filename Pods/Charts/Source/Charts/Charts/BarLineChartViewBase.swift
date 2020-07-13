@@ -913,4 +913,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     #if !os(OSX)
-    open overr
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool
+    {
+        if !super.gestureRecognizerShouldBegin(gestureRecognizer)
+        {
+            return false
+        }
+        
+        return nsuiGestureRecognizerShouldBegin(gestureRecognizer)
+    }
+    #endif
+    
+    #if os(OSX)
+    public func gestureRecognizerShouldBegin(gestureRecognizer: NSGestureRecognizer) -> Bool
+    {
+        return nsuiGestureRecognizerSh
