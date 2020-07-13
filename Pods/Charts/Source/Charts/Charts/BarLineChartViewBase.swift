@@ -892,4 +892,25 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 (self.hasNoDragOffset && self.isFullyZoomedOut && !self.isHighlightPerDragEnabled) ||
                 (!_dragYEnabled && abs(velocity.y) > abs(velocity.x)) ||
                 (!_dragXEnabled && abs(velocity.y) < abs(velocity.x))
-   
+            {
+                return false
+            }
+        }
+        else
+        {
+            #if !os(tvOS)
+            if gestureRecognizer == _pinchGestureRecognizer
+            {
+                if _data === nil || (!_pinchZoomEnabled && !_scaleXEnabled && !_scaleYEnabled)
+                {
+                    return false
+                }
+            }
+            #endif
+        }
+        
+        return true
+    }
+    
+    #if !os(OSX)
+    open overr
