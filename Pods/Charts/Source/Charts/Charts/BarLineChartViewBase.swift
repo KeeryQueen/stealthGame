@@ -935,4 +935,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     {
         #if !os(tvOS)
         if ((gestureRecognizer is NSUIPinchGestureRecognizer && otherGestureRecognizer is NSUIPanGestureRecognizer) ||
-            (gestureRecognizer is NSUIPanGestureRecognizer && otherGestureRecognizer i
+            (gestureRecognizer is NSUIPanGestureRecognizer && otherGestureRecognizer is NSUIPinchGestureRecognizer))
+        {
+            return true
+        }
+        #endif
+        
+        if gestureRecognizer is NSUIPanGestureRecognizer,
+            otherGestureRecognizer is NSUIPanGestureRecognizer,
+            gestureRecognizer == _panGestureRecognizer
+        {
+            var scrollView = self.superview
+            while scrollView != nil && !(scrollView is NSUIScrollView)
+            {
+ 
