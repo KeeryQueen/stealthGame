@@ -956,4 +956,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             if let superViewOfScrollView = scrollView?.superview,
                 superViewOfScrollView is NSUIScrollView
             {
-         
+                scrollView = superViewOfScrollView
+            }
+
+            var foundScrollView = scrollView as? NSUIScrollView
+            
+            if !(foundScrollView?.nsuiIsScrollEnabled ?? true)
+            {
+                foundScrollView = nil
+            }
+            
+            let scrollViewPanGestureRecognizer = foundScrollView?.nsuiGestureRecognizers?.first {
+                $0 is NSUIPanGestureRecognizer
+            }
+            
+          
