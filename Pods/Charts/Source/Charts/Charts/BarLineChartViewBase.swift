@@ -970,4 +970,22 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 $0 is NSUIPanGestureRecognizer
             }
             
-          
+            if otherGestureRecognizer === scrollViewPanGestureRecognizer
+            {
+                _outerScrollView = foundScrollView
+                
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    /// MARK: Viewport modifiers
+    
+    /// Zooms in by 1.4, into the charts center.
+    @objc open func zoomIn()
+    {
+        let center = _viewPortHandler.contentCenter
+        
+        
