@@ -988,4 +988,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     {
         let center = _viewPortHandler.contentCenter
         
+        let matrix = _viewPortHandler.zoomIn(x: center.x, y: -center.y)
+        _viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: false)
         
+        // Range might have changed, which means that Y-axis labels could have changed in size, affecting Y-axis size. So we need to recalculate offsets.
+        calculateOffsets()
+        setNeedsDisplay()
+    }
+
+    /// Zooms out by 0.7, from the charts cent
