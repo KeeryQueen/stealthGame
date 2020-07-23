@@ -1006,4 +1006,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
 
         // Range might have changed, which means that Y-axis labels could have changed in size, affecting Y-axis size. So we need to recalculate offsets.
         calculateOffsets()
-        setNeedsDisplay
+        setNeedsDisplay()
+    }
+    
+    /// Zooms out to original size.
+    @objc open func resetZoom()
+    {
+        let matrix = _viewPortHandler.resetZoom()
+        _viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: false)
+        
+        // Range might have changed, which means that Y-axis labels could have changed in size, affecting Y-axis size. So we need to recalculate offsets.
+        calculateOffsets()
+        s
