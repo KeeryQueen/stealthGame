@@ -1017,4 +1017,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         
         // Range might have changed, which means that Y-axis labels could have changed in size, affecting Y-axis size. So we need to recalculate offsets.
         calculateOffsets()
-        s
+        setNeedsDisplay()
+    }
+
+    /// Zooms in or out by the given scale factor. x and y are the coordinates
+    /// (in pixels) of the zoom center.
+    ///
+    /// - Parameters:
+    ///   - scaleX: if < 1 --> zoom out, if > 1 --> zoom in
+    ///   - scaleY: if < 1 --> zoom out, if > 1 --> zoom in
+    ///   - x:
+    ///   - y:
+    @objc open func zoom(
+        scaleX: CGFloat,
+               scaleY: CGFloat,
+               x: CGFloat,
+    
