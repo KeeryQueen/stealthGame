@@ -1042,4 +1042,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         setNeedsDisplay()
     }
     
-    /// Zooms in 
+    /// Zooms in or out by the given scale factor.
+    /// x and y are the values (**not pixels**) of the zoom center.
+    ///
+    /// - Parameters:
+    ///   - scaleX: if < 1 --> zoom out, if > 1 --> zoom in
+    ///   - scaleY: if < 1 --> zoom out, if > 1 --> zoom in
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis:
+    @objc open func zoom(
+        scaleX: CGFloat,
+               scaleY: CGFloat,
+               xValue: Double,
+               yValue:
