@@ -1055,4 +1055,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         scaleX: CGFloat,
                scaleY: CGFloat,
                xValue: Double,
-               yValue:
+               yValue: Double,
+               axis: YAxis.AxisDependency)
+    {
+        let job = ZoomViewJob(
+            viewPortHandler: viewPortHandler,
+            scaleX: scaleX,
+            scaleY: scaleY,
+            xValue: xValue,
+            yValue: yValue,
+            transformer: getTransformer(forAxis: axis),
+            axis: axis,
+            view: self)
+        addViewportJob(job)
+    }
+    
+    /// Zooms to the center of the c
