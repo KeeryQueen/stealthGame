@@ -1085,4 +1085,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         let center = centerOffsets
         let matrix = viewPortHandler.zoom(
             scaleX: scaleX,
-            sc
+            scaleY: scaleY,
+            x: center.x,
+            y: -center.y)
+        viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: false)
+    }
+    
+    /// Zooms by the specified scale factor to the specified values on the specified axis.
+    ///
+    /// - Parameters:
+    ///   - scaleX:
+    ///   - scaleY:
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis: which axis should be used as a reference
