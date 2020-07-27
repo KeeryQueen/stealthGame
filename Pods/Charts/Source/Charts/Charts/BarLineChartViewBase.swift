@@ -1070,4 +1070,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         addViewportJob(job)
     }
     
-    /// Zooms to the center of the c
+    /// Zooms to the center of the chart with the given scale factor.
+    ///
+    /// - Parameters:
+    ///   - scaleX: if < 1 --> zoom out, if > 1 --> zoom in
+    ///   - scaleY: if < 1 --> zoom out, if > 1 --> zoom in
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis:
+    @objc open func zoomToCenter(
+        scaleX: CGFloat,
+               scaleY: CGFloat)
+    {
+        let center = centerOffsets
+        let matrix = viewPortHandler.zoom(
+            scaleX: scaleX,
+            sc
