@@ -1098,4 +1098,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     ///   - scaleY:
     ///   - xValue:
     ///   - yValue:
-    ///   - axis: which axis should be used as a reference
+    ///   - axis: which axis should be used as a reference for the y-axis
+    ///   - duration: the duration of the animation in seconds
+    ///   - easing:
+    @objc open func zoomAndCenterViewAnimated(
+        scaleX: CGFloat,
+        scaleY: CGFloat,
+        xValue: Double,
+        yValue: Double,
+        axis: YAxis.AxisDependency,
+        duration: TimeInterval,
+        easing: ChartEasingFunctionBlock?)
+    {
+        let origin = valueForTouchPoint(
+            point: CGPoint(x: viewPortHandler.content
