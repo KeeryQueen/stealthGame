@@ -1111,4 +1111,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         easing: ChartEasingFunctionBlock?)
     {
         let origin = valueForTouchPoint(
-            point: CGPoint(x: viewPortHandler.content
+            point: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop),
+            axis: axis)
+        
+        let job = AnimatedZoomViewJob(
+            viewPortHandler: viewPortHandler,
+            transformer: getTransformer(forAxis: axis),
+            view: self,
+            yAxis: getAxis(axis),
+            xAxisRange: _xAxis.axisRange,
+            scaleX: scaleX,
+            scaleY: scaleY,
+            xOrigin: viewPortHandler.scaleX,
+            yOrigin: viewPortHandler.scaleY,
+          
