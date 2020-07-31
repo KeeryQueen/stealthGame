@@ -1124,4 +1124,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             scaleY: scaleY,
             xOrigin: viewPortHandler.scaleX,
             yOrigin: viewPortHandler.scaleY,
-          
+            zoomCenterX: CGFloat(xValue),
+            zoomCenterY: CGFloat(yValue),
+            zoomOriginX: origin.x,
+            zoomOriginY: origin.y,
+            duration: duration,
+            easing: easing)
+            
+        addViewportJob(job)
+    }
+    
+    /// Zooms by the specified scale factor to the specified values on the specified axis.
+    ///
+    /// - Parameters:
+    ///   - scaleX:
+    ///   - scaleY:
+    
