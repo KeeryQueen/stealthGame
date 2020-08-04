@@ -1174,4 +1174,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         axis: YAxis.AxisDependency,
         duration: TimeInterval)
     {
-        zoomAndCenterViewAnimated(scaleX: scaleX, scaleY: scaleY, xValue: xValue, yValue: y
+        zoomAndCenterViewAnimated(scaleX: scaleX, scaleY: scaleY, xValue: xValue, yValue: yValue, axis: axis, duration: duration, easingOption: .easeInOutSine)
+    }
+    
+    /// Resets all zooming and dragging and makes the chart fit exactly it's bounds.
+    @objc open func fitScreen()
+    {
+        let matrix = _viewPortHandler.fitScreen()
+        _viewPortHandler.refresh(newMatrix: matrix, chart: self, invalidate: false)
+        
+        calculateOffsets()
+        setNeedsDisplay()
+    }
+    
+    /// Sets the min
