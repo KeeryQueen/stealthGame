@@ -1187,4 +1187,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         setNeedsDisplay()
     }
     
-    /// Sets the min
+    /// Sets the minimum scale value to which can be zoomed out. 1 = fitScreen
+    @objc open func setScaleMinima(_ scaleX: CGFloat, scaleY: CGFloat)
+    {
+        _viewPortHandler.setMinimumScaleX(scaleX)
+        _viewPortHandler.setMinimumScaleY(scaleY)
+    }
+    
+    @objc open var visibleXRange: Double
+    {
+        return abs(highestVisibleX - lowestVisibleX)
+    }
+    
+    /// Sets the size of the area (range on the x-axis) t
