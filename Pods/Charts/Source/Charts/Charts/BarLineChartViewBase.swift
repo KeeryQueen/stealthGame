@@ -1207,4 +1207,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     @objc open func setVisibleXRangeMaximum(_ maxXRange: Double)
     {
         let xScale = _xAxis.axisRange / maxXRange
-        _viewPortHandler.setMini
+        _viewPortHandler.setMinimumScaleX(CGFloat(xScale))
+    }
+    
+    /// Sets the size of the area (range on the x-axis) that should be minimum visible at once (no further zooming in allowed).
+    ///
+    /// If this is e.g. set to 10, no less than a range of 10 values on the x-axis can be viewed at once without scrolling.
+    ///
+    /// If you call this method, chart must have data or it has no effect.
+    @objc open func setVisibleXRangeMinimum(_ minXRange: Do
