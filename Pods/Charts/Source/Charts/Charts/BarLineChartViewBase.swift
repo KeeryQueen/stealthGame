@@ -1247,4 +1247,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         _viewPortHandler.setMinimumScaleY(CGFloat(yScale))
     }
     
-    /// Sets the size of the area (range on the y-axis) that should be minimum visible at once, no further zoomin
+    /// Sets the size of the area (range on the y-axis) that should be minimum visible at once, no further zooming in possible.
+    ///
+    /// - Parameters:
+    ///   - yRange:
+    ///   - axis: - the axis for which this limit should apply
+    @objc open func setVisibleYRangeMinimum(_ minYRange: Double, axis: YAxis.AxisDependency)
+    {
+        let yScale = getAxisRange(axis: axis) / minYRange
+        _viewPortHandler.setMaximumScaleY(CGFloat(yScale))
+    }
+
+    /// Limits the maximum and minimum y range that can be visible b
