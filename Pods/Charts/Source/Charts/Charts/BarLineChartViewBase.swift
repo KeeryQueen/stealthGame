@@ -1268,4 +1268,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     {
         let minScale = getAxisRange(axis: axis) / minYRange
         let maxScale = getAxisRange(axis: axis) / maxYRange
-        _viewPortHandler.setMinMaxScaleY(minScaleY: CG
+        _viewPortHandler.setMinMaxScaleY(minScaleY: CGFloat(minScale), maxScaleY: CGFloat(maxScale))
+    }
+    
+    /// Moves the left side of the current viewport to the specified x-value.
+    /// This also refreshes the chart by calling setNeedsDisplay().
+    @objc open func moveViewToX(_ xValue: Double)
+    {
+        let job = MoveViewJob(
+            viewPortHandler: viewPortHandler,
+            xValue: xValue,
+            yValue: 0.0,
+            transformer: getTransfor
