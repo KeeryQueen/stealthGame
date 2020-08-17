@@ -1279,4 +1279,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             viewPortHandler: viewPortHandler,
             xValue: xValue,
             yValue: 0.0,
-            transformer: getTransfor
+            transformer: getTransformer(forAxis: .left),
+            view: self)
+        
+        addViewportJob(job)
+    }
+
+    /// Centers the viewport to the specified y-value on the y-axis.
+    /// This also refreshes the chart by calling setNeedsDisplay().
+    /// 
+    /// - Parameters:
+    ///   - yValue:
+    ///   - axis: - which axis should be used as a reference for the y-axis
+    @objc open func moveViewToY(_ yValue: Double, axis: YAxis.AxisDependency)
+ 
