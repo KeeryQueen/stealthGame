@@ -1305,4 +1305,13 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         addViewportJob(job)
     }
 
-    /// This will move the left side of the current 
+    /// This will move the left side of the current viewport to the specified x-value on the x-axis, and center the viewport to the specified y-value on the y-axis.
+    /// This also refreshes the chart by calling setNeedsDisplay().
+    /// 
+    /// - Parameters:
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis: - which axis should be used as a reference for the y-axis
+    @objc open func moveViewTo(xValue: Double, yValue: Double, axis: YAxis.AxisDependency)
+    {
+        let yInVie
