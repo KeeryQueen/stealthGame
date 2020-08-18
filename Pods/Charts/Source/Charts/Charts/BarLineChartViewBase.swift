@@ -1314,4 +1314,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     ///   - axis: - which axis should be used as a reference for the y-axis
     @objc open func moveViewTo(xValue: Double, yValue: Double, axis: YAxis.AxisDependency)
     {
-        let yInVie
+        let yInView = getAxisRange(axis: axis) / Double(_viewPortHandler.scaleY)
+        
+        let job = MoveViewJob(
+            viewPortHandler: viewPortHandler,
+            xValue: xValue,
+            yValue: yValue + yInView / 2.0,
+            transformer: getTransformer(forAxis: axis),
+            view: self)
+        
+        addViewportJob(job)
+    }
+    
+    /// This will move the left side of the current viewport to the sp
