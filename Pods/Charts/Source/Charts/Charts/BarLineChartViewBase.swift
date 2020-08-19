@@ -1334,4 +1334,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     ///   - yValue:
     ///   - axis: which axis should be used as a reference for the y-axis
     ///   - duration: the duration of the animation in seconds
-    ///   - ea
+    ///   - easing:
+    @objc open func moveViewToAnimated(
+        xValue: Double,
+        yValue: Double,
+        axis: YAxis.AxisDependency,
+        duration: TimeInterval,
+        easing: ChartEasingFunctionBlock?)
+    {
+        let bounds = valueForTouchPoint(
+            point: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop),
+            axis: axis)
+        
+        let yInView = get
