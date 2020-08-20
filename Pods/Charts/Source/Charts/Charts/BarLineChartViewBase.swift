@@ -1346,4 +1346,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             point: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop),
             axis: axis)
         
-        let yInView = get
+        let yInView = getAxisRange(axis: axis) / Double(_viewPortHandler.scaleY)
+        
+        let job = AnimatedMoveViewJob(
+            viewPortHandler: viewPortHandler,
+            xValue: xValue,
+            yValue: yValue + yInView / 2.0,
+            transformer: getTransformer(forAxis: axis),
+            view: self,
+            xOrigin: bounds.x,
+            yOrigin: bounds.y,
+            duration: duration,
+            easing: easing)
+        
+        addViewportJo
