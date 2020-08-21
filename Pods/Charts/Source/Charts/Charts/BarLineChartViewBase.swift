@@ -1359,4 +1359,14 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             duration: duration,
             easing: easing)
         
-        addViewportJo
+        addViewportJob(job)
+    }
+    
+    /// This will move the left side of the current viewport to the specified x-position and center the viewport to the specified y-position animated.
+    /// This also refreshes the chart by calling setNeedsDisplay().
+    ///
+    /// - Parameters:
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis: which axis should be used as a reference for the y-axis
+    ///   - duration: th
