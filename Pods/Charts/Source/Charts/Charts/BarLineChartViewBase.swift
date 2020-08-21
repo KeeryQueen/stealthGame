@@ -1369,4 +1369,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     ///   - xValue:
     ///   - yValue:
     ///   - axis: which axis should be used as a reference for the y-axis
-    ///   - duration: th
+    ///   - duration: the duration of the animation in seconds
+    ///   - easing:
+    @objc open func moveViewToAnimated(
+        xValue: Double,
+        yValue: Double,
+        axis: YAxis.AxisDependency,
+        duration: TimeInterval,
+        easingOption: ChartEasingOption)
+    {
+        moveViewToAnimated(xValue: xValue, yValue: yValue, axis: axis, duration: duration, easing: easingFunctionFromOption(easingOption))
+    }
+    
+    /// This will move the left side 
