@@ -1381,4 +1381,13 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         moveViewToAnimated(xValue: xValue, yValue: yValue, axis: axis, duration: duration, easing: easingFunctionFromOption(easingOption))
     }
     
-    /// This will move the left side 
+    /// This will move the left side of the current viewport to the specified x-position and center the viewport to the specified y-position animated.
+    /// This also refreshes the chart by calling setNeedsDisplay().
+    ///
+    /// - Parameters:
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis: which axis should be used as a reference for the y-axis
+    ///   - duration: the duration of the animation in seconds
+    ///   - easing:
+    @objc open func moveViewTo
