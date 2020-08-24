@@ -1401,3 +1401,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     
     /// This will move the center of the current viewport to the specified x-value and y-value.
     /// This also refreshes the chart by calling setNeedsDisplay().
+    ///
+    /// - Parameters:
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis: - which axis should be used as a reference for the y-axis
+    @objc open func centerViewTo(
+        xValue: Double,
+        yValue: Double,
+        axis: YAxis.AxisDependency)
+    {
+        let yInView = getAxisRange(axis: axis) / Double(_viewPortHandler.scaleY)
+        let xInView = xAxis.axisRange / Double(_viewPortHandler.scaleX)
+        
+        let job = MoveViewJob
