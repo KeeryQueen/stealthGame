@@ -1414,4 +1414,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         let yInView = getAxisRange(axis: axis) / Double(_viewPortHandler.scaleY)
         let xInView = xAxis.axisRange / Double(_viewPortHandler.scaleX)
         
-        let job = MoveViewJob
+        let job = MoveViewJob(
+            viewPortHandler: viewPortHandler,
+            xValue: xValue - xInView / 2.0,
+            yValue: yValue + yInView / 2.0,
+            transformer: getTransformer(forAxis: axis),
+            view: self)
+        
+        addViewportJob(job)
+    }
+    
+    /// This will move the center of the current viewport to the specified x-value and y-value animated.
+    ///
+    /// - Parameters:
+    ///   - xValue:
+    ///   
