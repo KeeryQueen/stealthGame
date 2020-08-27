@@ -1440,4 +1440,14 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         easing: ChartEasingFunctionBlock?)
     {
         let bounds = valueForTouchPoint(
-            point: CGPoint(x: viewPortHan
+            point: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop),
+            axis: axis)
+        
+        let yInView = getAxisRange(axis: axis) / Double(_viewPortHandler.scaleY)
+        let xInView = xAxis.axisRange / Double(_viewPortHandler.scaleX)
+        
+        let job = AnimatedMoveViewJob(
+            viewPortHandler: viewPortHandler,
+            xValue: xValue - xInView / 2.0,
+            yValue: yValue + yInView / 2.0,
+            transformer: getTransformer(for
