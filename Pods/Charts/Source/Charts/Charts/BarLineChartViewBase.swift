@@ -1450,4 +1450,20 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             viewPortHandler: viewPortHandler,
             xValue: xValue - xInView / 2.0,
             yValue: yValue + yInView / 2.0,
-            transformer: getTransformer(for
+            transformer: getTransformer(forAxis: axis),
+            view: self,
+            xOrigin: bounds.x,
+            yOrigin: bounds.y,
+            duration: duration,
+            easing: easing)
+        
+        addViewportJob(job)
+    }
+    
+    /// This will move the center of the current viewport to the specified x-value and y-value animated.
+    ///
+    /// - Parameters:
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis: which axis should be used as a reference for the y-axis
+    ///   
