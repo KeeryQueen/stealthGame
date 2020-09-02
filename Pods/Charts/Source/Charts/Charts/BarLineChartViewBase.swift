@@ -1478,4 +1478,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         centerViewToAnimated(xValue: xValue, yValue: yValue, axis: axis, duration: duration, easing: easingFunctionFromOption(easingOption))
     }
     
-    /// This will move the 
+    /// This will move the center of the current viewport to the specified x-value and y-value animated.
+    ///
+    /// - Parameters:
+    ///   - xValue:
+    ///   - yValue:
+    ///   - axis: which axis should be used as a reference for the y-axis
+    ///   - duration: the duration of the animation in seconds
+    ///   - easing:
+    @objc open func centerViewToAnimated(
+        xValue: Double,
+        yValue: Double,
+        axis: YAxis.AxisDepe
