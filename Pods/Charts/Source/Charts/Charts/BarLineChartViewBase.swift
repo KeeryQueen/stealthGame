@@ -1489,4 +1489,11 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     @objc open func centerViewToAnimated(
         xValue: Double,
         yValue: Double,
-        axis: YAxis.AxisDepe
+        axis: YAxis.AxisDependency,
+        duration: TimeInterval)
+    {
+        centerViewToAnimated(xValue: xValue, yValue: yValue, axis: axis, duration: duration, easingOption: .easeInOutSine)
+    }
+
+    /// Sets custom offsets for the current `ChartViewPort` (the offsets on the sides of the actual chart window). Setting this will prevent the chart from automatically calculating it's offsets. Use `resetViewPortOffsets()` to undo this.
+    /// ONLY
