@@ -1505,4 +1505,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         {
             self._viewPortHandler.restrainViewPort(offsetLeft: left, offsetTop: top, offsetRight: right, offsetBottom: bottom)
             prepareOffsetMatrix()
-       
+            prepareValuePxMatrix()
+        }
+        else
+        {
+            DispatchQueue.main.async(execute: {
+                self.setViewPortOffsets(left: left, top: top, right: right, bottom: bottom)
+            })
+        }
+    }
+
+    /// Resets all custom offsets set via `setViewPortOffsets(...)` method. Allows the chart to again calculate all offsets automatically.
+    @objc open func reset
