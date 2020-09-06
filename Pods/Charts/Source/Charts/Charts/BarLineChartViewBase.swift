@@ -1516,4 +1516,25 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
 
     /// Resets all custom offsets set via `setViewPortOffsets(...)` method. Allows the chart to again calculate all offsets automatically.
-    @objc open func reset
+    @objc open func resetViewPortOffsets()
+    {
+        _customViewPortEnabled = false
+        calculateOffsets()
+    }
+
+    // MARK: - Accessors
+    
+    /// - Returns: The range of the specified axis.
+    @objc open func getAxisRange(axis: YAxis.AxisDependency) -> Double
+    {
+        if axis == .left
+        {
+            return leftAxis.axisRange
+        }
+        else
+        {
+            return rightAxis.axisRange
+        }
+    }
+
+    /// - Returns: The position (in pixels) the provided Entry has
