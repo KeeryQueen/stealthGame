@@ -1537,4 +1537,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
     }
 
-    /// - Returns: The position (in pixels) the provided Entry has
+    /// - Returns: The position (in pixels) the provided Entry has inside the chart view
+    @objc open func getPosition(entry e: ChartDataEntry, axis: YAxis.AxisDependency) -> CGPoint
+    {
+        var vals = CGPoint(x: CGFloat(e.x), y: CGFloat(e.y))
+
+        getTransformer(forAxis: axis).pointValueToPixel(&vals)
+
+        return vals
+    }
+
+    /// is dragging enabled? (moving the chart with the finger) for the chart (this does not affect scaling).
+    @objc open var dragEnabled:
