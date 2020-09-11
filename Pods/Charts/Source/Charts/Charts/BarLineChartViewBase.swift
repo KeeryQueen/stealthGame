@@ -1593,4 +1593,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
     }
     
-    /// is scaling en
+    /// is scaling enabled? (zooming in and out by gesture) for the chart (this does not affect dragging).
+    @objc open func setScaleEnabled(_ enabled: Bool)
+    {
+        if _scaleXEnabled != enabled || _scaleYEnabled != enabled
+        {
+            _scaleXEnabled = enabled
+            _scaleYEnabled = enabled
+            #if !os(tvOS)
+            _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnable
