@@ -1601,4 +1601,22 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             _scaleXEnabled = enabled
             _scaleYEnabled = enabled
             #if !os(tvOS)
-            _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnable
+            _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+            #endif
+        }
+    }
+    
+    @objc open var scaleXEnabled: Bool
+    {
+        get
+        {
+            return _scaleXEnabled
+        }
+        set
+        {
+            if _scaleXEnabled != newValue
+            {
+                _scaleXEnabled = newValue
+                #if !os(tvOS)
+                _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+               
