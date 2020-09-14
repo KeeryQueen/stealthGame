@@ -1638,4 +1638,22 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 #if !os(tvOS)
                 _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
                 #endif
+            }
+        }
+    }
     
+    @objc open var isScaleXEnabled: Bool { return scaleXEnabled }
+    @objc open var isScaleYEnabled: Bool { return scaleYEnabled }
+    
+    /// flag that indicates if double tap zoom is enabled or not
+    @objc open var doubleTapToZoomEnabled: Bool
+    {
+        get
+        {
+            return _doubleTapToZoomEnabled
+        }
+        set
+        {
+            if _doubleTapToZoomEnabled != newValue
+            {
+            
