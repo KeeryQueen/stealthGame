@@ -1656,4 +1656,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         {
             if _doubleTapToZoomEnabled != newValue
             {
-            
+                _doubleTapToZoomEnabled = newValue
+                _doubleTapGestureRecognizer.isEnabled = _doubleTapToZoomEnabled
+            }
+        }
+    }
+    
+    /// **default**: true
+    /// `true` if zooming via double-tap is enabled `false` ifnot.
+    @objc open var isDoubleTapToZoomEnabled: Bool
+    {
+        return doubleTapToZoomEnabled
+    }
+    
+    /// flag that indicates if highlighting per dragging over a fully zoome
