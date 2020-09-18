@@ -1669,4 +1669,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         return doubleTapToZoomEnabled
     }
     
-    /// flag that indicates if highlighting per dragging over a fully zoome
+    /// flag that indicates if highlighting per dragging over a fully zoomed out chart is enabled
+    @objc open var highlightPerDragEnabled = true
+    
+    /// If set to true, highlighting per dragging over a fully zoomed out chart is enabled
+    /// You might want to disable this when using inside a `NSUIScrollView`
+    /// 
+    /// **default**: true
+    @objc open var isHighlightPerDragEnabled: Bool
+    {
+        return highlightPerDragEnabled
+    }
+    
+    /// **default**: true
+    /// `true` if drawing the
