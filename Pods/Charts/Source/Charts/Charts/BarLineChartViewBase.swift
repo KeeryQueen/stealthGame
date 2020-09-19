@@ -1682,4 +1682,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// **default**: true
-    /// `true` if drawing the
+    /// `true` if drawing the grid background is enabled, `false` ifnot.
+    @objc open var isDrawGridBackgroundEnabled: Bool
+    {
+        return drawGridBackgroundEnabled
+    }
+    
+    /// **default**: false
+    /// `true` if drawing the borders rectangle is enabled, `false` ifnot.
+    @objc open var isDrawBordersEnabled: Bool
+    {
+        return drawBordersEnabled
+    }
+
+    /// - Returns: The x and y values in the chart at the given touch point
