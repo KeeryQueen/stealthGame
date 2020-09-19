@@ -1696,3 +1696,13 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
 
     /// - Returns: The x and y values in the chart at the given touch point
+    /// (encapsulated in a `CGPoint`). This method transforms pixel coordinates to
+    /// coordinates / values in the chart. This is the opposite method to
+    /// `getPixelsForValues(...)`.
+    @objc open func valueForTouchPoint(point pt: CGPoint, axis: YAxis.AxisDependency) -> CGPoint
+    {
+        return getTransformer(forAxis: axis).valueForTouchPoint(pt)
+    }
+
+    /// Transforms the given chart values into pixels. This is the opposite
+    ///
