@@ -1705,4 +1705,13 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
 
     /// Transforms the given chart values into pixels. This is the opposite
-    ///
+    /// method to `valueForTouchPoint(...)`.
+    @objc open func pixelForValues(x: Double, y: Double, axis: YAxis.AxisDependency) -> CGPoint
+    {
+        return getTransformer(forAxis: axis).pixelForValues(x: x, y: y)
+    }
+    
+    /// - Returns: The Entry object displayed at the touched position of the chart
+    @objc open func getEntryByTouchPoint(point pt: CGPoint) -> ChartDataEntry!
+    {
+        if l
