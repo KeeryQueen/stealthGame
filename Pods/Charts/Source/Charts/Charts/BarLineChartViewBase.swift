@@ -1727,4 +1727,26 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         let h = getHighlightByTouchPoint(pt)
         if h !== nil
         {
-            return _data?.getD
+            return _data?.getDataSetByIndex(h!.dataSetIndex) as? IBarLineScatterCandleBubbleChartDataSet
+        }
+        return nil
+    }
+
+    /// The current x-scale factor
+    @objc open var scaleX: CGFloat
+    {
+        if _viewPortHandler === nil
+        {
+            return 1.0
+        }
+        return _viewPortHandler.scaleX
+    }
+
+    /// The current y-scale factor
+    @objc open var scaleY: CGFloat
+    {
+        if _viewPortHandler === nil
+        {
+            return 1.0
+        }
+     
