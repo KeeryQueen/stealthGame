@@ -1761,4 +1761,20 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     {
         if axis == .left
         {
-       
+            return leftAxis
+        }
+        else
+        {
+            return rightAxis
+        }
+    }
+    
+    /// flag that indicates if pinch-zoom is enabled. if true, both x and y axis can be scaled simultaneously with 2 fingers, if false, x and y axis can be scaled separately
+    @objc open var pinchZoomEnabled: Bool
+    {
+        get
+        {
+            return _pinchZoomEnabled
+        }
+        set
+  
