@@ -1749,4 +1749,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         {
             return 1.0
         }
-     
+        return _viewPortHandler.scaleY
+    }
+
+    /// if the chart is fully zoomed out, return true
+    @objc open var isFullyZoomedOut: Bool { return _viewPortHandler.isFullyZoomedOut }
+
+    /// - Returns: The y-axis object to the corresponding AxisDependency. In the
+    /// horizontal bar-chart, LEFT == top, RIGHT == BOTTOM
+    @objc open func getAxis(_ axis: YAxis.AxisDependency) -> YAxis
+    {
+        if axis == .left
+        {
+       
