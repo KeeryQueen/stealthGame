@@ -1790,4 +1790,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
 
     /// **default**: false
     /// `true` if pinch-zoom is enabled, `false` ifnot
-    @objc open 
+    @objc open var isPinchZoomEnabled: Bool { return pinchZoomEnabled }
+
+    /// Set an offset in dp that allows the user to drag the chart over it's
+    /// bounds on the x-axis.
+    @objc open func setDragOffsetX(_ offset: CGFloat)
+    {
+        _viewPortHandler.setDragOffsetX(offset)
+    }
+
+    /// Set an offset in dp that allows the user to drag the chart over it's
+    /// bounds on the y-axis.
+    @objc open func setDragOffsetY(_ offset: CGFloat)
+    {
+        _viewPortH
