@@ -1777,4 +1777,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             return _pinchZoomEnabled
         }
         set
-  
+        {
+            if _pinchZoomEnabled != newValue
+            {
+                _pinchZoomEnabled = newValue
+                #if !os(tvOS)
+                _pinchGestureRecognizer.isEnabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+                #endif
+            }
+        }
+    }
+
+    /// **default**: false
+    /// `true` if pinch-zoom is enabled, `false` ifnot
+    @objc open 
