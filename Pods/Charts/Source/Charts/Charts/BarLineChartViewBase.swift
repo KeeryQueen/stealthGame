@@ -1803,4 +1803,17 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// bounds on the y-axis.
     @objc open func setDragOffsetY(_ offset: CGFloat)
     {
-        _viewPortH
+        _viewPortHandler.setDragOffsetY(offset)
+    }
+
+    /// `true` if both drag offsets (x and y) are zero or smaller.
+    @objc open var hasNoDragOffset: Bool { return _viewPortHandler.hasNoDragOffset }
+
+    open override var chartYMax: Double
+    {
+        return max(leftAxis._axisMaximum, rightAxis._axisMaximum)
+    }
+
+    open override var chartYMin: Double
+    {
+        return min(leftAxis._axisMinimum, rightAxis._a
