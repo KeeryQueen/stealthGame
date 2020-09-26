@@ -1816,4 +1816,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
 
     open override var chartYMin: Double
     {
-        return min(leftAxis._axisMinimum, rightAxis._a
+        return min(leftAxis._axisMinimum, rightAxis._axisMinimum)
+    }
+    
+    /// `true` if either the left or the right or both axes are inverted.
+    @objc open var isAnyAxisInverted: Bool
+    {
+        return leftAxis.isInverted || rightAxis.isInverted
+    }
+    
+    /// flag that indicates if auto scaling on the y axis is enabled.
+    /// if yes, the y axis automatically adjusts to the min and max y values of the current x axis range whenever the viewport changes
+    @objc open var autoScal
