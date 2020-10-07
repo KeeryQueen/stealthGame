@@ -1838,4 +1838,25 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     @objc open var isAutoScaleMinMaxEnabled : Bool { return autoScaleMinMaxEnabled }
     
     /// Sets a minimum width to the specified y axis.
-    @objc open func setYAxisMinWidth(_ axis: YAxis.AxisDependency, width: CGF
+    @objc open func setYAxisMinWidth(_ axis: YAxis.AxisDependency, width: CGFloat)
+    {
+        if axis == .left
+        {
+            leftAxis.minWidth = width
+        }
+        else
+        {
+            rightAxis.minWidth = width
+        }
+    }
+    
+    /// **default**: 0.0
+    ///
+    /// - Returns: The (custom) minimum width of the specified Y axis.
+    @objc open func getYAxisMinWidth(_ axis: YAxis.AxisDependency) -> CGFloat
+    {
+        if axis == .left
+        {
+            return leftAxis.minWidth
+        }
+        e
