@@ -1827,4 +1827,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     
     /// flag that indicates if auto scaling on the y axis is enabled.
     /// if yes, the y axis automatically adjusts to the min and max y values of the current x axis range whenever the viewport changes
-    @objc open var autoScal
+    @objc open var autoScaleMinMaxEnabled: Bool
+    {
+        get { return _autoScaleMinMaxEnabled }
+        set { _autoScaleMinMaxEnabled = newValue }
+    }
+    
+    /// **default**: false
+    /// `true` if auto scaling on the y axis is enabled.
+    @objc open var isAutoScaleMinMaxEnabled : Bool { return autoScaleMinMaxEnabled }
+    
+    /// Sets a minimum width to the specified y axis.
+    @objc open func setYAxisMinWidth(_ axis: YAxis.AxisDependency, width: CGF
