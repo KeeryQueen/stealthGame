@@ -1859,4 +1859,23 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         {
             return leftAxis.minWidth
         }
-        e
+        else
+        {
+            return rightAxis.minWidth
+        }
+    }
+    /// Sets a maximum width to the specified y axis.
+    /// Zero (0.0) means there's no maximum width
+    @objc open func setYAxisMaxWidth(_ axis: YAxis.AxisDependency, width: CGFloat)
+    {
+        if axis == .left
+        {
+            leftAxis.maxWidth = width
+        }
+        else
+        {
+            rightAxis.maxWidth = width
+        }
+    }
+    
+    /// Zero (0.0) means there's no m
