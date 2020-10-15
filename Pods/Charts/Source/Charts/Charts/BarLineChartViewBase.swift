@@ -1895,4 +1895,20 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
     }
 
-    /// - Returns the width of the speci
+    /// - Returns the width of the specified y axis.
+    @objc open func getYAxisWidth(_ axis: YAxis.AxisDependency) -> CGFloat
+    {
+        if axis == .left
+        {
+            return leftAxis.requiredSize().width
+        }
+        else
+        {
+            return rightAxis.requiredSize().width
+        }
+    }
+    
+    // MARK: - BarLineScatterCandleBubbleChartDataProvider
+    
+    /// - Returns: The Transformer class that contains all matrices and is
+    /
