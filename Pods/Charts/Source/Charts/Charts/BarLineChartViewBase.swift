@@ -1911,4 +1911,19 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     // MARK: - BarLineScatterCandleBubbleChartDataProvider
     
     /// - Returns: The Transformer class that contains all matrices and is
-    /
+    /// responsible for transforming values into pixels on the screen and
+    /// backwards.
+    open func getTransformer(forAxis axis: YAxis.AxisDependency) -> Transformer
+    {
+        if axis == .left
+        {
+            return _leftAxisTransformer
+        }
+        else
+        {
+            return _rightAxisTransformer
+        }
+    }
+    
+    /// the number of maximum visible drawn values on the chart only active when `drawValuesEnabled` is enabled
+    op
