@@ -1946,3 +1946,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// The lowest x-index (value on the x-axis) that is still visible on he chart.
     open var lowestVisibleX: Double
     {
+        var pt = CGPoint(
+            x: viewPortHandler.contentLeft,
+            y: viewPortHandler.contentBottom)
+        
+        getTransformer(forAxis: .left).pixelToValues(&pt)
+        
+        return max(xAxis._axisMinimum, Double(pt.x))
+    }
+    
+    /// The highest x-index (value on the x-axis) that is still visible on the chart.
+    open var highestVisibleX: Double
+    {
+        var pt = CGPoint
