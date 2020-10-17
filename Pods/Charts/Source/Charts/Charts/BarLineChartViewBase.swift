@@ -1926,4 +1926,23 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// the number of maximum visible drawn values on the chart only active when `drawValuesEnabled` is enabled
-    op
+    open override var maxVisibleCount: Int
+    {
+        get
+        {
+            return _maxVisibleCount
+        }
+        set
+        {
+            _maxVisibleCount = newValue
+        }
+    }
+    
+    open func isInverted(axis: YAxis.AxisDependency) -> Bool
+    {
+        return getAxis(axis).isInverted
+    }
+    
+    /// The lowest x-index (value on the x-axis) that is still visible on he chart.
+    open var lowestVisibleX: Double
+    {
