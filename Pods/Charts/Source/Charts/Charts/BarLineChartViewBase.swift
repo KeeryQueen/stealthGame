@@ -1958,4 +1958,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// The highest x-index (value on the x-axis) that is still visible on the chart.
     open var highestVisibleX: Double
     {
-        var pt = CGPoint
+        var pt = CGPoint(
+            x: viewPortHandler.contentRight,
+            y: viewPortHandler.contentBottom)
+        
+        getTransformer(forAxis: .left).pixelToValues(&pt)
+
+        return min(xAxis._axisMaximum, Double(pt.x))
+    }
+}
