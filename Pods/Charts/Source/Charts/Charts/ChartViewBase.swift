@@ -541,3 +541,443 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
                 _indicesToHighlight = [h!]
             }
         }
+        
+        if callDelegate, let delegate = delegate
+        {
+            if let h = h
+            {
+                // notify the listener
+                delegate.chartValueSelected?(self, entry: entry!, highlight: h)
+            }
+            else
+            {
+                delegate.chartValueNothingSelected?(self)
+            }
+        }
+        
+        // redraw the chart
+        setNeedsDisplay()
+    }
+    
+    /// - Returns: The Highlight object (contains x-index and DataSet index) of the
+    /// selected value at the given touch point inside the Line-, Scatter-, or
+    /// CandleStick-Chart.
+    @objc open func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight?
+    {
+        if _data === nil
+        {
+            Swift.print("Can't select by touch. No data set.")
+            return nil
+        }
+        
+        return self.highlighter?.getHighlight(x: pt.x, y: pt.y)
+    }
+
+    /// The last value that was highlighted via touch.
+    @objc open var lastHighlighted: Highlight?
+  
+    // MARK: - Markers
+
+    /// draws all MarkerViews on the highlighted positions
+    internal func drawMarkers(context: CGContext)
+    {
+        // if there is no marker view or drawing marker is disabled
+        guard
+            let marker = marker
+            , isDrawMarkersEnabled &&
+                valuesToHighlight()
+            else { return }
+        
+        for i in 0 ..< _indicesToHighlight.count
+        {
+            let highlight = _indicesToHighlight[i]
+            
+            guard let
+                set = data?.getDataSetByIndex(highlight.dataSetIndex),
+                let e = _data?.entryForHighlight(highlight)
+                else { continue }
+            
+            let entryIndex = set.entryIndex(entry: e)
+            if entryIndex > Int(Double(set.entryCount) * _animator.phaseX)
+            {
+                continue
+            }
+
+            let pos = getMarkerPosition(highlight: highlight)
+
+            // check bounds
+            if !_viewPortHandler.isInBounds(x: pos.x, y: pos.y)
+            {
+                continue
+            }
+
+            // callbacks to update the content
+            marker.refreshContent(entry: e, highlight: highlight)
+            
+            // draw the marker
+            marker.draw(context: context, point: pos)
+        }
+    }
+    
+    /// - Returns: The actual position in pixels of the MarkerView for the given Entry in the given DataSet.
+    @objc open func getMarkerPosition(highlight: Highlight) -> CGPoint
+    {
+        return CGPoint(x: highlight.drawX, y: highlight.drawY)
+    }
+    
+    // MARK: - Animation
+    
+    /// The animator responsible for animating chart values.
+    @objc open var chartAnimator: Animator!
+    {
+        return _animator
+    }
+    
+    /// Animates the drawing / rendering of the chart on both x- and y-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - xAxisDuration: duration for animating the x axis
+    ///   - yAxisDuration: duration for animating the y axis
+    ///   - easingX: an easing function for the animation on the x axis
+    ///   - easingY: an easing function for the animation on the y axis
+    @objc open func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easingX: ChartEasingFunctionBlock?, easingY: ChartEasingFunctionBlock?)
+    {
+        _animator.animate(xAxisDuration: xAxisDuration, yAxisDuration: yAxisDuration, easingX: easingX, easingY: easingY)
+    }
+    
+    /// Animates the drawing / rendering of the chart on both x- and y-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - xAxisDuration: duration for animating the x axis
+    ///   - yAxisDuration: duration for animating the y axis
+    ///   - easingOptionX: the easing function for the animation on the x axis
+    ///   - easingOptionY: the easing function for the animation on the y axis
+    @objc open func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easingOptionX: ChartEasingOption, easingOptionY: ChartEasingOption)
+    {
+        _animator.animate(xAxisDuration: xAxisDuration, yAxisDuration: yAxisDuration, easingOptionX: easingOptionX, easingOptionY: easingOptionY)
+    }
+    
+    /// Animates the drawing / rendering of the chart on both x- and y-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - xAxisDuration: duration for animating the x axis
+    ///   - yAxisDuration: duration for animating the y axis
+    ///   - easing: an easing function for the animation
+    @objc open func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easing: ChartEasingFunctionBlock?)
+    {
+        _animator.animate(xAxisDuration: xAxisDuration, yAxisDuration: yAxisDuration, easing: easing)
+    }
+    
+    /// Animates the drawing / rendering of the chart on both x- and y-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - xAxisDuration: duration for animating the x axis
+    ///   - yAxisDuration: duration for animating the y axis
+    ///   - easingOption: the easing function for the animation
+    @objc open func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval, easingOption: ChartEasingOption)
+    {
+        _animator.animate(xAxisDuration: xAxisDuration, yAxisDuration: yAxisDuration, easingOption: easingOption)
+    }
+    
+    /// Animates the drawing / rendering of the chart on both x- and y-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - xAxisDuration: duration for animating the x axis
+    ///   - yAxisDuration: duration for animating the y axis
+    @objc open func animate(xAxisDuration: TimeInterval, yAxisDuration: TimeInterval)
+    {
+        _animator.animate(xAxisDuration: xAxisDuration, yAxisDuration: yAxisDuration)
+    }
+    
+    /// Animates the drawing / rendering of the chart the x-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - xAxisDuration: duration for animating the x axis
+    ///   - easing: an easing function for the animation
+    @objc open func animate(xAxisDuration: TimeInterval, easing: ChartEasingFunctionBlock?)
+    {
+        _animator.animate(xAxisDuration: xAxisDuration, easing: easing)
+    }
+    
+    /// Animates the drawing / rendering of the chart the x-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - xAxisDuration: duration for animating the x axis
+    ///   - easingOption: the easing function for the animation
+    @objc open func animate(xAxisDuration: TimeInterval, easingOption: ChartEasingOption)
+    {
+        _animator.animate(xAxisDuration: xAxisDuration, easingOption: easingOption)
+    }
+    
+    /// Animates the drawing / rendering of the chart the x-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - xAxisDuration: duration for animating the x axis
+    @objc open func animate(xAxisDuration: TimeInterval)
+    {
+        _animator.animate(xAxisDuration: xAxisDuration)
+    }
+    
+    /// Animates the drawing / rendering of the chart the y-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - yAxisDuration: duration for animating the y axis
+    ///   - easing: an easing function for the animation
+    @objc open func animate(yAxisDuration: TimeInterval, easing: ChartEasingFunctionBlock?)
+    {
+        _animator.animate(yAxisDuration: yAxisDuration, easing: easing)
+    }
+    
+    /// Animates the drawing / rendering of the chart the y-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - yAxisDuration: duration for animating the y axis
+    ///   - easingOption: the easing function for the animation
+    @objc open func animate(yAxisDuration: TimeInterval, easingOption: ChartEasingOption)
+    {
+        _animator.animate(yAxisDuration: yAxisDuration, easingOption: easingOption)
+    }
+    
+    /// Animates the drawing / rendering of the chart the y-axis with the specified animation time.
+    /// If `animate(...)` is called, no further calling of `invalidate()` is necessary to refresh the chart.
+    ///
+    /// - Parameters:
+    ///   - yAxisDuration: duration for animating the y axis
+    @objc open func animate(yAxisDuration: TimeInterval)
+    {
+        _animator.animate(yAxisDuration: yAxisDuration)
+    }
+    
+    // MARK: - Accessors
+
+    /// The current y-max value across all DataSets
+    open var chartYMax: Double
+    {
+        return _data?.yMax ?? 0.0
+    }
+
+    /// The current y-min value across all DataSets
+    open var chartYMin: Double
+    {
+        return _data?.yMin ?? 0.0
+    }
+    
+    open var chartXMax: Double
+    {
+        return _xAxis._axisMaximum
+    }
+    
+    open var chartXMin: Double
+    {
+        return _xAxis._axisMinimum
+    }
+    
+    open var xRange: Double
+    {
+        return _xAxis.axisRange
+    }
+    
+    /// - Note: (Equivalent of getCenter() in MPAndroidChart, as center is already a standard in iOS that returns the center point relative to superview, and MPAndroidChart returns relative to self)*
+    /// The center point of the chart (the whole View) in pixels.
+    @objc open var midPoint: CGPoint
+    {
+        let bounds = self.bounds
+        return CGPoint(x: bounds.origin.x + bounds.size.width / 2.0, y: bounds.origin.y + bounds.size.height / 2.0)
+    }
+    
+    /// The center of the chart taking offsets under consideration. (returns the center of the content rectangle)
+    open var centerOffsets: CGPoint
+    {
+        return _viewPortHandler.contentCenter
+    }
+    
+    /// The Legend object of the chart. This method can be used to get an instance of the legend in order to customize the automatically generated Legend.
+    @objc open var legend: Legend
+    {
+        return _legend
+    }
+    
+    /// The renderer object responsible for rendering / drawing the Legend.
+    @objc open var legendRenderer: LegendRenderer!
+    {
+        return _legendRenderer
+    }
+    
+    /// The rectangle that defines the borders of the chart-value surface (into which the actual values are drawn).
+    @objc open var contentRect: CGRect
+    {
+        return _viewPortHandler.contentRect
+    }
+    
+    /// - Returns: The ViewPortHandler of the chart that is responsible for the
+    /// content area of the chart and its offsets and dimensions.
+    @objc open var viewPortHandler: ViewPortHandler!
+    {
+        return _viewPortHandler
+    }
+    
+    /// - Returns: The bitmap that represents the chart.
+    @objc open func getChartImage(transparent: Bool) -> NSUIImage?
+    {
+        NSUIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque || !transparent, NSUIScreen.nsuiMain?.nsuiScale ?? 1.0)
+        
+        guard let context = NSUIGraphicsGetCurrentContext()
+            else { return nil }
+        
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: bounds.size)
+        
+        if isOpaque || !transparent
+        {
+            // Background color may be partially transparent, we must fill with white if we want to output an opaque image
+            context.setFillColor(NSUIColor.white.cgColor)
+            context.fill(rect)
+            
+            if let backgroundColor = self.backgroundColor
+            {
+                context.setFillColor(backgroundColor.cgColor)
+                context.fill(rect)
+            }
+        }
+        
+        nsuiLayer?.render(in: context)
+        
+        let image = NSUIGraphicsGetImageFromCurrentImageContext()
+        
+        NSUIGraphicsEndImageContext()
+        
+        return image
+    }
+    
+    public enum ImageFormat
+    {
+        case jpeg
+        case png
+    }
+    
+    /// Saves the current chart state with the given name to the given path on
+    /// the sdcard leaving the path empty "" will put the saved file directly on
+    /// the SD card chart is saved as a PNG image, example:
+    /// saveToPath("myfilename", "foldername1/foldername2")
+    ///
+    /// - Parameters:
+    ///   - to: path to the image to save
+    ///   - format: the format to save
+    ///   - compressionQuality: compression quality for lossless formats (JPEG)
+    /// - Returns: `true` if the image was saved successfully
+    open func save(to path: String, format: ImageFormat, compressionQuality: Double) -> Bool
+    {
+        guard let image = getChartImage(transparent: format != .jpeg) else { return false }
+        
+        let imageData: Data?
+        switch (format)
+        {
+        case .png: imageData = NSUIImagePNGRepresentation(image)
+        case .jpeg: imageData = NSUIImageJPEGRepresentation(image, CGFloat(compressionQuality))
+        }
+        
+        guard let data = imageData else { return false }
+        
+        do
+        {
+            try data.write(to: URL(fileURLWithPath: path), options: .atomic)
+        }
+        catch
+        {
+            return false
+        }
+        
+        return true
+    }
+    
+    internal var _viewportJobs = [ViewPortJob]()
+    
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+    {
+        if keyPath == "bounds" || keyPath == "frame"
+        {
+            let bounds = self.bounds
+            
+            if (_viewPortHandler !== nil &&
+                (bounds.size.width != _viewPortHandler.chartWidth ||
+                bounds.size.height != _viewPortHandler.chartHeight))
+            {
+                _viewPortHandler.setChartDimens(width: bounds.size.width, height: bounds.size.height)
+                
+                // This may cause the chart view to mutate properties affecting the view port -- lets do this
+                // before we try to run any pending jobs on the view port itself
+                notifyDataSetChanged()
+
+                // Finish any pending viewport changes
+                while (!_viewportJobs.isEmpty)
+                {
+                    let job = _viewportJobs.remove(at: 0)
+                    job.doJob()
+                }
+            }
+        }
+    }
+    
+    @objc open func removeViewportJob(_ job: ViewPortJob)
+    {
+        if let index = _viewportJobs.firstIndex(where: { $0 === job })
+        {
+            _viewportJobs.remove(at: index)
+        }
+    }
+    
+    @objc open func clearAllViewportJobs()
+    {
+        _viewportJobs.removeAll(keepingCapacity: false)
+    }
+    
+    @objc open func addViewportJob(_ job: ViewPortJob)
+    {
+        if _viewPortHandler.hasChartDimens
+        {
+            job.doJob()
+        }
+        else
+        {
+            _viewportJobs.append(job)
+        }
+    }
+    
+    /// **default**: true
+    /// `true` if chart continues to scroll after touch up, `false` ifnot.
+    @objc open var isDragDecelerationEnabled: Bool
+        {
+            return dragDecelerationEnabled
+    }
+    
+    /// Deceleration friction coefficient in [0 ; 1] interval, higher values indicate that speed will decrease slowly, for example if it set to 0, it will stop immediately.
+    /// 1 is an invalid value, and will be converted to 0.999 automatically.
+    /// 
+    /// **default**: true
+    @objc open var dragDecelerationFrictionCoef: CGFloat
+    {
+        get
+        {
+            return _dragDecelerationFrictionCoef
+        }
+        set
+        {
+            var val = newValue
+            if val < 0.0
+            {
+                val = 0.0
+            }
+            if val >= 1.0
+            {
+                val = 0.999
+            }
+            
