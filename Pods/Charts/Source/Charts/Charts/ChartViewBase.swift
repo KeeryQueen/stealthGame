@@ -981,3 +981,63 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
                 val = 0.999
             }
             
+            _dragDecelerationFrictionCoef = val
+        }
+    }
+    
+    /// The maximum distance in screen pixels away from an entry causing it to highlight.
+    /// **default**: 500.0
+    open var maxHighlightDistance: CGFloat = 500.0
+    
+    /// the number of maximum visible drawn values on the chart only active when `drawValuesEnabled` is enabled
+    open var maxVisibleCount: Int
+    {
+        return Int(INT_MAX)
+    }
+    
+    // MARK: - AnimatorDelegate
+    
+    open func animatorUpdated(_ chartAnimator: Animator)
+    {
+        setNeedsDisplay()
+    }
+    
+    open func animatorStopped(_ chartAnimator: Animator)
+    {
+        delegate?.chartView?(self, animatorDidStop: chartAnimator)
+    }
+    
+    // MARK: - Touches
+    
+    open override func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
+    {
+        if !_interceptTouchEvents
+        {
+            super.nsuiTouchesBegan(touches, withEvent: event)
+        }
+    }
+    
+    open override func nsuiTouchesMoved(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
+    {
+        if !_interceptTouchEvents
+        {
+            super.nsuiTouchesMoved(touches, withEvent: event)
+        }
+    }
+    
+    open override func nsuiTouchesEnded(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
+    {
+        if !_interceptTouchEvents
+        {
+            super.nsuiTouchesEnded(touches, withEvent: event)
+        }
+    }
+    
+    open override func nsuiTouchesCancelled(_ touches: Set<NSUITouch>?, withEvent event: NSUIEvent?)
+    {
+        if !_interceptTouchEvents
+        {
+            super.nsuiTouchesCancelled(touches, withEvent: event)
+        }
+    }
+}
