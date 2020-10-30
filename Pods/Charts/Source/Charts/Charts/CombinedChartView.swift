@@ -23,3 +23,21 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     public enum DrawOrder: Int
     {
         case bar
+        case bubble
+        case line
+        case candle
+        case scatter
+    }
+    
+    open override func initialize()
+    {
+        super.initialize()
+        
+        self.highlighter = CombinedHighlighter(chart: self, barDataProvider: self)
+        
+        // Old default behaviour
+        self.highlightFullBarEnabled = true
+        
+        _fillFormatter = DefaultFillFormatter()
+        
+        renderer = CombinedChartRenderer(chart: self, anima
