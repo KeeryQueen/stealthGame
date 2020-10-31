@@ -57,3 +57,23 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
             
             (renderer as? CombinedChartRenderer)?.createRenderers()
             renderer?.initBuffers()
+        }
+    }
+    
+    @objc open var fillFormatter: IFillFormatter
+    {
+        get
+        {
+            return _fillFormatter
+        }
+        set
+        {
+            _fillFormatter = newValue
+            if _fillFormatter == nil
+            {
+                _fillFormatter = DefaultFillFormatter()
+            }
+        }
+    }
+    
+    /// - Returns: The Highlight object (contains x-index and DataSet index) of t
