@@ -40,4 +40,20 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         
         _fillFormatter = DefaultFillFormatter()
         
-        renderer = CombinedChartRenderer(chart: self, anima
+        renderer = CombinedChartRenderer(chart: self, animator: _animator, viewPortHandler: _viewPortHandler)
+    }
+    
+    open override var data: ChartData?
+    {
+        get
+        {
+            return super.data
+        }
+        set
+        {
+            super.data = newValue
+            
+            self.highlighter = CombinedHighlighter(chart: self, barDataProvider: self)
+            
+            (renderer as? CombinedChartRenderer)?.createRenderers()
+            renderer?.initBuffers()
