@@ -102,4 +102,34 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     
     // MARK: - CombinedChartDataProvider
     
-    open var combinedData: CombinedChartD
+    open var combinedData: CombinedChartData?
+    {
+        get
+        {
+            return _data as? CombinedChartData
+        }
+    }
+    
+    // MARK: - LineChartDataProvider
+    
+    open var lineData: LineChartData?
+    {
+        get
+        {
+            return combinedData?.lineData
+        }
+    }
+    
+    // MARK: - BarChartDataProvider
+    
+    open var barData: BarChartData?
+    {
+        get
+        {
+            return combinedData?.barData
+        }
+    }
+    
+    // MARK: - ScatterChartDataProvider
+    
+    open var scat
