@@ -88,4 +88,18 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         guard let h = self.highlighter?.getHighlight(x: pt.x, y: pt.y)
             else { return nil }
         
+        if !isHighlightFullBarEnabled { return h }
         
+        // For isHighlightFullBarEnabled, remove stackIndex
+        return Highlight(
+            x: h.x, y: h.y,
+            xPx: h.xPx, yPx: h.yPx,
+            dataIndex: h.dataIndex,
+            dataSetIndex: h.dataSetIndex,
+            stackIndex: -1,
+            axis: h.axis)
+    }
+    
+    // MARK: - CombinedChartDataProvider
+    
+    open var combinedData: CombinedChartD
