@@ -155,4 +155,15 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     open var bubbleData: BubbleChartData?
     {
         get
-   
+        {
+            return combinedData?.bubbleData
+        }
+    }
+    
+    // MARK: - Accessors
+    
+    /// if set to true, all values are drawn above their bars, instead of below their top
+    @objc open var drawValueAboveBarEnabled: Bool
+        {
+        get { return (renderer as! CombinedChartRenderer).drawValueAboveBarEnabled }
+        set { (renderer as! CombinedChartRenderer).drawV
