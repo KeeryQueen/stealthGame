@@ -132,4 +132,27 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     
     // MARK: - ScatterChartDataProvider
     
-    open var scat
+    open var scatterData: ScatterChartData?
+    {
+        get
+        {
+            return combinedData?.scatterData
+        }
+    }
+    
+    // MARK: - CandleChartDataProvider
+    
+    open var candleData: CandleChartData?
+    {
+        get
+        {
+            return combinedData?.candleData
+        }
+    }
+    
+    // MARK: - BubbleChartDataProvider
+    
+    open var bubbleData: BubbleChartData?
+    {
+        get
+   
