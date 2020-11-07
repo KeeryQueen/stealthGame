@@ -166,4 +166,15 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     @objc open var drawValueAboveBarEnabled: Bool
         {
         get { return (renderer as! CombinedChartRenderer).drawValueAboveBarEnabled }
-        set { (renderer as! CombinedChartRenderer).drawV
+        set { (renderer as! CombinedChartRenderer).drawValueAboveBarEnabled = newValue }
+    }
+    
+    /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
+    @objc open var drawBarShadowEnabled: Bool
+    {
+        get { return (renderer as! CombinedChartRenderer).drawBarShadowEnabled }
+        set { (renderer as! CombinedChartRenderer).drawBarShadowEnabled = newValue }
+    }
+    
+    /// `true` if drawing values above bars is enabled, `false` ifnot
+    open var isDrawValueAb
