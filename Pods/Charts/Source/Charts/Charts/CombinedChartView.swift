@@ -193,4 +193,17 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         }
         set
         {
-            (renderer as! CombinedChartRenderer).drawOrder = newValue.map { DrawOrder(rawValue: $0)!
+            (renderer as! CombinedChartRenderer).drawOrder = newValue.map { DrawOrder(rawValue: $0)! }
+        }
+    }
+    
+    /// Set this to `true` to make the highlight operation full-bar oriented, `false` to make it highlight single values
+    @objc open var highlightFullBarEnabled: Bool = false
+    
+    /// `true` the highlight is be full-bar oriented, `false` ifsingle-value
+    open var isHighlightFullBarEnabled: Bool { return highlightFullBarEnabled }
+    
+    // MARK: - ChartViewBase
+    
+    /// draws all MarkerViews on the highlighted positions
+    override f
