@@ -220,4 +220,20 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
             guard 
                 let set = combinedData?.getDataSetByHighlight(highlight),
                 let e = _data?.entryForHighlight(highlight)
-             
+                else { continue }
+            
+            let entryIndex = set.entryIndex(entry: e)
+            if entryIndex > Int(Double(set.entryCount) * _animator.phaseX)
+            {
+                continue
+            }
+            
+            let pos = getMarkerPosition(highlight: highlight)
+            
+            // check bounds
+            if !_viewPortHandler.isInBounds(x: pos.x, y: pos.y)
+            {
+                continue
+            }
+            
+          
