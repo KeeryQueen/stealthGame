@@ -34,4 +34,17 @@ open class HorizontalBarChartView: BarChartView
     {
         guard
             let legend = _legend,
-       
+            legend.isEnabled,
+            !legend.drawInside
+        else { return }
+        
+        // setup offsets for legend
+        switch legend.orientation
+        {
+        case .vertical:
+            switch legend.horizontalAlignment
+            {
+            case .left:
+                offsetLeft += min(legend.neededWidth, _viewPortHandler.chartWidth * legend.maxSizePercent) + legend.xOffset
+                
+            case .rig
