@@ -69,4 +69,13 @@ open class HorizontalBarChartView: BarChartView
             switch legend.verticalAlignment
             {
             case .top:
-                offsetTop += min(legend.neededHeight, _viewPortHandler.chartHeight * legen
+                offsetTop += min(legend.neededHeight, _viewPortHandler.chartHeight * legend.maxSizePercent) + legend.yOffset
+                
+                // left axis equals the top x-axis in a horizontal chart
+                if leftAxis.isEnabled && leftAxis.isDrawLabelsEnabled
+                {
+                    offsetTop += leftAxis.getRequiredHeightSpace()
+                }
+                
+            case .bottom:
+                offsetBottom += min(legend.neededHeight, _viewPortHandler.chartHeight * legend.maxSizePercent) + legend.yOffset
