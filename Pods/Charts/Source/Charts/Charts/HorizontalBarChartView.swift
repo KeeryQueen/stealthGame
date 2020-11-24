@@ -57,4 +57,16 @@ open class HorizontalBarChartView: BarChartView
                 case .top:
                     offsetTop += min(legend.neededHeight, _viewPortHandler.chartHeight * legend.maxSizePercent) + legend.yOffset
                     
-                
+                case .bottom:
+                    offsetBottom += min(legend.neededHeight, _viewPortHandler.chartHeight * legend.maxSizePercent) + legend.yOffset
+                    
+                default:
+                    break
+                }
+            }
+            
+        case .horizontal:
+            switch legend.verticalAlignment
+            {
+            case .top:
+                offsetTop += min(legend.neededHeight, _viewPortHandler.chartHeight * legen
