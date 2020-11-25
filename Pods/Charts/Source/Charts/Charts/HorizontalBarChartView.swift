@@ -79,3 +79,20 @@ open class HorizontalBarChartView: BarChartView
                 
             case .bottom:
                 offsetBottom += min(legend.neededHeight, _viewPortHandler.chartHeight * legend.maxSizePercent) + legend.yOffset
+
+                // right axis equals the bottom x-axis in a horizontal chart
+                if rightAxis.isEnabled && rightAxis.isDrawLabelsEnabled
+                {
+                    offsetBottom += rightAxis.getRequiredHeightSpace()
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    internal override func calculateOffsets()
+    {
+        var offsetLeft: CGFloat = 0.0,
+        offsetRight: CGFloat = 0.0,
+        offs
