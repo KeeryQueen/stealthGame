@@ -95,4 +95,18 @@ open class HorizontalBarChartView: BarChartView
     {
         var offsetLeft: CGFloat = 0.0,
         offsetRight: CGFloat = 0.0,
-        offs
+        offsetTop: CGFloat = 0.0,
+        offsetBottom: CGFloat = 0.0
+        
+        calculateLegendOffsets(offsetLeft: &offsetLeft,
+                               offsetTop: &offsetTop,
+                               offsetRight: &offsetRight,
+                               offsetBottom: &offsetBottom)
+        
+        // offsets for y-labels
+        if leftAxis.needsOffset
+        {
+            offsetTop += leftAxis.getRequiredHeightSpace()
+        }
+        
+ 
