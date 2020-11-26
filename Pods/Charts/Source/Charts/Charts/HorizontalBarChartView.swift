@@ -109,4 +109,20 @@ open class HorizontalBarChartView: BarChartView
             offsetTop += leftAxis.getRequiredHeightSpace()
         }
         
- 
+        if rightAxis.needsOffset
+        {
+            offsetBottom += rightAxis.getRequiredHeightSpace()
+        }
+        
+        let xlabelwidth = _xAxis.labelRotatedWidth
+        
+        if _xAxis.isEnabled
+        {
+            // offsets for x-labels
+            if _xAxis.labelPosition == .bottom
+            {
+                offsetLeft += xlabelwidth
+            }
+            else if _xAxis.labelPosition == .top
+            {
+         
