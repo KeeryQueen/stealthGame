@@ -125,4 +125,19 @@ open class HorizontalBarChartView: BarChartView
             }
             else if _xAxis.labelPosition == .top
             {
-         
+                offsetRight += xlabelwidth
+            }
+            else if _xAxis.labelPosition == .bothSided
+            {
+                offsetLeft += xlabelwidth
+                offsetRight += xlabelwidth
+            }
+        }
+        
+        offsetTop += self.extraTopOffset
+        offsetRight += self.extraRightOffset
+        offsetBottom += self.extraBottomOffset
+        offsetLeft += self.extraLeftOffset
+
+        _viewPortHandler.restrainViewPort(
+            off
