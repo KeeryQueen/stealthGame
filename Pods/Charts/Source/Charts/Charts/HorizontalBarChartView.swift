@@ -140,4 +140,15 @@ open class HorizontalBarChartView: BarChartView
         offsetLeft += self.extraLeftOffset
 
         _viewPortHandler.restrainViewPort(
-            off
+            offsetLeft: max(self.minOffset, offsetLeft),
+            offsetTop: max(self.minOffset, offsetTop),
+            offsetRight: max(self.minOffset, offsetRight),
+            offsetBottom: max(self.minOffset, offsetBottom))
+        
+        prepareOffsetMatrix()
+        prepareValuePxMatrix()
+    }
+    
+    internal override func prepareValuePxMatrix()
+    {
+        _rightAxisTransformer.prepareMatrixValuePx(chartXMin: rightAxis._axisMinimum, deltaX: CGFloat(rightAxis.axisRange), deltaY: CGFl
