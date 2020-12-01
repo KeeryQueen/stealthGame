@@ -160,4 +160,18 @@ open class HorizontalBarChartView: BarChartView
         return CGPoint(x: highlight.drawY, y: highlight.drawX)
     }
     
-    
+    open override func getBarBounds(entry e: BarChartDataEntry) -> CGRect
+    {
+        guard
+            let data = _data as? BarChartData,
+            let set = data.getDataSetForEntry(e) as? IBarChartDataSet
+            else { return CGRect.null }
+        
+        let y = e.y
+        let x = e.x
+        
+        let barWidth = data.barWidth
+        
+        let top = x - 0.5 + barWidth / 2.0
+        let bottom = x + 0.5 - barWidth / 2.0
+        let left = y >= 
