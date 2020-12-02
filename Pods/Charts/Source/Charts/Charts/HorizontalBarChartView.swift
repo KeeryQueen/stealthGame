@@ -174,4 +174,18 @@ open class HorizontalBarChartView: BarChartView
         
         let top = x - 0.5 + barWidth / 2.0
         let bottom = x + 0.5 - barWidth / 2.0
-        let left = y >= 
+        let left = y >= 0.0 ? y : 0.0
+        let right = y <= 0.0 ? y : 0.0
+        
+        var bounds = CGRect(x: left, y: top, width: right - left, height: bottom - top)
+        
+        getTransformer(forAxis: set.axisDependency).rectValueToPixel(&bounds)
+        
+        return bounds
+    }
+    
+    open override func getPosition(entry e: ChartDataEntry, axis: YAxis.AxisDependency) -> CGPoint
+    {
+        var vals = CGPoint(x: CGFloat(e.y), y: CGFloat(e.x))
+        
+   
