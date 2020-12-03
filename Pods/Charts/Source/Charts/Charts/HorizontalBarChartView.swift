@@ -188,4 +188,20 @@ open class HorizontalBarChartView: BarChartView
     {
         var vals = CGPoint(x: CGFloat(e.y), y: CGFloat(e.x))
         
-   
+        getTransformer(forAxis: axis).pointValueToPixel(&vals)
+        
+        return vals
+    }
+
+    open override func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight?
+    {
+        if _data === nil
+        {
+            Swift.print("Can't select by touch. No data set.", terminator: "\n")
+            return nil
+        }
+        
+        return self.highlighter?.getHighlight(x: pt.y, y: pt.x)
+    }
+    
+    /// The lowest x-
