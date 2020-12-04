@@ -204,4 +204,16 @@ open class HorizontalBarChartView: BarChartView
         return self.highlighter?.getHighlight(x: pt.y, y: pt.x)
     }
     
-    /// The lowest x-
+    /// The lowest x-index (value on the x-axis) that is still visible on he chart.
+    open override var lowestVisibleX: Double
+    {
+        var pt = CGPoint(
+            x: viewPortHandler.contentLeft,
+            y: viewPortHandler.contentBottom)
+        
+        getTransformer(forAxis: .left).pixelToValues(&pt)
+        
+        return max(xAxis._axisMinimum, Double(pt.y))
+    }
+    
+    /// The highest x-index (value on the
