@@ -216,4 +216,20 @@ open class HorizontalBarChartView: BarChartView
         return max(xAxis._axisMinimum, Double(pt.y))
     }
     
-    /// The highest x-index (value on the
+    /// The highest x-index (value on the x-axis) that is still visible on the chart.
+    open override var highestVisibleX: Double
+    {
+        var pt = CGPoint(
+            x: viewPortHandler.contentLeft,
+            y: viewPortHandler.contentTop)
+        
+        getTransformer(forAxis: .left).pixelToValues(&pt)
+        
+        return min(xAxis._axisMaximum, Double(pt.y))
+    }
+    
+    // MARK: - Viewport
+    
+    open override func setVisibleXRangeMaximum(_ maxXRange: Double)
+    {
+        l
