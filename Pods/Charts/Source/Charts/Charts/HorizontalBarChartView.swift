@@ -255,4 +255,14 @@ open class HorizontalBarChartView: BarChartView
         viewPortHandler.setMinimumScaleX(CGFloat(yScale))
     }
     
-    op
+    open override func setVisibleYRangeMinimum(_ minYRange: Double, axis: YAxis.AxisDependency)
+    {
+        let yScale = getAxisRange(axis: axis) / minYRange
+        viewPortHandler.setMaximumScaleX(CGFloat(yScale))
+    }
+    
+    open override func setVisibleYRange(minYRange: Double, maxYRange: Double, axis: YAxis.AxisDependency)
+    {
+        let minScale = getAxisRange(axis: axis) / minYRange
+        let maxScale = getAxisRange(axis: axis) / maxYRange
+        vi
