@@ -528,3 +528,329 @@ open class PieRadarChartViewBase: ChartViewBase
             stopDeceleration()
             
             sampleVelocity(touchLocation: location)
+            
+            _decelerationAngularVelocity = calculateVelocity()
+            
+            if _decelerationAngularVelocity != 0.0
+            {
+                _decelerationLastTime = CACurrentMediaTime()
+                _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(PieRadarChartViewBase.decelerationLoop))
+                _decelerationDisplayLink.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
+            }
+        }
+    }
+    
+    internal final func processRotationGestureCancelled()
+    {
+        if _isRotating
+        {
+            _isRotating = false
+        }
+    }
+    
+    #if !os(OSX)
+    open override func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
+    {
+        // if rotation by touch is enabled
+        if rotationEnabled
+        {
+            stopDeceleration()
+            
+            if !rotationWithTwoFingers, let touchLocation = touches.first?.location(in: self)
+            {
+                processRotationGestureBegan(location: touchLocation)
+            }
+        }
+        
+        if !_isRotating
+        {
+            super.nsuiTouchesBegan(touches, withEvent: event)
+        }
+    }
+    
+    open override func nsuiTouchesMoved(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
+    {
+        if rotationEnabled && !rotationWithTwoFingers, let touch = touches.first
+        {
+            let touchLocation = touch.location(in: self)
+            processRotationGestureMoved(location: touchLocation)
+        }
+        
+        if !_isRotating
+        {
+            super.nsuiTouchesMoved(touches, withEvent: event)
+        }
+    }
+    
+    open override func nsuiTouchesEnded(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
+    {
+        if !_isRotating
+        {
+            super.nsuiTouchesEnded(touches, withEvent: event)
+        }
+        
+        if rotationEnabled && !rotationWithTwoFingers, let touch = touches.first
+        {
+            let touchLocation = touch.location(in: self)
+            processRotationGestureEnded(location: touchLocation)
+        }
+        
+        if _isRotating
+        {
+            _isRotating = false
+        }
+    }
+    
+    open override func nsuiTouchesCancelled(_ touches: Set<NSUITouch>?, withEvent event: NSUIEvent?)
+    {
+        super.nsuiTouchesCancelled(touches, withEvent: event)
+        
+        processRotationGestureCancelled()
+    }
+    #endif
+    
+    #if os(OSX)
+    open override func mouseDown(with theEvent: NSEvent)
+    {
+        // if rotation by touch is enabled
+        if rotationEnabled
+        {
+            stopDeceleration()
+        
+            let location = self.convert(theEvent.locationInWindow, from: nil)
+            
+            processRotationGestureBegan(location: location)
+        }
+        
+        if !_isRotating
+        {
+            super.mouseDown(with: theEvent)
+        }
+    }
+    
+    open override func mouseDragged(with theEvent: NSEvent)
+    {
+        if rotationEnabled
+        {
+            let location = self.convert(theEvent.locationInWindow, from: nil)
+            
+            processRotationGestureMoved(location: location)
+        }
+        
+        if !_isRotating
+        {
+            super.mouseDragged(with: theEvent)
+        }
+    }
+    
+    open override func mouseUp(with theEvent: NSEvent)
+    {
+        if !_isRotating
+        {
+            super.mouseUp(with: theEvent)
+        }
+        
+        if rotationEnabled
+        {
+            let location = self.convert(theEvent.locationInWindow, from: nil)
+            
+            processRotationGestureEnded(location: location)
+        }
+        
+        if _isRotating
+        {
+            _isRotating = false
+        }
+    }
+    #endif
+    
+    private func resetVelocity()
+    {
+        velocitySamples.removeAll(keepingCapacity: false)
+    }
+    
+    private func sampleVelocity(touchLocation: CGPoint)
+    {
+        let currentSample: AngularVelocitySample = {
+            let time = CACurrentMediaTime()
+            let angle = angleForPoint(x: touchLocation.x, y: touchLocation.y)
+            return AngularVelocitySample(time: time, angle: angle)
+        }()
+
+        // Remove samples older than our sample time - 1 seconds
+        // while keeping at least one sample
+        
+        var i = 0, count = velocitySamples.count
+        while (i < count - 2)
+        {
+            if currentSample.time - velocitySamples[i].time > 1.0
+            {
+                velocitySamples.remove(at: 0)
+                i -= 1
+                count -= 1
+            }
+            else
+            {
+                break
+            }
+
+            i += 1
+        }
+
+        velocitySamples.append(currentSample)
+    }
+
+    private func calculateVelocity() -> CGFloat
+    {
+        guard var firstSample = velocitySamples.first,
+            var lastSample = velocitySamples.last
+            else { return 0 }
+
+        // Look for a sample that's closest to the latest sample, but not the same, so we can deduce the direction
+        let beforeLastSample = velocitySamples.last { $0.angle != lastSample.angle }
+            ?? firstSample
+
+        // Calculate the sampling time
+        let timeDelta: CGFloat = {
+            let delta = CGFloat(lastSample.time - firstSample.time)
+            return delta == 0 ? 0.1 : delta
+        }()
+
+        // Calculate clockwise/ccw by choosing two values that should be closest to each other,
+        // so if the angles are two far from each other we know they are inverted "for sure"
+        let isClockwise: Bool = {
+            let isClockwise = lastSample.angle >= beforeLastSample.angle
+            let isInverted = abs(lastSample.angle - beforeLastSample.angle) > 270.0
+            return isInverted ? !isClockwise : isClockwise
+        }()
+
+        // Now if the "gesture" is over a too big of an angle - then we know the angles are inverted, and we need to move them closer to each other from both sides of the 360.0 wrapping point
+        if lastSample.angle - firstSample.angle > 180.0
+        {
+            firstSample.angle += 360.0
+        }
+        else if firstSample.angle - lastSample.angle > 180.0
+        {
+            lastSample.angle += 360.0
+        }
+
+        // The velocity
+        let velocity = abs((lastSample.angle - firstSample.angle) / timeDelta)
+        return isClockwise ? velocity : -velocity
+    }
+
+    /// sets the starting angle of the rotation, this is only used by the touch listener, x and y is the touch position
+    private func setGestureStartAngle(x: CGFloat, y: CGFloat)
+    {
+        _startAngle = angleForPoint(x: x, y: y)
+        
+        // take the current angle into consideration when starting a new drag
+        _startAngle -= _rotationAngle
+    }
+    
+    /// updates the view rotation depending on the given touch position, also takes the starting angle into consideration
+    private func updateGestureRotation(x: CGFloat, y: CGFloat)
+    {
+        self.rotationAngle = angleForPoint(x: x, y: y) - _startAngle
+    }
+    
+    @objc open func stopDeceleration()
+    {
+        if _decelerationDisplayLink !== nil
+        {
+            _decelerationDisplayLink.remove(from: RunLoop.main, forMode: RunLoop.Mode.common)
+            _decelerationDisplayLink = nil
+        }
+    }
+    
+    @objc private func decelerationLoop()
+    {
+        let currentTime = CACurrentMediaTime()
+        
+        _decelerationAngularVelocity *= self.dragDecelerationFrictionCoef
+        
+        let timeInterval = CGFloat(currentTime - _decelerationLastTime)
+        
+        self.rotationAngle += _decelerationAngularVelocity * timeInterval
+        
+        _decelerationLastTime = currentTime
+        
+        if(abs(_decelerationAngularVelocity) < 0.001)
+        {
+            stopDeceleration()
+        }
+    }
+    
+    /// - Returns: The distance between two points
+    private func distance(eventX: CGFloat, startX: CGFloat, eventY: CGFloat, startY: CGFloat) -> CGFloat
+    {
+        let dx = eventX - startX
+        let dy = eventY - startY
+        return sqrt(dx * dx + dy * dy)
+    }
+    
+    /// - Returns: The distance between two points
+    private func distance(from: CGPoint, to: CGPoint) -> CGFloat
+    {
+        let dx = from.x - to.x
+        let dy = from.y - to.y
+        return sqrt(dx * dx + dy * dy)
+    }
+    
+    /// reference to the last highlighted object
+    private var _lastHighlight: Highlight!
+    
+    @objc private func tapGestureRecognized(_ recognizer: NSUITapGestureRecognizer)
+    {
+        if recognizer.state == NSUIGestureRecognizerState.ended
+        {
+            if !self.isHighLightPerTapEnabled { return }
+            
+            let location = recognizer.location(in: self)
+            
+            let high = self.getHighlightByTouchPoint(location)
+            self.highlightValue(high, callDelegate: true)
+        }
+    }
+    
+    #if !os(tvOS)
+    @objc private func rotationGestureRecognized(_ recognizer: NSUIRotationGestureRecognizer)
+    {
+        if recognizer.state == NSUIGestureRecognizerState.began
+        {
+            stopDeceleration()
+            
+            _startAngle = self.rawRotationAngle
+        }
+        
+        if recognizer.state == NSUIGestureRecognizerState.began || recognizer.state == NSUIGestureRecognizerState.changed
+        {
+            let angle = recognizer.nsuiRotation.RAD2DEG
+            
+            self.rotationAngle = _startAngle + angle
+            setNeedsDisplay()
+        }
+        else if recognizer.state == NSUIGestureRecognizerState.ended
+        {
+            let angle = recognizer.nsuiRotation.RAD2DEG
+            
+            self.rotationAngle = _startAngle + angle
+            setNeedsDisplay()
+            
+            if isDragDecelerationEnabled
+            {
+                stopDeceleration()
+                
+                _decelerationAngularVelocity = recognizer.velocity.RAD2DEG
+                
+                if _decelerationAngularVelocity != 0.0
+                {
+                    _decelerationLastTime = CACurrentMediaTime()
+                    _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(PieRadarChartViewBase.decelerationLoop))
+                    _decelerationDisplayLink.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
+                }
+            }
+        }
+    }
+    #endif
+}
