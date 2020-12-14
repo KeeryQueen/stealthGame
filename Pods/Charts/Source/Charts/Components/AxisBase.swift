@@ -14,4 +14,18 @@ import CoreGraphics
 
 /// Base class for all axes
 @objc(ChartAxisBase)
-open cl
+open class AxisBase: ComponentBase
+{
+    public override init()
+    {
+        super.init()
+    }
+    
+    /// Custom formatter that is used instead of the auto-formatter if set
+    private var _axisValueFormatter: IAxisValueFormatter?
+    
+    @objc open var labelFont = NSUIFont.systemFont(ofSize: 10.0)
+    @objc open var labelTextColor = NSUIColor.labelOrBlack
+    
+    @objc open var axisLineColor = NSUIColor.gray
+    @objc open var axisLineWidth = CGFloat(0.
