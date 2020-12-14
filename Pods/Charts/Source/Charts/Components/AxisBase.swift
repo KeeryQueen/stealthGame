@@ -28,4 +28,15 @@ open class AxisBase: ComponentBase
     @objc open var labelTextColor = NSUIColor.labelOrBlack
     
     @objc open var axisLineColor = NSUIColor.gray
-    @objc open var axisLineWidth = CGFloat(0.
+    @objc open var axisLineWidth = CGFloat(0.5)
+    @objc open var axisLineDashPhase = CGFloat(0.0)
+    @objc open var axisLineDashLengths: [CGFloat]!
+    
+    @objc open var gridColor = NSUIColor.gray.withAlphaComponent(0.9)
+    @objc open var gridLineWidth = CGFloat(0.5)
+    @objc open var gridLineDashPhase = CGFloat(0.0)
+    @objc open var gridLineDashLengths: [CGFloat]!
+    @objc open var gridLineCap = CGLineCap.butt
+    
+    @objc open var drawGridLinesEnabled = true
+    
