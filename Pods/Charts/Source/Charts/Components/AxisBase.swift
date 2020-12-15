@@ -50,4 +50,19 @@ open class AxisBase: ComponentBase
     /// This is useful especially for grouped BarChart.
     @objc open var centerAxisLabelsEnabled: Bool
     {
-        get { return _centerAxisLabelsEnabled && entryCount
+        get { return _centerAxisLabelsEnabled && entryCount > 0 }
+        set { _centerAxisLabelsEnabled = newValue }
+    }
+    
+    @objc open var isCenterAxisLabelsEnabled: Bool
+    {
+        get { return centerAxisLabelsEnabled }
+    }
+
+    /// array of limitlines that can be set for the axis
+    private var _limitLines = [ChartLimitLine]()
+    
+    /// Are the LimitLines drawn behind the data or in front of the data?
+    ///
+    /// **default**: false
+    @objc open var drawLimitLinesBehind
