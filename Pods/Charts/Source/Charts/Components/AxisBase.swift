@@ -65,4 +65,17 @@ open class AxisBase: ComponentBase
     /// Are the LimitLines drawn behind the data or in front of the data?
     ///
     /// **default**: false
-    @objc open var drawLimitLinesBehind
+    @objc open var drawLimitLinesBehindDataEnabled = false
+    
+    /// Are the grid lines drawn behind the data or in front of the data?
+    ///
+    /// **default**: true
+    @objc open var drawGridLinesBehindDataEnabled = true
+
+    /// the flag can be used to turn off the antialias for grid lines
+    @objc open var gridAntialiasEnabled = true
+    
+    /// the actual array of entries
+    @objc open var entries = [Double]()
+    
+    /// axis 
