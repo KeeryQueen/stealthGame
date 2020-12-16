@@ -78,4 +78,16 @@ open class AxisBase: ComponentBase
     /// the actual array of entries
     @objc open var entries = [Double]()
     
-    /// axis 
+    /// axis label entries only used for centered labels
+    @objc open var centeredEntries = [Double]()
+    
+    /// the number of entries the legend contains
+    @objc open var entryCount: Int { return entries.count }
+    
+    /// the number of label entries the axis should have
+    ///
+    /// **default**: 6
+    private var _labelCount = Int(6)
+    
+    /// the number of decimal digits to use (for the default formatter
+    @objc open var decimals: Int = 0
