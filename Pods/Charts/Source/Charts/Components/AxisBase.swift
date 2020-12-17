@@ -91,3 +91,13 @@ open class AxisBase: ComponentBase
     
     /// the number of decimal digits to use (for the default formatter
     @objc open var decimals: Int = 0
+    
+    /// When true, axis labels are controlled by the `granularity` property.
+    /// When false, axis values could possibly be repeated.
+    /// This could happen if two adjacent axis values are rounded to same value.
+    /// If using granularity this could be avoided by having fewer axis values visible.
+    @objc open var granularityEnabled = false
+    
+    private var _granularity = Double(1.0)
+    
+    /// The min
