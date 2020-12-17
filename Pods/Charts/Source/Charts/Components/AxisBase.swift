@@ -100,4 +100,19 @@ open class AxisBase: ComponentBase
     
     private var _granularity = Double(1.0)
     
-    /// The min
+    /// The minimum interval between axis values.
+    /// This can be used to avoid label duplicating when zooming in.
+    ///
+    /// **default**: 1.0
+    @objc open var granularity: Double
+    {
+        get
+        {
+            return _granularity
+        }
+        set
+        {
+            _granularity = newValue
+            
+            // set this to `true` if it was disabled, as it makes no sense to set this property with granularity disabled
+            granul
