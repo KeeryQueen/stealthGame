@@ -115,4 +115,23 @@ open class AxisBase: ComponentBase
             _granularity = newValue
             
             // set this to `true` if it was disabled, as it makes no sense to set this property with granularity disabled
-            granul
+            granularityEnabled = true
+        }
+    }
+    
+    /// The minimum interval between axis values.
+    @objc open var isGranularityEnabled: Bool
+    {
+        get
+        {
+            return granularityEnabled
+        }
+    }
+    
+    /// if true, the set number of y-labels will be forced
+    @objc open var forceLabelsEnabled = false
+    
+    @objc open func getLongestLabel() -> String
+    {
+        var longest = ""
+        
