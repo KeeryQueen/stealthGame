@@ -135,3 +135,18 @@ open class AxisBase: ComponentBase
     {
         var longest = ""
         
+        for i in 0 ..< entries.count
+        {
+            let text = getFormattedLabel(i)
+            
+            if longest.count < text.count
+            {
+                longest = text
+            }
+        }
+        
+        return longest
+    }
+    
+    /// - Returns: The formatted label at the specified index. This will either use the auto-formatter or the custom formatter (if one is set).
+    @objc open func getFormattedLabel(_ index: Int) -> String
