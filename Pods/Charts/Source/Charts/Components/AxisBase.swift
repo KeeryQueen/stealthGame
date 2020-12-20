@@ -150,3 +150,15 @@ open class AxisBase: ComponentBase
     
     /// - Returns: The formatted label at the specified index. This will either use the auto-formatter or the custom formatter (if one is set).
     @objc open func getFormattedLabel(_ index: Int) -> String
+    {
+        if index < 0 || index >= entries.count
+        {
+            return ""
+        }
+        
+        return valueFormatter?.stringForValue(entries[index], axis: self) ?? ""
+    }
+    
+    /// Sets the formatter to be used for formatting the axis labels.
+    /// If no formatter is set, the chart will automatically determine a reasonable formatting (concerning decimals) for all the values that are drawn inside the chart.
+    /// Use `nil` to
