@@ -185,4 +185,14 @@ open class AxisBase: ComponentBase
         }
     }
     
-    @objc open var isDrawGridLi
+    @objc open var isDrawGridLinesEnabled: Bool { return drawGridLinesEnabled }
+    
+    @objc open var isDrawAxisLineEnabled: Bool { return drawAxisLineEnabled }
+    
+    @objc open var isDrawLabelsEnabled: Bool { return drawLabelsEnabled }
+    
+    /// Are the LimitLines drawn behind the data or in front of the data?
+    /// 
+    /// **default**: false
+    @objc open var isDrawLimitLinesBehindDataEnabled: Bool { return drawLimitLinesBehindDataEnabled }
+    
