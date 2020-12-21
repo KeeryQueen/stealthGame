@@ -172,4 +172,17 @@ open class AxisBase: ComponentBase
             }
             else if _axisValueFormatter is DefaultAxisValueFormatter &&
             (_axisValueFormatter as! DefaultAxisValueFormatter).hasAutoDecimals &&
-                (_ax
+                (_axisValueFormatter as! DefaultAxisValueFormatter).decimals != decimals
+            {
+                (self._axisValueFormatter as! DefaultAxisValueFormatter).decimals = self.decimals
+            }
+
+            return _axisValueFormatter
+        }
+        set
+        {
+            _axisValueFormatter = newValue ?? DefaultAxisValueFormatter(decimals: decimals)
+        }
+    }
+    
+    @objc open var isDrawGridLi
