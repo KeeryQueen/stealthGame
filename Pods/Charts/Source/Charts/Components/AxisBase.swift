@@ -196,3 +196,13 @@ open class AxisBase: ComponentBase
     /// **default**: false
     @objc open var isDrawLimitLinesBehindDataEnabled: Bool { return drawLimitLinesBehindDataEnabled }
     
+    /// Are the grid lines drawn behind the data or in front of the data?
+    ///
+    /// **default**: true
+    @objc open var isDrawGridLinesBehindDataEnabled: Bool { return drawGridLinesBehindDataEnabled }
+    
+    /// Extra spacing for `axisMinimum` to be added to automatically calculated `axisMinimum`
+    @objc open var spaceMin: Double = 0.0
+    
+    /// Extra spacing for `axisMaximum` to be added to automatically calculated `axisMaximum`
+  
