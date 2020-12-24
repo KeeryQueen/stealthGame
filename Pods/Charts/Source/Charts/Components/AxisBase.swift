@@ -205,4 +205,14 @@ open class AxisBase: ComponentBase
     @objc open var spaceMin: Double = 0.0
     
     /// Extra spacing for `axisMaximum` to be added to automatically calculated `axisMaximum`
-  
+    @objc open var spaceMax: Double = 0.0
+    
+    /// Flag indicating that the axis-min value has been customized
+    internal var _customAxisMin: Bool = false
+    
+    /// Flag indicating that the axis-max value has been customized
+    internal var _customAxisMax: Bool = false
+    
+    /// Do not touch this directly, instead, use axisMinimum.
+    /// This is automatically calculated to represent the real min value,
+    /// and is used when calculating th
