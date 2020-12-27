@@ -252,4 +252,18 @@ open class AxisBase: ComponentBase
             let range = axisMinLabels...axisMaxLabels as ClosedRange
             _labelCount = newValue.clamped(to: range)
                         
-            forceLabelsEnabled = f
+            forceLabelsEnabled = false
+        }
+    }
+    
+    @objc open func setLabelCount(_ count: Int, force: Bool)
+    {
+        self.labelCount = count
+        forceLabelsEnabled = force
+    }
+    
+    /// `true` if focing the y-label count is enabled. Default: false
+    @objc open var isForceLabelsEnabled: Bool { return forceLabelsEnabled }
+    
+    /// Adds a new ChartLimitLine to this axis.
+    @objc open func add
