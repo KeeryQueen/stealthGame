@@ -237,4 +237,19 @@ open class AxisBase: ComponentBase
     }
     
     /// the number of label entries the axis should have
-    /// max =
+    /// max = 25,
+    /// min = 2,
+    /// default = 6,
+    /// be aware that this number is not fixed and can only be approximated
+    @objc open var labelCount: Int
+    {
+        get
+        {
+            return _labelCount
+        }
+        set
+        {
+            let range = axisMinLabels...axisMaxLabels as ClosedRange
+            _labelCount = newValue.clamped(to: range)
+                        
+            forceLabelsEnabled = f
