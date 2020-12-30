@@ -266,4 +266,19 @@ open class AxisBase: ComponentBase
     @objc open var isForceLabelsEnabled: Bool { return forceLabelsEnabled }
     
     /// Adds a new ChartLimitLine to this axis.
-    @objc open func add
+    @objc open func addLimitLine(_ line: ChartLimitLine)
+    {
+        _limitLines.append(line)
+    }
+    
+    /// Removes the specified ChartLimitLine from the axis.
+    @objc open func removeLimitLine(_ line: ChartLimitLine)
+    {
+        guard let i = _limitLines.firstIndex(of: line) else { return }
+        _limitLines.remove(at: i)
+    }
+    
+    /// Removes all LimitLines from the axis.
+    @objc open func removeAllLimitLines()
+    {
+        _limitLines.removeAll
