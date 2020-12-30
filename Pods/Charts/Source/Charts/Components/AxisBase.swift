@@ -281,4 +281,21 @@ open class AxisBase: ComponentBase
     /// Removes all LimitLines from the axis.
     @objc open func removeAllLimitLines()
     {
-        _limitLines.removeAll
+        _limitLines.removeAll(keepingCapacity: false)
+    }
+    
+    /// The LimitLines of this axis.
+    @objc open var limitLines : [ChartLimitLine]
+    {
+        return _limitLines
+    }
+    
+    // MARK: Custom axis ranges
+    
+    /// By calling this method, any custom minimum value that has been previously set is reseted, and the calculation is done automatically.
+    @objc open func resetCustomAxisMin()
+    {
+        _customAxisMin = false
+    }
+    
+    @objc open var isAxis
