@@ -298,4 +298,15 @@ open class AxisBase: ComponentBase
         _customAxisMin = false
     }
     
-    @objc open var isAxis
+    @objc open var isAxisMinCustom: Bool { return _customAxisMin }
+    
+    /// By calling this method, any custom maximum value that has been previously set is reseted, and the calculation is done automatically.
+    @objc open func resetCustomAxisMax()
+    {
+        _customAxisMax = false
+    }
+    
+    @objc open var isAxisMaxCustom: Bool { return _customAxisMax }
+        
+    /// The minimum value for this axis.
+    /// If set, this value will not be cal
