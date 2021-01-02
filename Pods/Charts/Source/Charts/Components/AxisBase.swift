@@ -309,4 +309,21 @@ open class AxisBase: ComponentBase
     @objc open var isAxisMaxCustom: Bool { return _customAxisMax }
         
     /// The minimum value for this axis.
-    /// If set, this value will not be cal
+    /// If set, this value will not be calculated automatically depending on the provided data.
+    /// Use `resetCustomAxisMin()` to undo this.
+    @objc open var axisMinimum: Double
+    {
+        get
+        {
+            return _axisMinimum
+        }
+        set
+        {
+            _customAxisMin = true
+            _axisMinimum = newValue
+            axisRange = abs(_axisMaximum - newValue)
+        }
+    }
+    
+    /// The maximum value for this axis.
+    /// I
