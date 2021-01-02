@@ -326,4 +326,20 @@ open class AxisBase: ComponentBase
     }
     
     /// The maximum value for this axis.
-    /// I
+    /// If set, this value will not be calculated automatically depending on the provided data.
+    /// Use `resetCustomAxisMax()` to undo this.
+    @objc open var axisMaximum: Double
+    {
+        get
+        {
+            return _axisMaximum
+        }
+        set
+        {
+            _customAxisMax = true
+            _axisMaximum = newValue
+            axisRange = abs(newValue - _axisMinimum)
+        }
+    }
+    
+    /// Calculates the minimum, maximum and range
