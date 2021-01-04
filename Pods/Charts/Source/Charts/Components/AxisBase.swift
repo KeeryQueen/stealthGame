@@ -351,4 +351,22 @@ open class AxisBase: ComponentBase
     {
         // if custom, use value as is, else use data value
         var min = _customAxisMin ? _axisMinimum : (dataMin - spaceMin)
-        var max = _customAxisMax
+        var max = _customAxisMax ? _axisMaximum : (dataMax + spaceMax)
+        
+        // temporary range (before calculations)
+        let range = abs(max - min)
+        
+        // in case all values are equal
+        if range == 0.0
+        {
+            max = max + 1.0
+            min = min - 1.0
+        }
+        
+        _axisMinimum = min
+        _axisMaximum = max
+        
+        // actual range
+        axisRange = abs(max - min)
+    }
+}
