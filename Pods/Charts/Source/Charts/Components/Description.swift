@@ -47,4 +47,8 @@ open class Description: ComponentBase
     @objc open var textAlign: NSTextAlignment = NSTextAlignment.right
     
     /// Font object used for drawing the description text.
-    @objc open var font: NSUIFon
+    @objc open var font: NSUIFont
+    
+    /// Text color used for drawing the description text
+    @objc open var textColor = NSUIColor.labelOrBlack
+}
