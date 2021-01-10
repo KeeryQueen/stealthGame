@@ -34,4 +34,6 @@ public protocol IMarker: class
     ///   - highlight: The highlight object contains information about the highlighted value such as it's dataset-index, the selected range or stack-index (only stacked bar entries).
     func refreshContent(entry: ChartDataEntry, highlight: Highlight)
     
-    /// Draws th
+    /// Draws the IMarker on the given position on the given context
+    func draw(context: CGContext, point: CGPoint)
+}
