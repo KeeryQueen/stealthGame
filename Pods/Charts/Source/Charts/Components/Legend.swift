@@ -16,4 +16,25 @@ import CoreGraphics
 open class Legend: ComponentBase
 {
     @objc(ChartLegendForm)
-    public
+    public enum Form: Int
+    {
+        /// Avoid drawing a form
+        case none
+        
+        /// Do not draw the a form, but leave space for it
+        case empty
+        
+        /// Use default (default dataset's form to the legend's form)
+        case `default`
+        
+        /// Draw a square
+        case square
+        
+        /// Draw a circle
+        case circle
+        
+        /// Draw a horizontal line
+        case line
+    }
+    
+    @
