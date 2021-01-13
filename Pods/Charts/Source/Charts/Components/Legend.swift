@@ -60,4 +60,15 @@ open class Legend: ComponentBase
         case vertical
     }
     
- 
+    @objc(ChartLegendDirection)
+    public enum Direction: Int
+    {
+        case leftToRight
+        case rightToLeft
+    }
+    
+    /// The legend entries array
+    @objc open var entries = [LegendEntry]()
+    
+    /// Entries that will be appended to the end of the auto calculated entries after calculating the legend.
+    /// (if the legend has already been calculated, you will need to call notifyDataSetChanged() to let the changes 
