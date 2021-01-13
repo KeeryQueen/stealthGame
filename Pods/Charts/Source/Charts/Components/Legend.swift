@@ -37,4 +37,27 @@ open class Legend: ComponentBase
         case line
     }
     
-    @
+    @objc(ChartLegendHorizontalAlignment)
+    public enum HorizontalAlignment: Int
+    {
+        case left
+        case center
+        case right
+    }
+    
+    @objc(ChartLegendVerticalAlignment)
+    public enum VerticalAlignment: Int
+    {
+        case top
+        case center
+        case bottom
+    }
+    
+    @objc(ChartLegendOrientation)
+    public enum Orientation: Int
+    {
+        case horizontal
+        case vertical
+    }
+    
+ 
