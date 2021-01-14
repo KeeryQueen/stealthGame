@@ -71,4 +71,13 @@ open class Legend: ComponentBase
     @objc open var entries = [LegendEntry]()
     
     /// Entries that will be appended to the end of the auto calculated entries after calculating the legend.
-    /// (if the legend has already been calculated, you will need to call notifyDataSetChanged() to let the changes 
+    /// (if the legend has already been calculated, you will need to call notifyDataSetChanged() to let the changes take effect)
+    @objc open var extraEntries = [LegendEntry]()
+    
+    /// Are the legend labels/colors a custom value or auto calculated? If false, then it's auto, if true, then custom.
+    /// 
+    /// **default**: false (automatic legend)
+    private var _isLegendCustom = false
+
+    /// The horizontal alignment of the legend
+    @objc open var horizontalAlignment: HorizontalAlignment = HorizontalAlign
