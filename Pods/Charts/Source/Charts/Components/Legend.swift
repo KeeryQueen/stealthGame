@@ -80,4 +80,15 @@ open class Legend: ComponentBase
     private var _isLegendCustom = false
 
     /// The horizontal alignment of the legend
-    @objc open var horizontalAlignment: HorizontalAlignment = HorizontalAlign
+    @objc open var horizontalAlignment: HorizontalAlignment = HorizontalAlignment.left
+    
+    /// The vertical alignment of the legend
+    @objc open var verticalAlignment: VerticalAlignment = VerticalAlignment.bottom
+    
+    /// The orientation of the legend
+    @objc open var orientation: Orientation = Orientation.horizontal
+    
+    /// Flag indicating whether the legend will draw inside the chart or outside
+    @objc open var drawInside: Bool = false
+    
+    /// Flag indicating whether the 
