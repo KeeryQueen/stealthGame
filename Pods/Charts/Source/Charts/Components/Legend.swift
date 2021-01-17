@@ -103,4 +103,15 @@ open class Legend: ComponentBase
     /// The form/shape of the legend forms
     @objc open var form = Form.square
     
-   
+    /// The size of the legend forms
+    @objc open var formSize = CGFloat(8.0)
+    
+    /// The line width for forms that consist of lines
+    @objc open var formLineWidth = CGFloat(3.0)
+    
+    /// Line dash configuration for shapes that consist of lines.
+    ///
+    /// This is how much (in pixels) into the dash pattern are we starting from.
+    @objc open var formLineDashPhase: CGFloat = 0.0
+    
+    /// Line dash configuration for shapes that co
