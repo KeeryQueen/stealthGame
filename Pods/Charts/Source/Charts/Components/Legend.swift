@@ -91,4 +91,16 @@ open class Legend: ComponentBase
     /// Flag indicating whether the legend will draw inside the chart or outside
     @objc open var drawInside: Bool = false
     
-    /// Flag indicating whether the 
+    /// Flag indicating whether the legend will draw inside the chart or outside
+    @objc open var isDrawInsideEnabled: Bool { return drawInside }
+    
+    /// The text direction of the legend
+    @objc open var direction: Direction = Direction.leftToRight
+
+    @objc open var font: NSUIFont = NSUIFont.systemFont(ofSize: 10.0)
+    @objc open var textColor = NSUIColor.labelOrBlack
+
+    /// The form/shape of the legend forms
+    @objc open var form = Form.square
+    
+   
