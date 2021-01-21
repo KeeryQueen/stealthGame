@@ -114,4 +114,16 @@ open class Legend: ComponentBase
     /// This is how much (in pixels) into the dash pattern are we starting from.
     @objc open var formLineDashPhase: CGFloat = 0.0
     
-    /// Line dash configuration for shapes that co
+    /// Line dash configuration for shapes that consist of lines.
+    ///
+    /// This is the actual dash pattern.
+    /// I.e. [2, 3] will paint [--   --   ]
+    /// [1, 3, 4, 2] will paint [-   ----  -   ----  ]
+    @objc open var formLineDashLengths: [CGFloat]?
+    
+    @objc open var xEntrySpace = CGFloat(6.0)
+    @objc open var yEntrySpace = CGFloat(0.0)
+    @objc open var formToTextSpace = CGFloat(5.0)
+    @objc open var stackSpace = CGFloat(3.0)
+    
+    @objc open var ca
