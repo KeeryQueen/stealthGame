@@ -126,4 +126,23 @@ open class Legend: ComponentBase
     @objc open var formToTextSpace = CGFloat(5.0)
     @objc open var stackSpace = CGFloat(3.0)
     
-    @objc open var ca
+    @objc open var calculatedLabelSizes = [CGSize]()
+    @objc open var calculatedLabelBreakPoints = [Bool]()
+    @objc open var calculatedLineSizes = [CGSize]()
+    
+    public override init()
+    {
+        super.init()
+        
+        self.xOffset = 5.0
+        self.yOffset = 3.0
+    }
+    
+    @objc public init(entries: [LegendEntry])
+    {
+        super.init()
+        
+        self.entries = entries
+    }
+    
+    @objc open func get
