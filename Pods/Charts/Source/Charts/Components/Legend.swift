@@ -145,4 +145,19 @@ open class Legend: ComponentBase
         self.entries = entries
     }
     
-    @objc open func get
+    @objc open func getMaximumEntrySize(withFont font: NSUIFont) -> CGSize
+    {
+        var maxW = CGFloat(0.0)
+        var maxH = CGFloat(0.0)
+        
+        var maxFormSize: CGFloat = 0.0
+
+        for entry in entries
+        {
+            let formSize = entry.formSize.isNaN ? self.formSize : entry.formSize
+            if formSize > maxFormSize
+            {
+                maxFormSize = formSize
+            }
+            
+           
