@@ -176,4 +176,16 @@ open class Legend: ComponentBase
         }
         
         return CGSize(
-            width: maxW + maxFormSize + 
+            width: maxW + maxFormSize + formToTextSpace,
+            height: maxH
+        )
+    }
+
+    @objc open var neededWidth = CGFloat(0.0)
+    @objc open var neededHeight = CGFloat(0.0)
+    @objc open var textWidthMax = CGFloat(0.0)
+    @objc open var textHeightMax = CGFloat(0.0)
+    
+    /// flag that indicates if word wrapping is enabled
+    /// this is currently supported only for `orientation == Horizontal`.
+    /// you may want to set maxSizePercent when word wrapping, 
