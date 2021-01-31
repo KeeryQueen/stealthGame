@@ -160,4 +160,20 @@ open class Legend: ComponentBase
                 maxFormSize = formSize
             }
             
-           
+            guard let label = entry.label
+                else { continue }
+            
+            let size = (label as NSString).size(withAttributes: [.font: font])
+            
+            if size.width > maxW
+            {
+                maxW = size.width
+            }
+            if size.height > maxH
+            {
+                maxH = size.height
+            }
+        }
+        
+        return CGSize(
+            width: maxW + maxFormSize + 
