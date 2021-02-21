@@ -207,4 +207,16 @@ open class Legend: ComponentBase
     {
         let maxEntrySize = getMaximumEntrySize(withFont: labelFont)
         let defaultFormSize = self.formSize
-        let stackSpace =
+        let stackSpace = self.stackSpace
+        let formToTextSpace = self.formToTextSpace
+        let xEntrySpace = self.xEntrySpace
+        let yEntrySpace = self.yEntrySpace
+        let wordWrapEnabled = self.wordWrapEnabled
+        let entries = self.entries
+        let entryCount = entries.count
+        
+        textWidthMax = maxEntrySize.width
+        textHeightMax = maxEntrySize.height
+        
+        switch orientation
+    
