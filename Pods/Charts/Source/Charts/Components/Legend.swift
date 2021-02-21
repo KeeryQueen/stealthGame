@@ -188,4 +188,14 @@ open class Legend: ComponentBase
     
     /// flag that indicates if word wrapping is enabled
     /// this is currently supported only for `orientation == Horizontal`.
-    /// you may want to set maxSizePercent when word wrapping, 
+    /// you may want to set maxSizePercent when word wrapping, to set the point where the text wraps.
+    /// 
+    /// **default**: true
+    @objc open var wordWrapEnabled = true
+    
+    /// if this is set, then word wrapping the legend is enabled.
+    @objc open var isWordWrapEnabled: Bool { return wordWrapEnabled }
+
+    /// The maximum relative size out of the whole chart view in percent.
+    /// If the legend is to the right/left of the chart, then this affects the width of the legend.
+    /// If the legend i
