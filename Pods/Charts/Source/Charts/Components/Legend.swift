@@ -198,4 +198,13 @@ open class Legend: ComponentBase
 
     /// The maximum relative size out of the whole chart view in percent.
     /// If the legend is to the right/left of the chart, then this affects the width of the legend.
-    /// If the legend i
+    /// If the legend is to the top/bottom of the chart, then this affects the height of the legend.
+    /// 
+    /// **default**: 0.95 (95%)
+    @objc open var maxSizePercent: CGFloat = 0.95
+    
+    @objc open func calculateDimensions(labelFont: NSUIFont, viewPortHandler: ViewPortHandler)
+    {
+        let maxEntrySize = getMaximumEntrySize(withFont: labelFont)
+        let defaultFormSize = self.formSize
+        let stackSpace =
