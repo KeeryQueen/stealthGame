@@ -219,4 +219,18 @@ open class Legend: ComponentBase
         textHeightMax = maxEntrySize.height
         
         switch orientation
-    
+        {
+        case .vertical:
+            
+            var maxWidth = CGFloat(0.0)
+            var width = CGFloat(0.0)
+            var maxHeight = CGFloat(0.0)
+            let labelLineHeight = labelFont.lineHeight
+            
+            var wasStacked = false
+            
+            for i in 0 ..< entryCount
+            {
+                let e = entries[i]
+                let drawingForm = e.form != .none
+             
