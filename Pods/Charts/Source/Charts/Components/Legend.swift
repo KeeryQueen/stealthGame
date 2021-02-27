@@ -247,4 +247,17 @@ open class Legend: ComponentBase
                     {
                         width += stackSpace
                     }
-                    width 
+                    width += formSize
+                }
+                
+                if label != nil
+                {
+                    let size = (label! as NSString).size(withAttributes: [.font: labelFont])
+                    
+                    if drawingForm && !wasStacked
+                    {
+                        width += formToTextSpace
+                    }
+                    else if wasStacked
+                    {
+                        maxWidth = max(maxWidth, width)
