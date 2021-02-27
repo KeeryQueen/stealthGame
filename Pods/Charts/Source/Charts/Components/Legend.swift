@@ -233,4 +233,18 @@ open class Legend: ComponentBase
             {
                 let e = entries[i]
                 let drawingForm = e.form != .none
-             
+                let formSize = e.formSize.isNaN ? defaultFormSize : e.formSize
+                let label = e.label
+                
+                if !wasStacked
+                {
+                    width = 0.0
+                }
+                
+                if drawingForm
+                {
+                    if wasStacked
+                    {
+                        width += stackSpace
+                    }
+                    width 
