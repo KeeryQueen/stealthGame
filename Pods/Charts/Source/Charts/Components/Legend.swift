@@ -261,3 +261,17 @@ open class Legend: ComponentBase
                     else if wasStacked
                     {
                         maxWidth = max(maxWidth, width)
+                        maxHeight += labelLineHeight + yEntrySpace
+                        width = 0.0
+                        wasStacked = false
+                    }
+                    
+                    width += size.width
+                    maxHeight += labelLineHeight + yEntrySpace
+                }
+                else
+                {
+                    wasStacked = true
+                    width += formSize
+                    
+          
