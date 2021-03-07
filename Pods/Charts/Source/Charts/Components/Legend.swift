@@ -290,4 +290,13 @@ open class Legend: ComponentBase
             
             let labelLineHeight = labelFont.lineHeight
             
-            l
+            let contentWidth: CGFloat = viewPortHandler.contentWidth * maxSizePercent
+            
+            // Prepare arrays for calculated layout
+            if calculatedLabelSizes.count != entryCount
+            {
+                calculatedLabelSizes = [CGSize](repeating: CGSize(), count: entryCount)
+            }
+            
+            if calculatedLabelBreakPoints.count != entryCount
+          
