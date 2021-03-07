@@ -299,4 +299,15 @@ open class Legend: ComponentBase
             }
             
             if calculatedLabelBreakPoints.count != entryCount
-          
+            {
+                calculatedLabelBreakPoints = [Bool](repeating: false, count: entryCount)
+            }
+            
+            calculatedLineSizes.removeAll(keepingCapacity: true)
+            
+            // Start calculating layout
+            
+            let labelAttrs = [NSAttributedString.Key.font: labelFont]
+            var maxLineWidth: CGFloat = 0.0
+            var currentLineWidth: CGFloat = 0.0
+            var requiredWidth:
