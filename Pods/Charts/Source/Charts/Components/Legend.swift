@@ -274,4 +274,20 @@ open class Legend: ComponentBase
                     wasStacked = true
                     width += formSize
                     
-          
+                    if i < entryCount - 1
+                    {
+                        width += stackSpace
+                    }
+                }
+                
+                maxWidth = max(maxWidth, width)
+            }
+            
+            neededWidth = maxWidth
+            neededHeight = maxHeight
+            
+        case .horizontal:
+            
+            let labelLineHeight = labelFont.lineHeight
+            
+            l
