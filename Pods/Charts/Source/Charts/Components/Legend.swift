@@ -310,4 +310,17 @@ open class Legend: ComponentBase
             let labelAttrs = [NSAttributedString.Key.font: labelFont]
             var maxLineWidth: CGFloat = 0.0
             var currentLineWidth: CGFloat = 0.0
-            var requiredWidth:
+            var requiredWidth: CGFloat = 0.0
+            var stackedStartIndex: Int = -1
+            
+            for i in 0 ..< entryCount
+            {
+                let e = entries[i]
+                let drawingForm = e.form != .none
+                let label = e.label
+                
+                calculatedLabelBreakPoints[i] = false
+                
+                if stackedStartIndex == -1
+                {
+                    // we are not stacking, so require
