@@ -323,4 +323,16 @@ open class Legend: ComponentBase
                 
                 if stackedStartIndex == -1
                 {
-                    // we are not stacking, so require
+                    // we are not stacking, so required width is for this label only
+                    requiredWidth = 0.0
+                }
+                else
+                {
+                    // add the spacing appropriate for stacked labels/forms
+                    requiredWidth += stackSpace
+                }
+                
+                // grouped forms have null labels
+                if label != nil
+                {
+              
