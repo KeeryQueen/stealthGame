@@ -335,4 +335,13 @@ open class Legend: ComponentBase
                 // grouped forms have null labels
                 if label != nil
                 {
-              
+                    calculatedLabelSizes[i] = (label! as NSString).size(withAttributes: labelAttrs)
+                    requiredWidth += drawingForm ? formToTextSpace + formSize : 0.0
+                    requiredWidth += calculatedLabelSizes[i].width
+                }
+                else
+                {
+                    calculatedLabelSizes[i] = CGSize()
+                    requiredWidth += drawingForm ? formSize : 0.0
+                    
+  
