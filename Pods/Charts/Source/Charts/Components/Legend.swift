@@ -362,3 +362,12 @@ open class Legend: ComponentBase
                         // Expand current line
                         currentLineWidth += requiredSpacing + requiredWidth
                     }
+                    else
+                    { // It doesn't fit, we need to wrap a line
+                        
+                        // Add current line size to array
+                        calculatedLineSizes.append(CGSize(width: currentLineWidth, height: labelLineHeight))
+                        maxLineWidth = max(maxLineWidth, currentLineWidth)
+                        
+                        // Start a new line
+                        calculatedLabelBrea
