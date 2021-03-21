@@ -344,4 +344,15 @@ open class Legend: ComponentBase
                     calculatedLabelSizes[i] = CGSize()
                     requiredWidth += drawingForm ? formSize : 0.0
                     
-  
+                    if stackedStartIndex == -1
+                    {
+                        // mark this index as we might want to break here later
+                        stackedStartIndex = i
+                    }
+                }
+                
+                if label != nil || i == entryCount - 1
+                {
+                    let requiredSpacing = currentLineWidth == 0.0 ? 0.0 : xEntrySpace
+                    
+                 
