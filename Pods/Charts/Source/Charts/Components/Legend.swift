@@ -355,4 +355,10 @@ open class Legend: ComponentBase
                 {
                     let requiredSpacing = currentLineWidth == 0.0 ? 0.0 : xEntrySpace
                     
-                 
+                    if (!wordWrapEnabled || // No word wrapping, it must fit.
+                        currentLineWidth == 0.0 || // The line is empty, it must fit.
+                        (contentWidth - currentLineWidth >= requiredSpacing + requiredWidth)) // It simply fits
+                    {
+                        // Expand current line
+                        currentLineWidth += requiredSpacing + requiredWidth
+                    }
