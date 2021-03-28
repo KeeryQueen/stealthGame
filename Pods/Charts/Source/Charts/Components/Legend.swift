@@ -370,4 +370,11 @@ open class Legend: ComponentBase
                         maxLineWidth = max(maxLineWidth, currentLineWidth)
                         
                         // Start a new line
-                        calculatedLabelBrea
+                        calculatedLabelBreakPoints[stackedStartIndex > -1 ? stackedStartIndex : i] = true
+                        currentLineWidth = requiredWidth
+                    }
+                    
+                    if i == entryCount - 1
+                    { // Add last line size to array
+                        calculatedLineSizes.append(CGSize(width: currentLineWidth, height: labelLineHeight))
+                        maxLineWidth = max(maxLineWidth, currentLineWidth
