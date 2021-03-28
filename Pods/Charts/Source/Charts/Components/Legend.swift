@@ -377,4 +377,18 @@ open class Legend: ComponentBase
                     if i == entryCount - 1
                     { // Add last line size to array
                         calculatedLineSizes.append(CGSize(width: currentLineWidth, height: labelLineHeight))
-                        maxLineWidth = max(maxLineWidth, currentLineWidth
+                        maxLineWidth = max(maxLineWidth, currentLineWidth)
+                    }
+                }
+                
+                stackedStartIndex = label != nil ? -1 : stackedStartIndex
+            }
+            
+            neededWidth = maxLineWidth
+            neededHeight = labelLineHeight * CGFloat(calculatedLineSizes.count) +
+                yEntrySpace * CGFloat(calculatedLineSizes.count == 0 ? 0 : (calculatedLineSizes.count - 1))
+        }
+        
+        neededWidth += xOffset
+        neededHeight += yOffset
+  
