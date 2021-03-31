@@ -401,4 +401,15 @@ open class Legend: ComponentBase
     /// Call `resetCustom(...)` to re-enable automatic calculation (and then `notifyDataSetChanged()` is needed).
     @objc open func setCustom(entries: [LegendEntry])
     {
-        sel
+        self.entries = entries
+        _isLegendCustom = true
+    }
+    
+    /// Calling this will disable the custom legend entries (set by `setLegend(...)`). Instead, the entries will again be calculated automatically (after `notifyDataSetChanged()` is called).
+    @objc open func resetCustom()
+    {
+        _isLegendCustom = false
+    }
+    
+    /// **default**: false (automatic legend)
+    /// `true` if a custom legend entries has been se
