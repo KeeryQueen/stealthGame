@@ -391,4 +391,14 @@ open class Legend: ComponentBase
         
         neededWidth += xOffset
         neededHeight += yOffset
-  
+    }
+    
+    /// MARK: - Custom legend
+    
+    /// Sets a custom legend's entries array.
+    /// * A nil label will start a group.
+    /// This will disable the feature that automatically calculates the legend entries from the datasets.
+    /// Call `resetCustom(...)` to re-enable automatic calculation (and then `notifyDataSetChanged()` is needed).
+    @objc open func setCustom(entries: [LegendEntry])
+    {
+        sel
