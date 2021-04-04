@@ -36,4 +36,19 @@ open class YAxis: AxisBase
     
     ///  Enum that specifies the axis a DataSet should be plotted against, either Left or Right.
     @objc
-    public enum AxisD
+    public enum AxisDependency: Int
+    {
+        case left
+        case right
+    }
+    
+    /// indicates if the bottom y-label entry is drawn or not
+    @objc open var drawBottomYLabelEntryEnabled = true
+    
+    /// indicates if the top y-label entry is drawn or not
+    @objc open var drawTopYLabelEntryEnabled = true
+    
+    /// flag that indicates if the axis is inverted or not
+    @objc open var inverted = false
+    
+    /// fla
