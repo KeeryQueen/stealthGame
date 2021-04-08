@@ -51,4 +51,14 @@ open class YAxis: AxisBase
     /// flag that indicates if the axis is inverted or not
     @objc open var inverted = false
     
-    /// fla
+    /// flag that indicates if the zero-line should be drawn regardless of other grid lines
+    @objc open var drawZeroLineEnabled = false
+    
+    /// Color of the zero line
+    @objc open var zeroLineColor: NSUIColor? = NSUIColor.gray
+    
+    /// Width of the zero line
+    @objc open var zeroLineWidth: CGFloat = 1.0
+    
+    /// This is how much (in pixels) into the dash pattern are we starting from.
+    @objc open var zeroLineDashPhase = CGFl
