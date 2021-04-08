@@ -61,4 +61,15 @@ open class YAxis: AxisBase
     @objc open var zeroLineWidth: CGFloat = 1.0
     
     /// This is how much (in pixels) into the dash pattern are we starting from.
-    @objc open var zeroLineDashPhase = CGFl
+    @objc open var zeroLineDashPhase = CGFloat(0.0)
+    
+    /// This is the actual dash pattern.
+    /// I.e. [2, 3] will paint [--   --   ]
+    /// [1, 3, 4, 2] will paint [-   ----  -   ----  ]
+    @objc open var zeroLineDashLengths: [CGFloat]?
+
+    /// axis space from the largest value to the top in percent of the total axis range
+    @objc open var spaceTop = CGFloat(0.1)
+
+    /// axis space from the smallest value to the bottom in percent of the total axis range
+    @objc open var space
