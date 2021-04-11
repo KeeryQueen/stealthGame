@@ -72,4 +72,16 @@ open class YAxis: AxisBase
     @objc open var spaceTop = CGFloat(0.1)
 
     /// axis space from the smallest value to the bottom in percent of the total axis range
-    @objc open var space
+    @objc open var spaceBottom = CGFloat(0.1)
+    
+    /// the position of the y-labels relative to the chart
+    @objc open var labelPosition = LabelPosition.outsideChart
+
+    /// the alignment of the text in the y-label
+    @objc open var labelAlignment: NSTextAlignment = .left
+
+    /// the horizontal offset of the y-label
+    @objc open var labelXOffset: CGFloat = 0.0
+    
+    /// the side this axis object represents
+    private var _axisDependenc
