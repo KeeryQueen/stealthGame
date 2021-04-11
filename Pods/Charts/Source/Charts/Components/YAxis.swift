@@ -121,4 +121,19 @@ open class YAxis: AxisBase
     @objc open func requiredSize() -> CGSize
     {
         let label = getLongestLabel() as NSString
-        var size = label.size(withAttributes: [NSAttributedSt
+        var size = label.size(withAttributes: [NSAttributedString.Key.font: labelFont])
+        size.width += xOffset * 2.0
+        size.height += yOffset * 2.0
+        size.width = max(minWidth, min(size.width, maxWidth > 0.0 ? maxWidth : size.width))
+        return size
+    }
+    
+    @objc open func getRequiredHeightSpace() -> CGFloat
+    {
+        return requiredSize().height
+    }
+    
+    /// `true` if this axis needs horizontal offset, `false` ifno offset is needed.
+    @objc open var needsOffset: Bool
+    {
+        
