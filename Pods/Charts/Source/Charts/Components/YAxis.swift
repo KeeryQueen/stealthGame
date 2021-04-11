@@ -100,4 +100,25 @@ open class YAxis: AxisBase
     public override init()
     {
         super.init()
-       
+        
+        self.yOffset = 0.0
+    }
+    
+    @objc public init(position: AxisDependency)
+    {
+        super.init()
+        
+        _axisDependency = position
+        
+        self.yOffset = 0.0
+    }
+    
+    @objc open var axisDependency: AxisDependency
+    {
+        return _axisDependency
+    }
+    
+    @objc open func requiredSize() -> CGSize
+    {
+        let label = getLongestLabel() as NSString
+        var size = label.size(withAttributes: [NSAttributedSt
