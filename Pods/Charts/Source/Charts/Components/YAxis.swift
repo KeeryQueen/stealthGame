@@ -84,4 +84,20 @@ open class YAxis: AxisBase
     @objc open var labelXOffset: CGFloat = 0.0
     
     /// the side this axis object represents
-    private var _axisDependenc
+    private var _axisDependency = AxisDependency.left
+    
+    /// the minimum width that the axis should take
+    /// 
+    /// **default**: 0.0
+    @objc open var minWidth = CGFloat(0)
+    
+    /// the maximum width that the axis can take.
+    /// use Infinity for disabling the maximum.
+    /// 
+    /// **default**: CGFloat.infinity
+    @objc open var maxWidth = CGFloat(CGFloat.infinity)
+    
+    public override init()
+    {
+        super.init()
+       
