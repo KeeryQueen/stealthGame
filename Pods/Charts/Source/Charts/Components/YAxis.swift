@@ -151,4 +151,16 @@ open class YAxis: AxisBase
     open override func calculate(min dataMin: Double, max dataMax: Double)
     {
         // if custom, use value as is, else use data value
-        var min = _customAxisMin ? _axisMinimum
+        var min = _customAxisMin ? _axisMinimum : dataMin
+        var max = _customAxisMax ? _axisMaximum : dataMax
+        
+        // Make sure max is greater than min
+        // Discussion: https://github.com/danielgindi/Charts/pull/3650#discussion_r221409991
+        if min > max
+        {
+            switch(_customAxisMax, _customAxisMin)
+            {
+            case(true, true):
+                (min, max) = (max, min)
+            case(true, false):
+                min = max < 0 ? max * 1.5 : m
