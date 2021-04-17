@@ -163,4 +163,22 @@ open class YAxis: AxisBase
             case(true, true):
                 (min, max) = (max, min)
             case(true, false):
-                min = max < 0 ? max * 1.5 : m
+                min = max < 0 ? max * 1.5 : max * 0.5
+            case(false, true):
+                max = min < 0 ? min * 0.5 : min * 1.5
+            case(false, false):
+                break
+            }
+        }
+        
+        // temporary range (before calculations)
+        let range = abs(max - min)
+        
+        // in case all values are equal
+        if range == 0.0
+        {
+            max = max + 1.0
+            min = min - 1.0
+        }
+        
+        // bottom-space only effects non-custom 
