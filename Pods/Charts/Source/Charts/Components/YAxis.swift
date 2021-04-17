@@ -136,4 +136,19 @@ open class YAxis: AxisBase
     /// `true` if this axis needs horizontal offset, `false` ifno offset is needed.
     @objc open var needsOffset: Bool
     {
-        
+        if isEnabled && isDrawLabelsEnabled && labelPosition == .outsideChart
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    @objc open var isInverted: Bool { return inverted }
+    
+    open override func calculate(min dataMin: Double, max dataMax: Double)
+    {
+        // if custom, use value as is, else use data value
+        var min = _customAxisMin ? _axisMinimum
