@@ -196,4 +196,11 @@ open class YAxis: AxisBase
         }
         
         // calc actual range
-        axisRange = abs(_axisMaximum - _axi
+        axisRange = abs(_axisMaximum - _axisMinimum)
+    }
+    
+    @objc open var isDrawBottomYLabelEntryEnabled: Bool { return drawBottomYLabelEntryEnabled }
+    
+    @objc open var isDrawTopYLabelEntryEnabled: Bool { return drawTopYLabelEntryEnabled }
+
+}
