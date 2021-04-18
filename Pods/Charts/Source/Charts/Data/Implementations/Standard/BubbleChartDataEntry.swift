@@ -26,4 +26,19 @@ open class BubbleChartDataEntry: ChartDataEntry
     ///   - x: The index on the x-axis.
     ///   - y: The value on the y-axis.
     ///   - size: The size of the bubble.
-    @objc public init(x: Double, y: Double, size:
+    @objc public init(x: Double, y: Double, size: CGFloat)
+    {
+        super.init(x: x, y: y)
+        
+        self.size = size
+    }
+    
+    /// - Parameters:
+    ///   - x: The index on the x-axis.
+    ///   - y: The value on the y-axis.
+    ///   - size: The size of the bubble.
+    ///   - data: Spot for additional data this Entry represents.
+    @objc public convenience init(x: Double, y: Double, size: CGFloat, data: Any?)
+    {
+        self.init(x: x, y: y, size: size)
+    
