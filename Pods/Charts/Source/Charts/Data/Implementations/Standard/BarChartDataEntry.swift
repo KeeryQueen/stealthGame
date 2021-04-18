@@ -141,3 +141,91 @@ open class BarChartDataEntry: ChartDataEntry
     ///   - entry:
     /// - Returns:
     @objc open func calcRanges()
+    {
+        guard let values = yValues, !values.isEmpty else { return }
+
+        if _ranges == nil
+        {
+            _ranges = [Range]()
+        }
+        else
+        {
+            _ranges!.removeAll()
+        }
+        
+        _ranges!.reserveCapacity(values.count)
+        
+        var negRemain = -negativeSum
+        var posRemain: Double = 0.0
+        
+        for value in values
+        {
+            if value < 0
+            {
+                _ranges!.append(Range(from: negRemain, to: negRemain - value))
+                negRemain -= value
+            }
+            else
+            {
+                _ranges!.append(Range(from: posRemain, to: posRemain + value))
+                posRemain += value
+            }
+        }
+    }
+    
+    // MARK: Accessors
+    
+    /// the values the stacked barchart holds
+    @objc open var isStacked: Bool { return _yVals != nil }
+    
+    /// the values the stacked barchart holds
+    @objc open var yValues: [Double]?
+    {
+        get { return self._yVals }
+        set
+        {
+            self.y = BarChartDataEntry.calcSum(values: newValue)
+            self._yVals = newValue
+            calcPosNegSum()
+            calcRanges()
+        }
+    }
+    
+    /// The ranges of the individual stack-entries. Will return null if this entry is not stacked.
+    @objc open var ranges: [Range]?
+    {
+        return _ranges
+    }
+    
+    // MARK: NSCopying
+    
+    open override func copy(with zone: NSZone? = nil) -> Any
+    {
+        let copy = super.copy(with: zone) as! BarChartDataEntry
+        copy._yVals = _yVals
+        copy.y = y
+        copy._negativeSum = _negativeSum
+        copy._positiveSum = _positiveSum
+        return copy
+    }
+    
+    /// Calculates the sum across all values of the given stack.
+    ///
+    /// - Parameters:
+    ///   - vals:
+    /// - Returns:
+    private static func calcSum(values: [Double]?) -> Double
+    {
+        guard let values = values
+            else { return 0.0 }
+        
+        var sum = 0.0
+        
+        for f in values
+        {
+            sum += f
+        }
+        
+        return sum
+    }
+}
