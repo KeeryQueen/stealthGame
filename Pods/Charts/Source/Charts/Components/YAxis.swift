@@ -181,4 +181,19 @@ open class YAxis: AxisBase
             min = min - 1.0
         }
         
-        // bottom-space only effects non-custom 
+        // bottom-space only effects non-custom min
+        if !_customAxisMin
+        {
+            let bottomSpace = range * Double(spaceBottom)
+            _axisMinimum = (min - bottomSpace)
+        }
+        
+        // top-space only effects non-custom max
+        if !_customAxisMax
+        {
+            let topSpace = range * Double(spaceTop)
+            _axisMaximum = (max + topSpace)
+        }
+        
+        // calc actual range
+        axisRange = abs(_axisMaximum - _axi
