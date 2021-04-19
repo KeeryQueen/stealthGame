@@ -57,4 +57,17 @@ open class BubbleChartDataEntry: ChartDataEntry
     
     /// - Parameters:
     ///   - x: The index on the x-axis.
-    //
+    ///   - y: The value on the y-axis.
+    ///   - size: The size of the bubble.
+    ///   - icon: icon image
+    ///   - data: Spot for additional data this Entry represents.
+    @objc public convenience init(x: Double, y: Double, size: CGFloat, icon: NSUIImage?, data: Any?)
+    {
+        self.init(x: x, y: y, size: size)
+        self.icon = icon
+        self.data = data
+    }
+    
+    // MARK: NSCopying
+    
+    open override fu
