@@ -70,4 +70,10 @@ open class BubbleChartDataEntry: ChartDataEntry
     
     // MARK: NSCopying
     
-    open override fu
+    open override func copy(with zone: NSZone? = nil) -> Any
+    {
+        let copy = super.copy(with: zone) as! BubbleChartDataEntry
+        copy.size = size
+        return copy
+    }
+}
