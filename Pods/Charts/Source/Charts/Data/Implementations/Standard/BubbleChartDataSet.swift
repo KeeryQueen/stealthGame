@@ -25,4 +25,24 @@ open class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBubbleCh
     
     open override func calcMinMax(entry e: ChartDataEntry)
     {
-        guard let e = e as? BubbleChartDat
+        guard let e = e as? BubbleChartDataEntry
+            else { return }
+        
+        super.calcMinMax(entry: e)
+        
+        let size = e.size
+        
+        if size > _maxSize
+        {
+            _maxSize = size
+        }
+    }
+    
+    // MARK: - Styling functions and accessors
+    
+    /// Sets/gets the width of the circle that surrounds the bubble when highlighted
+    open var highlightCircleWidth: CGFloat = 2.5
+    
+    // MARK: - NSCopying
+    
+ 
