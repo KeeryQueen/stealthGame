@@ -57,3 +57,43 @@ open class CandleChartDataEntry: ChartDataEntry
     {
         self.init(x: x, shadowH: shadowH, shadowL: shadowL, open: open, close: close)
         self.icon = icon
+        self.data = data
+    }
+    
+    /// The overall range (difference) between shadow-high and shadow-low.
+    @objc open var shadowRange: Double
+    {
+        return abs(high - low)
+    }
+    
+    /// The body size (difference between open and close).
+    @objc open var bodyRange: Double
+    {
+        return abs(open - close)
+    }
+    
+    /// the center value of the candle. (Middle value between high and low)
+    open override var y: Double
+    {
+        get
+        {
+            return super.y
+        }
+        set
+        {
+            super.y = (high + low) / 2.0
+        }
+    }
+    
+    // MARK: NSCopying
+    
+    open override func copy(with zone: NSZone? = nil) -> Any
+    {
+        let copy = super.copy(with: zone) as! CandleChartDataEntry
+        copy.high = high
+        copy.low = low
+        copy.open = open
+        copy.close = close
+        return copy
+    }
+}
