@@ -321,3 +321,255 @@ open class ChartDataSet: ChartBaseDataSet
         }
         
         if closest != -1
+        {
+            let closestXValue = self[closest].x
+            
+            if rounding == .up
+            {
+                // If rounding up, and found x-value is lower than specified x, and we can go upper...
+                if closestXValue < xValue && closest < endIndex - 1
+                {
+                    closest += 1
+                }
+            }
+            else if rounding == .down
+            {
+                // If rounding down, and found x-value is upper than specified x, and we can go lower...
+                if closestXValue > xValue && closest > 0
+                {
+                    closest -= 1
+                }
+            }
+            
+            // Search by closest to y-value
+            if !yValue.isNaN
+            {
+                while closest > 0 && self[closest - 1].x == closestXValue
+                {
+                    closest -= 1
+                }
+                
+                var closestYValue = self[closest].y
+                var closestYIndex = closest
+                
+                while true
+                {
+                    closest += 1
+                    if closest >= endIndex { break }
+                    
+                    let value = self[closest]
+                    
+                    if value.x != closestXValue { break }
+                    if abs(value.y - yValue) <= abs(closestYValue - yValue)
+                    {
+                        closestYValue = yValue
+                        closestYIndex = closest
+                    }
+                }
+                
+                closest = closestYIndex
+            }
+        }
+        
+        return closest
+    }
+    
+    /// - Parameters:
+    ///   - e: the entry to search for
+    /// - Returns: The array-index of the specified entry
+    @available(*, deprecated, message: "Use `firstIndex(of:)` or `lastIndex(of:)`")
+    open override func entryIndex(entry e: ChartDataEntry) -> Int
+    {
+        return firstIndex(of: e) ?? -1
+    }
+    
+    /// Adds an Entry to the DataSet dynamically.
+    /// Entries are added to the end of the list.
+    /// This will also recalculate the current minimum and maximum values of the DataSet and the value-sum.
+    ///
+    /// - Parameters:
+    ///   - e: the entry to add
+    /// - Returns: True
+    @available(*, deprecated, message: "Use `append(_:)` instead")
+    open override func addEntry(_ e: ChartDataEntry) -> Bool
+    {
+        append(e)
+        return true
+    }
+    
+    /// Adds an Entry to the DataSet dynamically.
+    /// Entries are added to their appropriate index respective to it's x-index.
+    /// This will also recalculate the current minimum and maximum values of the DataSet and the value-sum.
+    ///
+    /// - Parameters:
+    ///   - e: the entry to add
+    /// - Returns: True
+    open override func addEntryOrdered(_ e: ChartDataEntry) -> Bool
+    {
+        calcMinMax(entry: e)
+        
+        if let last = last, last.x > e.x
+        {
+            var closestIndex = entryIndex(x: e.x, closestToY: e.y, rounding: .up)
+            while self[closestIndex].x < e.x
+            {
+                closestIndex += 1
+            }
+            entries.insert(e, at: closestIndex)
+        }
+        else
+        {
+            append(e)
+        }
+        
+        return true
+    }
+    
+    @available(*, renamed: "remove(_:)")
+    open override func removeEntry(_ entry: ChartDataEntry) -> Bool
+    {
+        return remove(entry)
+    }
+
+    /// Removes an Entry from the DataSet dynamically.
+    /// This will also recalculate the current minimum and maximum values of the DataSet and the value-sum.
+    ///
+    /// - Parameters:
+    ///   - entry: the entry to remove
+    /// - Returns: `true` if the entry was removed successfully, else if the entry does not exist
+    open func remove(_ entry: ChartDataEntry) -> Bool
+    {
+        guard let index = firstIndex(of: entry) else { return false }
+        _ = remove(at: index)
+        return true
+    }
+
+    /// Removes the first Entry (at index 0) of this DataSet from the entries array.
+    ///
+    /// - Returns: `true` if successful, `false` if not.
+    @available(*, deprecated, message: "Use `func removeFirst() -> ChartDataEntry` instead.")
+    open override func removeFirst() -> Bool
+    {
+        let entry: ChartDataEntry? = isEmpty ? nil : removeFirst()
+        return entry != nil
+    }
+    
+    /// Removes the last Entry (at index size-1) of this DataSet from the entries array.
+    ///
+    /// - Returns: `true` if successful, `false` if not.
+    @available(*, deprecated, message: "Use `func removeLast() -> ChartDataEntry` instead.")
+    open override func removeLast() -> Bool
+    {
+        let entry: ChartDataEntry? = isEmpty ? nil : removeLast()
+        return entry != nil
+    }
+
+    /// Removes all values from this DataSet and recalculates min and max value.
+    @available(*, deprecated, message: "Use `removeAll(keepingCapacity:)` instead.")
+    open override func clear()
+    {
+        removeAll(keepingCapacity: true)
+    }
+    
+    // MARK: - Data functions and accessors
+
+    // MARK: - NSCopying
+    
+    open override func copy(with zone: NSZone? = nil) -> Any
+    {
+        let copy = super.copy(with: zone) as! ChartDataSet
+        
+        copy.entries = entries
+        copy._yMax = _yMax
+        copy._yMin = _yMin
+        copy._xMax = _xMax
+        copy._xMin = _xMin
+
+        return copy
+    }
+}
+
+// MARK: MutableCollection
+extension ChartDataSet: MutableCollection {
+    public typealias Index = Int
+    public typealias Element = ChartDataEntry
+
+    public var startIndex: Index {
+        return entries.startIndex
+    }
+
+    public var endIndex: Index {
+        return entries.endIndex
+    }
+
+    public func index(after: Index) -> Index {
+        return entries.index(after: after)
+    }
+
+    @objc
+    public subscript(position: Index) -> Element {
+        get {
+            // This is intentionally not a safe subscript to mirror
+            // the behaviour of the built in Swift Collection Types
+            return entries[position]
+        }
+        set {
+            calcMinMax(entry: newValue)
+            entries[position] = newValue
+        }
+    }
+}
+
+// MARK: RandomAccessCollection
+extension ChartDataSet: RandomAccessCollection {
+    public func index(before: Index) -> Index {
+        return entries.index(before: before)
+    }
+}
+
+// MARK: RangeReplaceableCollection
+extension ChartDataSet: RangeReplaceableCollection {
+    public func append(_ newElement: Element) {
+        calcMinMax(entry: newElement)
+        entries.append(newElement)
+    }
+
+    public func remove(at position: Index) -> Element {
+        let element = entries.remove(at: position)
+        notifyDataSetChanged()
+        return element
+    }
+
+    public func removeFirst() -> Element {
+        let element = entries.removeFirst()
+        notifyDataSetChanged()
+        return element
+    }
+
+    public func removeFirst(_ n: Int) {
+        entries.removeFirst(n)
+        notifyDataSetChanged()
+    }
+
+    public func removeLast() -> Element {
+        let element = entries.removeLast()
+        notifyDataSetChanged()
+        return element
+    }
+
+    public func removeLast(_ n: Int) {
+        entries.removeLast(n)
+        notifyDataSetChanged()
+    }
+
+    public func removeSubrange<R>(_ bounds: R) where R : RangeExpression, Index == R.Bound {
+        entries.removeSubrange(bounds)
+        notifyDataSetChanged()
+    }
+
+    @objc
+    public func removeAll(keepingCapacity keepCapacity: Bool) {
+        entries.removeAll(keepingCapacity: keepCapacity)
+        notifyDataSetChanged()
+    }
+}
