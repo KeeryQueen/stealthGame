@@ -164,3 +164,139 @@ open class CombinedChartData: BarLineScatterCandleBubbleChartData
                 }
             }
         }
+    }
+    
+    /// All data objects in row: line-bar-scatter-candle-bubble if not null.
+    @objc open var allData: [ChartData]
+    {
+        var data = [ChartData]()
+        
+        if lineData !== nil
+        {
+            data.append(lineData)
+        }
+        if barData !== nil
+        {
+            data.append(barData)
+        }
+        if scatterData !== nil
+        {
+            data.append(scatterData)
+        }
+        if candleData !== nil
+        {
+            data.append(candleData)
+        }
+        if bubbleData !== nil
+        {
+            data.append(bubbleData)
+        }
+        
+        return data
+    }
+    
+    @objc open func dataByIndex(_ index: Int) -> ChartData
+    {
+        return allData[index]
+    }
+    
+    open func dataIndex(_ data: ChartData) -> Int?
+    {
+        return allData.firstIndex(of: data)
+    }
+    
+    open override func removeDataSet(_ dataSet: IChartDataSet) -> Bool
+    {
+        return allData.contains { $0.removeDataSet(dataSet) }
+    }
+    
+    open override func removeDataSetByIndex(_ index: Int) -> Bool
+    {
+        print("removeDataSet(index) not supported for CombinedData", terminator: "\n")
+        return false
+    }
+    
+    open override func removeEntry(_ entry: ChartDataEntry, dataSetIndex: Int) -> Bool
+    {
+        print("removeEntry(entry, dataSetIndex) not supported for CombinedData", terminator: "\n")
+        return false
+    }
+    
+    open override func removeEntry(xValue: Double, dataSetIndex: Int) -> Bool
+    {
+        print("removeEntry(xValue, dataSetIndex) not supported for CombinedData", terminator: "\n")
+        return false
+    }
+    
+    open override func notifyDataChanged()
+    {
+        if _lineData !== nil
+        {
+            _lineData.notifyDataChanged()
+        }
+        if _barData !== nil
+        {
+            _barData.notifyDataChanged()
+        }
+        if _scatterData !== nil
+        {
+            _scatterData.notifyDataChanged()
+        }
+        if _candleData !== nil
+        {
+            _candleData.notifyDataChanged()
+        }
+        if _bubbleData !== nil
+        {
+            _bubbleData.notifyDataChanged()
+        }
+        
+        super.notifyDataChanged() // recalculate everything
+    }
+    
+    /// Get the Entry for a corresponding highlight object
+    ///
+    /// - Parameters:
+    ///   - highlight:
+    /// - Returns: The entry that is highlighted
+    open override func entryForHighlight(_ highlight: Highlight) -> ChartDataEntry?
+    {
+        if highlight.dataIndex >= allData.count
+        {
+            return nil
+        }
+        
+        let data = dataByIndex(highlight.dataIndex)
+        
+        if highlight.dataSetIndex >= data.dataSetCount
+        {
+            return nil
+        }
+        
+        // The value of the highlighted entry could be NaN - if we are not interested in highlighting a specific value.
+        let entries = data.getDataSetByIndex(highlight.dataSetIndex).entriesForXValue(highlight.x)
+        return entries.first { $0.y == highlight.y || highlight.y.isNaN }
+    }
+    
+    /// Get dataset for highlight
+    ///
+    /// - Parameters:
+    ///   - highlight: current highlight
+    /// - Returns: dataset related to highlight
+    @objc open func getDataSetByHighlight(_ highlight: Highlight) -> IChartDataSet!
+    {  
+        if highlight.dataIndex >= allData.count
+        {
+            return nil
+        }
+        
+        let data = dataByIndex(highlight.dataIndex)
+        
+        if highlight.dataSetIndex >= data.dataSetCount
+        {
+            return nil
+        }
+        
+        return data.dataSets[highlight.dataSetIndex]
+    }
+}
