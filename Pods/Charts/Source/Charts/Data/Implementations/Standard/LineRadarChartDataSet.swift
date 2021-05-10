@@ -63,4 +63,19 @@ open class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRadar
     /// Please note that this method uses the path clipping for drawing the filled area (with images, gradients and layers).
     open var drawFilledEnabled = false
     
-    /// `true` if filled draw
+    /// `true` if filled drawing is enabled, `false` ifnot
+    open var isDrawFilledEnabled: Bool
+    {
+        return drawFilledEnabled
+    }
+    
+    // MARK: NSCopying
+    
+    open override func copy(with zone: NSZone? = nil) -> Any
+    {
+        let copy = super.copy(with: zone) as! LineRadarChartDataSet
+        copy.fill = fill
+        copy.fillAlpha = fillAlpha
+        copy._fillColor = _fillColor
+        copy._lineWidth = _lineWidth
+        copy.draw
