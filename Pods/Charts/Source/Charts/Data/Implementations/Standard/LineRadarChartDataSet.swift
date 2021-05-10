@@ -35,4 +35,23 @@ open class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRadar
     
     /// The object that is used for filling the area below the line.
     /// **default**: nil
+    open var fill: Fill?
     
+    /// The alpha value that is used for filling the line surface,
+    /// **default**: 0.33
+    open var fillAlpha = CGFloat(0.33)
+    
+    private var _lineWidth = CGFloat(1.0)
+    
+    /// line width of the chart (min = 0.0, max = 10)
+    ///
+    /// **default**: 1
+    open var lineWidth: CGFloat
+    {
+        get
+        {
+            return _lineWidth
+        }
+        set
+        {
+  
