@@ -78,4 +78,8 @@ open class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRadar
         copy.fillAlpha = fillAlpha
         copy._fillColor = _fillColor
         copy._lineWidth = _lineWidth
-        copy.draw
+        copy.drawFilledEnabled = drawFilledEnabled
+        return copy
+    }
+    
+}
