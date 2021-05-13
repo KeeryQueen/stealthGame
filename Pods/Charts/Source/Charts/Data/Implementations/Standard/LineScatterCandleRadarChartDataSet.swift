@@ -12,4 +12,14 @@
 import Foundation
 
 
-open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDataSet, ILineScatterCandleR
+open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDataSet, ILineScatterCandleRadarChartDataSet
+{
+    // MARK: - Data functions and accessors
+    
+    // MARK: - Styling functions and accessors
+    
+    /// Enables / disables the horizontal highlight-indicator. If disabled, the indicator is not drawn.
+    open var drawHorizontalHighlightIndicatorEnabled = true
+    
+    /// Enables / disables the vertical highlight-indicator. If disabled, the indicator is not drawn.
+    open var drawVerticalHigh
