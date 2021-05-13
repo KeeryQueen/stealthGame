@@ -30,4 +30,17 @@ open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDa
     /// `true` if vertical highlight indicator lines are enabled (drawn)
     open var isVerticalHighlightIndicatorEnabled: Bool { return drawVerticalHighlightIndicatorEnabled }
     
-    /// Enables / disables both vert
+    /// Enables / disables both vertical and horizontal highlight-indicators.
+    /// :param: enabled
+    open func setDrawHighlightIndicators(_ enabled: Bool)
+    {
+        drawHorizontalHighlightIndicatorEnabled = enabled
+        drawVerticalHighlightIndicatorEnabled = enabled
+    }
+    
+    // MARK: NSCopying
+    
+    open override func copy(with zone: NSZone? = nil) -> Any
+    {
+        let copy = super.copy(with: zone) as! LineScatterCandleRadarChartDataSet
+        copy
