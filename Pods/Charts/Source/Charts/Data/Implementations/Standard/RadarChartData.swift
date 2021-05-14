@@ -21,4 +21,22 @@ open class RadarChartData: ChartData
     @objc open var highlightLineDashLengths: [CGFloat]?
     
     /// Sets labels that should be drawn around the RadarChart at the end of each web line.
-    @objc o
+    @objc open var labels = [String]()
+    
+    /// Sets the labels that should be drawn around the RadarChart at the end of each web line.
+    open func setLabels(_ labels: String...)
+    {
+        self.labels = labels
+    }
+    
+    public override init()
+    {
+        super.init()
+    }
+    
+    public override init(dataSets: [IChartDataSet]?)
+    {
+        super.init(dataSets: dataSets)
+    }
+    
+    open override func entryForHighlight(_ h
