@@ -94,3 +94,27 @@ open class PieChartDataEntry: ChartDataEntry
     ///   - data: Spot for additional data this Entry represents
     @objc public convenience init(value: Double, icon: NSUIImage?, data: Any?)
     {
+        self.init(value: value)
+        self.icon = icon
+        self.data = data
+    }
+    
+    // MARK: Data property accessors
+    
+    @objc open var label: String?
+    
+    @objc open var value: Double
+    {
+        get { return y }
+        set { y = newValue }
+    }
+        
+    // MARK: NSCopying
+    
+    open override func copy(with zone: NSZone? = nil) -> Any
+    {
+        let copy = super.copy(with: zone) as! PieChartDataEntry
+        copy.label = label
+        return copy
+    }
+}
