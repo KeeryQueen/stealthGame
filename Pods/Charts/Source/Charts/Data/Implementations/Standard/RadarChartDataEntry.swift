@@ -12,4 +12,26 @@
 import Foundation
 import CoreGraphics
 
-open class RadarChart
+open class RadarChartDataEntry: ChartDataEntry
+{
+    public required init()
+    {
+        super.init()
+    }
+
+    /// - Parameters:
+    ///   - value: The value on the y-axis.
+    @objc public init(value: Double)
+    {
+        super.init(x: .nan, y: value)
+    }
+
+    /// - Parameters:
+    ///   - value: The value on the y-axis.
+    ///   - data: Spot for additional data this Entry represents.
+    @objc public convenience init(value: Double, data: Any?)
+    {
+        self.init(value: value)
+        self.data = data
+    }
+    
