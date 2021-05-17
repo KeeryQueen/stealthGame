@@ -26,4 +26,18 @@ open class RadarChartDataSet: LineRadarChartDataSet, IRadarChartDataSet
         initialize()
     }
     
- 
+    public required override init(entries: [ChartDataEntry]?, label: String?)
+    {
+        super.init(entries: entries, label: label)
+        initialize()
+    }
+    
+    // MARK: - Data functions and accessors
+    
+    // MARK: - Styling functions and accessors
+    
+    /// flag indicating whether highlight circle should be drawn or not
+    /// **default**: false
+    open var drawHighlightCircleEnabled: Bool = false
+    
+    /// `true` if highlight circle shou
