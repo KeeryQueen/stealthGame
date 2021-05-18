@@ -52,3 +52,8 @@ open class RadarChartDataSet: LineRadarChartDataSet, IRadarChartDataSet
     open var highlightCircleStrokeAlpha: CGFloat = 0.3
     
     open var highlightCircleInnerRadius: CGFloat = 3.0
+    
+    open var highlightCircleOuterRadius: CGFloat = 4.0
+    
+    open var highlightCircleStrokeWidth: CGFloat = 2.0
+}
