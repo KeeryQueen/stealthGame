@@ -10,4 +10,24 @@
 //
 
 import Foundation
-import Co
+import CoreGraphics
+
+open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChartDataSet
+{
+    
+    @objc(ScatterShape)
+    public enum Shape: Int
+    {
+        case square
+        case circle
+        case triangle
+        case cross
+        case x
+        case chevronUp
+        case chevronDown
+    }
+    
+    /// The size the scatter shape will have
+    open var scatterShapeSize = CGFloat(10.0)
+    
+    /// 
