@@ -39,4 +39,13 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChar
     open var scatterShapeHoleColor: NSUIColor? = nil
     
     /// Sets the ScatterShape this DataSet should be drawn with.
-    /// This will search for an availabl
+    /// This will search for an available IShapeRenderer and set this renderer for the DataSet
+    @objc open func setScatterShape(_ shape: Shape)
+    {
+        self.shapeRenderer = ScatterChartDataSet.renderer(forShape: shape)
+    }
+    
+    /// The IShapeRenderer responsible for rendering this DataSet.
+    /// This can also be used to set a custom IShapeRenderer aside from the default ones.
+    /// **default**: `SquareShapeRenderer`
+    open var shapeRenderer: IShapeRenderer? = Squar
