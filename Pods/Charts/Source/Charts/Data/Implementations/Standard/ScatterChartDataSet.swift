@@ -72,4 +72,7 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChar
         copy.scatterShapeSize = scatterShapeSize
         copy.scatterShapeHoleRadius = scatterShapeHoleRadius
         copy.scatterShapeHoleColor = scatterShapeHoleColor
-        copy
+        copy.shapeRenderer = shapeRenderer
+        return copy
+    }
+}
