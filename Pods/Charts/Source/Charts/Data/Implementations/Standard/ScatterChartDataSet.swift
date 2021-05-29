@@ -59,4 +59,17 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChar
         case .triangle: return TriangleShapeRenderer()
         case .cross: return CrossShapeRenderer()
         case .x: return XShapeRenderer()
-        cas
+        case .chevronUp: return ChevronUpShapeRenderer()
+        case .chevronDown: return ChevronDownShapeRenderer()
+        }
+    }
+    
+    // MARK: NSCopying
+    
+    open override func copy(with zone: NSZone? = nil) -> Any
+    {
+        let copy = super.copy(with: zone) as! ScatterChartDataSet
+        copy.scatterShapeSize = scatterShapeSize
+        copy.scatterShapeHoleRadius = scatterShapeHoleRadius
+        copy.scatterShapeHoleColor = scatterShapeHoleColor
+        copy
