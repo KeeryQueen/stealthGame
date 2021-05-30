@@ -195,3 +195,77 @@ public protocol IChartDataSet
     
     /// `true` if value highlighting is enabled for this dataset
     var isHighlightEnabled: Bool { get }
+    
+    /// Custom formatter that is used instead of the auto-formatter if set
+    var valueFormatter: IValueFormatter? { get set }
+    
+    /// `true` if the valueFormatter object of this DataSet is null.
+    var needsFormatter: Bool { get }
+    
+    /// Sets/get a single color for value text.
+    /// Setting the color clears the colors array and adds a single color.
+    /// Getting will return the first color in the array.
+    var valueTextColor: NSUIColor { get set }
+    
+    /// - Returns: The color at the specified index that is used for drawing the values inside the chart. Uses modulus internally.
+    func valueTextColorAt(_ index: Int) -> NSUIColor
+    
+    /// the font for the value-text labels
+    var valueFont: NSUIFont { get set }
+    
+    /// The form to draw for this dataset in the legend.
+    ///
+    /// Return `.Default` to use the default legend form.
+    var form: Legend.Form { get }
+    
+    /// The form size to draw for this dataset in the legend.
+    ///
+    /// Return `NaN` to use the default legend form size.
+    var formSize: CGFloat { get }
+    
+    /// The line width for drawing the form of this dataset in the legend
+    ///
+    /// Return `NaN` to use the default legend form line width.
+    var formLineWidth: CGFloat { get }
+    
+    /// Line dash configuration for legend shapes that consist of lines.
+    ///
+    /// This is how much (in pixels) into the dash pattern are we starting from.
+    var formLineDashPhase: CGFloat { get }
+    
+    /// Line dash configuration for legend shapes that consist of lines.
+    ///
+    /// This is the actual dash pattern.
+    /// I.e. [2, 3] will paint [--   --   ]
+    /// [1, 3, 4, 2] will paint [-   ----  -   ----  ]
+    var formLineDashLengths: [CGFloat]? { get }
+    
+    /// Set this to true to draw y-values on the chart.
+    ///
+    /// - Note: For bar and line charts: if `maxVisibleCount` is reached, no values will be drawn even if this is enabled.
+    var drawValuesEnabled: Bool { get set }
+    
+    /// `true` if y-value drawing is enabled, `false` ifnot
+    var isDrawValuesEnabled: Bool { get }
+    
+    /// Set this to true to draw y-icons on the chart
+    ///
+    /// - Note: For bar and line charts: if `maxVisibleCount` is reached, no icons will be drawn even if this is enabled.
+    var drawIconsEnabled: Bool { get set }
+    
+    /// Returns true if y-icon drawing is enabled, false if not
+    var isDrawIconsEnabled: Bool { get }
+    
+    /// Offset of icons drawn on the chart.
+    ///
+    /// For all charts except Pie and Radar it will be ordinary (x offset, y offset).
+    ///
+    /// For Pie and Radar chart it will be (y offset, distance from center offset); so if you want icon to be rendered under value, you should increase X component of CGPoint, and if you want icon to be rendered closet to center, you should decrease height component of CGPoint.
+    var iconsOffset: CGPoint { get set }
+    
+    /// Set the visibility of this DataSet. If not visible, the DataSet will not be drawn to the chart upon refreshing it.
+    var visible: Bool { get set }
+    
+    /// `true` if this DataSet is visible inside the chart, or `false` ifit is currently hidden.
+    var isVisible: Bool { get }
+}
