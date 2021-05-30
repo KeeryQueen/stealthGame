@@ -13,4 +13,15 @@ import Foundation
 import CoreGraphics
 
 @objc
-public pr
+public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
+{
+    // MARK: - Data functions and accessors
+    
+    // MARK: - Styling functions and accessors
+    
+    /// The color that is used for filling the line surface area.
+    var fillColor: NSUIColor { get set }
+
+    /// - Returns: The object that is used for filling the area below the line.
+    /// **default**: nil
+    var fill: Fi
