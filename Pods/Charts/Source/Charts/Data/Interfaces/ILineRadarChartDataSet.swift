@@ -24,4 +24,16 @@ public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
 
     /// - Returns: The object that is used for filling the area below the line.
     /// **default**: nil
-    var fill: Fi
+    var fill: Fill? { get set }
+    
+    /// The alpha value that is used for filling the line surface.
+    /// **default**: 0.33
+    var fillAlpha: CGFloat { get set }
+    
+    /// line width of the chart (min = 0.0, max = 10)
+    ///
+    /// **default**: 1
+    var lineWidth: CGFloat { get set }
+    
+    /// Set to `true` if the DataSet should be drawn filled (surface), and not just as a line.
+    /// Disabling this will gi
