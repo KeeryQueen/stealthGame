@@ -20,4 +20,13 @@ public protocol IPieChartDataSet: IChartDataSet
     /// the space in pixels between the pie-slices
     /// **default**: 0
     /// **maximum**: 20
-    var sliceSpace: CG
+    var sliceSpace: CGFloat { get set }
+
+    /// When enabled, slice spacing will be 0.0 when the smallest value is going to be smaller than the slice spacing itself.
+    var automaticallyDisableSliceSpacing: Bool { get set }
+
+    /// indicates the selection distance of a pie slice
+    var selectionShift: CGFloat { get set }
+
+    var xValuePosition: PieChartDataSet.ValuePosition { get set }
+    var yValuePosition: PieChartDataSet.ValuePosition
