@@ -29,4 +29,15 @@ public protocol IPieChartDataSet: IChartDataSet
     var selectionShift: CGFloat { get set }
 
     var xValuePosition: PieChartDataSet.ValuePosition { get set }
-    var yValuePosition: PieChartDataSet.ValuePosition
+    var yValuePosition: PieChartDataSet.ValuePosition { get set }
+
+    /// When valuePosition is OutsideSlice, indicates line color
+    var valueLineColor: NSUIColor? { get set }
+
+    /// When valuePosition is OutsideSlice and enabled, line will have the same color as the slice
+    var useValueColorForLine: Bool { get set }
+
+    /// When valuePosition is OutsideSlice, indicates line width
+    var valueLineWidth: CGFloat { get set }
+
+    /// When valuePosition is OutsideSlice, indi
