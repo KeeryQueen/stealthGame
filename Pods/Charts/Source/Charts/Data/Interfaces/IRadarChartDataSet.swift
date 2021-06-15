@@ -32,4 +32,9 @@ public protocol IRadarChartDataSet: ILineRadarChartDataSet
     
     var highlightCircleStrokeAlpha: CGFloat { get set }
     
-    var highlightCi
+    var highlightCircleInnerRadius: CGFloat { get set }
+    
+    var highlightCircleOuterRadius: CGFloat { get set }
+    
+    var highlightCircleStrokeWidth: CGFloat { get set }
+}
