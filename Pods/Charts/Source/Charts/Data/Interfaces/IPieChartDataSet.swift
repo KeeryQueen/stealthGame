@@ -40,4 +40,13 @@ public protocol IPieChartDataSet: IChartDataSet
     /// When valuePosition is OutsideSlice, indicates line width
     var valueLineWidth: CGFloat { get set }
 
-    /// When valuePosition is OutsideSlice, indi
+    /// When valuePosition is OutsideSlice, indicates offset as percentage out of the slice size
+    var valueLinePart1OffsetPercentage: CGFloat { get set }
+
+    /// When valuePosition is OutsideSlice, indicates length of first half of the line
+    var valueLinePart1Length: CGFloat { get set }
+
+    /// When valuePosition is OutsideSlice, indicates length of second half of the line
+    var valueLinePart2Length: CGFloat { get set }
+
+    /// When valuePosition is Outsi
