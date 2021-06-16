@@ -36,3 +36,22 @@ private struct LineAlt {
         
         let startPoint = points[start]
         let endPoint = points[end]
+        
+        guard (end > start + 1) else {
+            return
+        }
+        
+        for i in start + 1 ..< end {
+            let currentPoint = points[i]
+            
+            let distance = currentPoint.distanceToLine(from: startPoint, to: endPoint)
+            
+            if distance > self.distance {
+                self.index = i
+                self.distance = distance
+            }
+        }
+    }
+}
+
+extension LineA
