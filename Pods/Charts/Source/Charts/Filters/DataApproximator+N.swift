@@ -16,4 +16,23 @@ extension CGPoint {
         let dx = linePoint2.x - linePoint1.x
         let dy = linePoint2.y - linePoint1.y
         
-        let dividend = abs(dy * self.x - dx * self.y - linePoint1.x * linePoint2.y + linePoint2.x * li
+        let dividend = abs(dy * self.x - dx * self.y - linePoint1.x * linePoint2.y + linePoint2.x * linePoint1.y)
+        let divisor = sqrt(dx * dx + dy * dy)
+        
+        return dividend / divisor
+    }
+}
+
+private struct LineAlt {
+    let start: Int
+    let end: Int
+    
+    var distance: CGFloat = 0
+    var index: Int = 0
+    
+    init(start: Int, end: Int, points: [CGPoint]) {
+        self.start = start
+        self.end = end
+        
+        let startPoint = points[start]
+        let endPoint = points[end]
