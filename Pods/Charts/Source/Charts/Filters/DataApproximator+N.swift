@@ -54,4 +54,17 @@ private struct LineAlt {
     }
 }
 
-extension LineA
+extension LineAlt: Comparable {
+    static func ==(lhs: LineAlt, rhs: LineAlt) -> Bool {
+        return (lhs.start == rhs.start) && (lhs.end == rhs.end) && (lhs.index == rhs.index)
+    }
+    
+    static func <(lhs: LineAlt, rhs: LineAlt) -> Bool {
+        return lhs.distance < rhs.distance
+    }
+}
+
+
+extension DataApproximator {
+    /// uses the douglas peuker algorithm to reduce the given arraylist of entries to given number of points
+    /// More algorithm details here - h
