@@ -117,3 +117,16 @@ extension DataApproximator {
             return keep[index] ? point : nil
         }
         
+        return reducedEntries
+    }
+    
+    // Keeps array sorted
+    private static func insertLine(_ line: LineAlt, into array: inout [LineAlt]) {
+        let insertionIndex = self.insertionIndex(for: line, into: &array)
+        array.insert(line, at: insertionIndex)
+    }
+    
+    private static func insertionIndex(for line: LineAlt, into array: inout [LineAlt]) -> Int {
+        var indices = array.indices
+        
+        while !ind
