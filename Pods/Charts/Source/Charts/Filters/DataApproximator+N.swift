@@ -77,4 +77,20 @@ extension DataApproximator {
         }
         var keep = [Bool](repeating: false, count: points.count)
         
-        // first and last a
+        // first and last always stay
+        keep[0] = true
+        keep[points.count - 1] = true
+        var currentStoredPoints = 2
+        
+        var queue = [LineAlt]()
+        let line = LineAlt(start: 0, end: points.count - 1, points: points)
+        queue.append(line)
+        
+        repeat {
+            let line = queue.popLast()!
+            
+            // store the key
+            keep[line.index] = true
+            
+            // check point count tolerance
+            currentStoredPoin
