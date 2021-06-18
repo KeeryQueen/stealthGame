@@ -105,4 +105,15 @@ extension DataApproximator {
                 self.insertLine(left, into: &queue)
             }
             
-            let right = LineAlt(start: line.index, end:
+            let right = LineAlt(start: line.index, end: line.end, points: points)
+            if (right.index > 0) {
+                self.insertLine(right, into: &queue)
+            }
+            
+        } while !queue.isEmpty
+        
+        // create a new array with series, only take the kept ones
+        let reducedEntries = points.enumerated().compactMap { (index: Int, point: CGPoint) -> CGPoint? in
+            return keep[index] ? point : nil
+        }
+        
