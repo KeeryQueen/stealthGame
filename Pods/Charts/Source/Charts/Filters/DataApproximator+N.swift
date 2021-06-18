@@ -142,4 +142,12 @@ extension DataApproximator {
             }
             else {
                 // perform search in right half
-  
+                indices = (midIndex + 1)..<indices.upperBound
+            }
+        }
+        
+        return indices.lowerBound
+    }
+}
+
+
