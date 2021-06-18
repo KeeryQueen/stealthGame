@@ -93,4 +93,16 @@ extension DataApproximator {
             keep[line.index] = true
             
             // check point count tolerance
-            currentStoredPoin
+            currentStoredPoints += 1
+            
+            if (currentStoredPoints == resultCount) {
+                break;
+            }
+            
+            // split the polyline at the key and recurse
+            let left = LineAlt(start: line.start, end: line.index, points: points)
+            if (left.index > 0) {
+                self.insertLine(left, into: &queue)
+            }
+            
+            let right = LineAlt(start: line.index, end:
