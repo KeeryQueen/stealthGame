@@ -129,4 +129,17 @@ extension DataApproximator {
     private static func insertionIndex(for line: LineAlt, into array: inout [LineAlt]) -> Int {
         var indices = array.indices
         
-        while !ind
+        while !indices.isEmpty {
+            let midIndex = indices.lowerBound.advanced(by: indices.count / 2)
+            let midLine = array[midIndex]
+            
+            if midLine == line {
+                return midIndex
+            }
+            else if (line < midLine) {
+                // perform search in left half
+                indices = indices.lowerBound..<midIndex
+            }
+            else {
+                // perform search in right half
+  
