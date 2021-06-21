@@ -50,4 +50,9 @@ open class DefaultFillFormatter: NSObject, IFillFormatter
             let max = data.yMax > 0.0 ? 0.0 : dataProvider.chartYMax
             let min = data.yMin < 0.0 ? 0.0 : dataProvider.chartYMin
 
-            fill
+            fillMin = CGFloat(dataSet.yMin >= 0.0 ? min : max)
+        }
+
+        return fillMin
+    }
+}
