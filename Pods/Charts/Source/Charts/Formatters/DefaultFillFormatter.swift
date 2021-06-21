@@ -20,4 +20,22 @@ open class DefaultFillFormatter: NSObject, IFillFormatter
         _ dataSet: ILineChartDataSet,
         _ dataProvider: LineChartDataProvider) -> CGFloat
     
-    @o
+    @objc open var block: Block?
+    
+    public override init() { }
+    
+    @objc public init(block: @escaping Block)
+    {
+        self.block = block
+    }
+    
+    @objc public static func with(block: @escaping Block) -> DefaultFillFormatter?
+    {
+        return DefaultFillFormatter(block: block)
+    }
+    
+    open func getFillLinePosition(
+        dataSet: ILineChartDataSet,
+        dataProvider: LineChartDataProvider) -> CGFloat
+    {
+        gua
