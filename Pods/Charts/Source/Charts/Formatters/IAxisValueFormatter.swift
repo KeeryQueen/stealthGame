@@ -9,4 +9,17 @@
 //  https://github.com/danielgindi/Charts
 //
 
-i
+import Foundation
+
+/// An interface for providing custom axis Strings.
+@objc(IChartAxisValueFormatter)
+public protocol IAxisValueFormatter: class
+{
+    
+    /// Called when a value from an axis is formatted before being drawn.
+    ///
+    /// For performance reasons, avoid excessive calculations and memory allocations inside this method.
+    ///
+    /// - Parameters:
+    ///   - value:           the value that is currently being drawn
+    ///   - axis:      
