@@ -22,4 +22,20 @@ open class BarHighlighter: ChartHighlighter
             let high = super.getHighlight(x: x, y: y)
             else { return nil }
         
-        let pos = getValsForTouch(x: x,
+        let pos = getValsForTouch(x: x, y: y)
+
+        if let set = barData.getDataSetByIndex(high.dataSetIndex) as? IBarChartDataSet,
+            set.isStacked
+        {
+            return getStackedHighlight(high: high,
+                                       set: set,
+                                       xValue: Double(pos.x),
+                                       yValue: Double(pos.y))
+        }
+        else
+        {
+            return high
+        }
+    }
+    
+    internal
