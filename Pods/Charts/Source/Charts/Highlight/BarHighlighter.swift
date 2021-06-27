@@ -62,4 +62,19 @@ open class BarHighlighter: ChartHighlighter
                                   yValue: Double) -> Highlight?
     {
         guard
-            let chart = self.chart as? BarLineScatterCandleBubbleChartDataProv
+            let chart = self.chart as? BarLineScatterCandleBubbleChartDataProvider,
+            let entry = set.entryForXValue(xValue, closestToY: yValue) as? BarChartDataEntry
+            else { return nil }
+        
+        // Not stacked
+        if entry.yValues == nil
+        {
+            return high
+        }
+        
+        guard
+            let ranges = entry.ranges,
+            ranges.count > 0
+            else { return nil }
+
+        let stackIndex = getClosestStackI
