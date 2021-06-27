@@ -51,4 +51,15 @@ open class BarHighlighter: ChartHighlighter
     /// This method creates the Highlight object that also indicates which value of a stacked BarEntry has been selected.
     ///
     /// - Parameters:
-    ///   - hig
+    ///   - high: the Highlight to work with looking for stacked values
+    ///   - set:
+    ///   - xIndex:
+    ///   - yValue:
+    /// - Returns:
+    @objc open func getStackedHighlight(high: Highlight,
+                                  set: IBarChartDataSet,
+                                  xValue: Double,
+                                  yValue: Double) -> Highlight?
+    {
+        guard
+            let chart = self.chart as? BarLineScatterCandleBubbleChartDataProv
