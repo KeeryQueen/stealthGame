@@ -49,4 +49,11 @@ open class IndexAxisValueFormatter: NSObject, IAxisValueFormatter
         return IndexAxisValueFormatter(values: values)
     }
     
-    open func stringForVa
+    open func stringForValue(_ value: Double,
+                             axis: AxisBase?) -> String
+    {
+        let index = Int(value.rounded())
+        guard values.indices.contains(index), index == Int(value) else { return "" }
+        return _values[index]
+    }
+}
