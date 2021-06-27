@@ -26,4 +26,27 @@ open class IndexAxisValueFormatter: NSObject, IAxisValueFormatter
         }
         set
         {
-            _values = new
+            _values = newValue
+            _valueCount = _values.count
+        }
+    }
+    
+    public override init()
+    {
+        super.init()
+        
+    }
+    
+    @objc public init(values: [String])
+    {
+        super.init()
+        
+        self.values = values
+    }
+    
+    @objc public static func with(values: [String]) -> IndexAxisValueFormatter?
+    {
+        return IndexAxisValueFormatter(values: values)
+    }
+    
+    open func stringForVa
