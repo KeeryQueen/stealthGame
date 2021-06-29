@@ -77,4 +77,15 @@ open class BarHighlighter: ChartHighlighter
             ranges.count > 0
             else { return nil }
 
-        let stackIndex = getClosestStackI
+        let stackIndex = getClosestStackIndex(ranges: ranges, value: yValue)
+        let pixel = chart
+            .getTransformer(forAxis: set.axisDependency)
+            .pixelForValues(x: high.x, y: ranges[stackIndex].to)
+
+        return Highlight(x: entry.x,
+                         y: entry.y,
+                         xPx: pixel.x,
+                         yPx: pixel.y,
+                         dataSetIndex: high.dataSetIndex,
+                         stackIndex: stackIndex,
+         
