@@ -30,4 +30,14 @@ open class ChartHighlighter : NSObject, IHighlighter
     
     /// - Parameters:
     ///   - x:
-    /// 
+    /// - Returns: The corresponding x-pos for a given touch-position in pixels.
+    @objc open func getValsForTouch(x: CGFloat, y: CGFloat) -> CGPoint
+    {
+        guard let chart = self.chart as? BarLineScatterCandleBubbleChartDataProvider else { return .zero }
+        
+        // take any transformer to determine the values
+        return chart.getTransformer(forAxis: .left).valueForTouchPoint(x: x, y: y)
+    }
+    
+    /// - Parameters:
+    //
