@@ -67,4 +67,15 @@ open class ChartHighlighter : NSObject, IHighlighter
     ///   - y: touch position
     /// - Returns: A list of Highlight objects representing the entries closest to the given xVal.
     /// The returned list contains two objects per DataSet (closest rounding up, closest rounding down).
-    @objc open func getHighlights(xVal
+    @objc open func getHighlights(xValue: Double, x: CGFloat, y: CGFloat) -> [Highlight]
+    {
+        var vals = [Highlight]()
+        
+        guard let data = self.data else { return vals }
+        
+        for i in 0 ..< data.dataSetCount
+        {
+            guard
+                let dataSet = data.getDataSetByIndex(i),
+                dataSet.isHighlightEnabled      // don't include datasets that cannot be highlighted
+                else { contin
