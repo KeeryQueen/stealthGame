@@ -40,4 +40,15 @@ open class ChartHighlighter : NSObject, IHighlighter
     }
     
     /// - Parameters:
-    //
+    ///   - xValue:
+    ///   - x:
+    ///   - y:
+    /// - Returns: The corresponding ChartHighlight for a given x-value and xy-touch position in pixels.
+    @objc open func getHighlight(xValue xVal: Double, x: CGFloat, y: CGFloat) -> Highlight?
+    {
+        guard let chart = chart else { return nil }
+        
+        let closestValues = getHighlights(xValue: xVal, x: x, y: y)
+        guard !closestValues.isEmpty else { return nil }
+        
+        let 
