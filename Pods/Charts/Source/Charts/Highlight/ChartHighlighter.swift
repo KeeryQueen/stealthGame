@@ -56,4 +56,15 @@ open class ChartHighlighter : NSObject, IHighlighter
         
         let axis: YAxis.AxisDependency = leftAxisMinDist < rightAxisMinDist ? .left : .right
         
-        let detail = closestSelectionDetailByPixel(closestValues: closestValues, x: x, y: y, axis: axis, minSelectionDistance: chart.maxHig
+        let detail = closestSelectionDetailByPixel(closestValues: closestValues, x: x, y: y, axis: axis, minSelectionDistance: chart.maxHighlightDistance)
+        
+        return detail
+    }
+    
+    /// - Parameters:
+    ///   - xValue: the transformed x-value of the x-touch position
+    ///   - x: touch position
+    ///   - y: touch position
+    /// - Returns: A list of Highlight objects representing the entries closest to the given xVal.
+    /// The returned list contains two objects per DataSet (closest rounding up, closest rounding down).
+    @objc open func getHighlights(xVal
