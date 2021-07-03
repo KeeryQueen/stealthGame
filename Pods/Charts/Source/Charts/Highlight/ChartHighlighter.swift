@@ -51,4 +51,9 @@ open class ChartHighlighter : NSObject, IHighlighter
         let closestValues = getHighlights(xValue: xVal, x: x, y: y)
         guard !closestValues.isEmpty else { return nil }
         
-        let 
+        let leftAxisMinDist = getMinimumDistance(closestValues: closestValues, y: y, axis: .left)
+        let rightAxisMinDist = getMinimumDistance(closestValues: closestValues, y: y, axis: .right)
+        
+        let axis: YAxis.AxisDependency = leftAxisMinDist < rightAxisMinDist ? .left : .right
+        
+        let detail = closestSelectionDetailByPixel(closestValues: closestValues, x: x, y: y, axis: axis, minSelectionDistance: chart.maxHig
