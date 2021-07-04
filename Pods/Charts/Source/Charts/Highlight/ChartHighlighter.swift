@@ -106,4 +106,18 @@ open class ChartHighlighter : NSObject, IHighlighter
         }
 
         return entries.map { e in
-            let px = chart.getTransformer(forAxis: set.axisDepe
+            let px = chart.getTransformer(forAxis: set.axisDependency)
+                .pixelForValues(x: e.x, y: e.y)
+            
+            return Highlight(x: e.x, y: e.y, xPx: px.x, yPx: px.y, dataSetIndex: dataSetIndex, axis: set.axisDependency)
+        }
+    }
+
+    // - MARK: - Utilities
+    
+    /// - Returns: The `ChartHighlight` of the closest value on the x-y cartesian axes
+    internal func closestSelectionDetailByPixel(
+        closestValues: [Highlight],
+        x: CGFloat,
+        y: CGFloat,
+        axis: YAxi
