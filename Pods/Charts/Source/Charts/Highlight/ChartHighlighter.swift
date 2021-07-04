@@ -85,4 +85,15 @@ open class ChartHighlighter : NSObject, IHighlighter
             // some datasets (i.e bubble charts) make sense to have multiple values for an x-value. We'll have to find a way to handle that later on. It's more complicated now when x-indices are floating point.
             vals.append(contentsOf: buildHighlights(dataSet: dataSet, dataSetIndex: i, xValue: xValue, rounding: .closest))
         }
-   
+        
+        return vals
+    }
+    
+    /// - Returns: An array of `Highlight` objects corresponding to the selected xValue and dataSetIndex.
+    internal func buildHighlights(
+        dataSet set: IChartDataSet,
+        dataSetIndex: Int,
+        xValue: Double,
+        rounding: ChartDataSetRounding) -> [Highlight]
+    {
+        guard let chart = self.chart as? BarLineScatterCandleBubbleChartDataPr
