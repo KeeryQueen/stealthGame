@@ -96,4 +96,14 @@ open class ChartHighlighter : NSObject, IHighlighter
         xValue: Double,
         rounding: ChartDataSetRounding) -> [Highlight]
     {
-        guard let chart = self.chart as? BarLineScatterCandleBubbleChartDataPr
+        guard let chart = self.chart as? BarLineScatterCandleBubbleChartDataProvider else { return [] }
+        
+        var entries = set.entriesForXValue(xValue)
+        if entries.count == 0, let closest = set.entryForXValue(xValue, closestToY: .nan, rounding: rounding)
+        {
+            // Try to find closest x-value and take all entries for that x-value
+            entries = set.entriesForXValue(closest.x)
+        }
+
+        return entries.map { e in
+            let px = chart.getTransformer(forAxis: set.axisDepe
