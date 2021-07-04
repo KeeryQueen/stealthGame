@@ -120,4 +120,18 @@ open class ChartHighlighter : NSObject, IHighlighter
         closestValues: [Highlight],
         x: CGFloat,
         y: CGFloat,
-        axis: YAxi
+        axis: YAxis.AxisDependency?,
+        minSelectionDistance: CGFloat) -> Highlight?
+    {
+        var distance = minSelectionDistance
+        var closest: Highlight?
+        
+        for high in closestValues
+        {
+            if axis == nil || high.axis == axis
+            {
+                let cDistance = getDistance(x1: x, y1: y, x2: high.xPx, y2: high.yPx)
+
+                if cDistance < distance
+                {
+              
