@@ -134,4 +134,17 @@ open class ChartHighlighter : NSObject, IHighlighter
 
                 if cDistance < distance
                 {
-              
+                    closest = high
+                    distance = cDistance
+                }
+            }
+        }
+        
+        return closest
+    }
+    
+    /// - Returns: The minimum distance from a touch-y-value (in pixels) to the closest y-value (in pixels) that is displayed in the chart.
+    internal func getMinimumDistance(
+        closestValues: [Highlight],
+        y: CGFloat,
+        a
