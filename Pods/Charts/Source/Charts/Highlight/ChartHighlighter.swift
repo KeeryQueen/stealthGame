@@ -147,4 +147,20 @@ open class ChartHighlighter : NSObject, IHighlighter
     internal func getMinimumDistance(
         closestValues: [Highlight],
         y: CGFloat,
-        a
+        axis: YAxis.AxisDependency
+    ) -> CGFloat {
+        var distance = CGFloat.greatestFiniteMagnitude
+        
+        for high in closestValues where high.axis == axis
+        {
+            let tempDistance = abs(getHighlightPos(high: high) - y)
+            if tempDistance < distance
+            {
+                distance = tempDistance
+            }
+        }
+        
+        return distance
+    }
+    
+    internal func getHighlightPos(high: High
