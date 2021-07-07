@@ -163,4 +163,18 @@ open class ChartHighlighter : NSObject, IHighlighter
         return distance
     }
     
-    internal func getHighlightPos(high: High
+    internal func getHighlightPos(high: Highlight) -> CGFloat
+    {
+        return high.yPx
+    }
+    
+    internal func getDistance(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat) -> CGFloat
+    {
+        return hypot(x1 - x2, y1 - y2)
+    }
+    
+    internal var data: ChartData?
+    {
+        return chart?.data
+    }
+}
