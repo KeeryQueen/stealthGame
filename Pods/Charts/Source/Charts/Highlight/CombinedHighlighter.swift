@@ -35,4 +35,17 @@ open class CombinedHighlighter: ChartHighlighter
             let dataObjects = chart.combinedData?.allData
             else { return vals }
         
-        for i in 
+        for i in 0..<dataObjects.count
+        {
+            let dataObject = dataObjects[i]
+
+            // in case of BarData, let the BarHighlighter take over
+            if barHighlighter != nil && dataObject is BarChartData,
+                let high = barHighlighter?.getHighlight(x: x, y: y)
+            {
+                high.dataIndex = i
+                vals.append(high)
+            }
+            else
+            {
+                for j in 0..<dataOb
