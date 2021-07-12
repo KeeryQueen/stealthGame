@@ -58,4 +58,13 @@ open class CombinedHighlighter: ChartHighlighter
 
                     for high in highs
                     {
-     
+                        high.dataIndex = i
+                        vals.append(high)
+                    }
+                }
+            }
+        }
+        
+        return vals
+    }
+}
