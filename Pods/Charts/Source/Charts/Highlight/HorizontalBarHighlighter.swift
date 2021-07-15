@@ -27,4 +27,17 @@ open class HorizontalBarHighlighter: BarHighlighter
         {
             return getStackedHighlight(high: high,
                                        set: set,
-               
+                                       xValue: Double(pos.y),
+                                       yValue: Double(pos.x))
+        }
+
+        return high
+    }
+    
+    internal override func buildHighlights(
+        dataSet set: IChartDataSet,
+        dataSetIndex: Int,
+        xValue: Double,
+        rounding: ChartDataSetRounding) -> [Highlight]
+    {
+        guard let chart = self.chart as? BarLineScat
