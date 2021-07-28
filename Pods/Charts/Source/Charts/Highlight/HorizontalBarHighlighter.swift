@@ -50,4 +50,14 @@ open class HorizontalBarHighlighter: BarHighlighter
         }
 
         return entries.map { e in
-            let px = chart.getTransformer(forAxis: set.axisDepende
+            let px = chart.getTransformer(forAxis: set.axisDependency)
+                .pixelForValues(x: e.y, y: e.x)
+            return Highlight(x: e.x, y: e.y, xPx: px.x, yPx: px.y, dataSetIndex: dataSetIndex, axis: set.axisDependency)
+        }
+    }
+    
+    internal override func getDistance(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat) -> CGFloat
+    {
+        return abs(y1 - y2)
+    }
+}
