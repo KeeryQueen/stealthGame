@@ -24,3 +24,21 @@ open class PieRadarHighlighter: ChartHighlighter
         // check if a slice was touched
         guard touchDistanceToCenter <= chart.radius else
         {
+            // if no slice was touched, highlight nothing
+            return nil
+        }
+
+        var angle = chart.angleForPoint(x: x ,y: y)
+
+        if chart is PieChartView
+        {
+            angle /= CGFloat(chart.chartAnimator.phaseY)
+        }
+
+        let index = chart.indexForAngle(angle)
+
+        // check if the index could be found
+        if index < 0 || index >= chart.data?.maxEntryCountSet?.entryCount ?? 0
+        {
+            return nil
+     
