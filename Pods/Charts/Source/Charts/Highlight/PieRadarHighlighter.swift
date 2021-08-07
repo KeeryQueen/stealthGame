@@ -41,4 +41,19 @@ open class PieRadarHighlighter: ChartHighlighter
         if index < 0 || index >= chart.data?.maxEntryCountSet?.entryCount ?? 0
         {
             return nil
-     
+        }
+        else
+        {
+            return closestHighlight(index: index, x: x, y: y)
+        }
+
+    }
+    
+    /// - Parameters:
+    ///   - index:
+    ///   - x:
+    ///   - y:
+    /// - Returns: The closest Highlight object of the given objects based on the touch position inside the chart.
+    @objc open func closestHighlight(index: Int, x: CGFloat, y: CGFloat) -> Highlight?
+    {
+        fatalError("closestHighlight(index, x, y) cannot
