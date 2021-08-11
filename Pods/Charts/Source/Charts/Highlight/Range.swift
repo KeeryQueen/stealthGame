@@ -32,4 +32,21 @@ open class Range: NSObject
     {
         if value > from && value <= to
         {
-            retur
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    @objc open func isLarger(_ value: Double) -> Bool
+    {
+        return value > to
+    }
+    
+    @objc open func isSmaller(_ value: Double) -> Bool
+    {
+        return value < from
+    }
+}
