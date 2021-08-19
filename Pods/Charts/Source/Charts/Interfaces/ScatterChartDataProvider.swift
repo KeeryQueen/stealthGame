@@ -15,4 +15,5 @@ import CoreGraphics
 @objc
 public protocol ScatterChartDataProvider: BarLineScatterCandleBubbleChartDataProvider
 {
-    var scatterData: 
+    var scatterData: ScatterChartData? { get }
+}
