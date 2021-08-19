@@ -35,4 +35,5 @@ public protocol ChartDataProvider
     
     var data: ChartData? { get }
     
-    var maxVisibleCount: Int {
+    var maxVisibleCount: Int { get }
+}
