@@ -20,4 +20,20 @@ open class ViewPortJob: NSObject
     internal weak var viewPortHandler: ViewPortHandler?
     internal var xValue: Double = 0.0
     internal var yValue: Double = 0.0
-    internal weak var 
+    internal weak var transformer: Transformer?
+    internal weak var view: ChartViewBase?
+    
+    @objc public init(
+        viewPortHandler: ViewPortHandler,
+        xValue: Double,
+        yValue: Double,
+        transformer: Transformer,
+        view: ChartViewBase)
+    {
+        super.init()
+        
+        self.viewPortHandler = viewPortHandler
+        self.xValue = xValue
+        self.yValue = yValue
+        self.transformer = transformer
+  
