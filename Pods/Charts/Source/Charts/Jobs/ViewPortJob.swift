@@ -36,4 +36,11 @@ open class ViewPortJob: NSObject
         self.xValue = xValue
         self.yValue = yValue
         self.transformer = transformer
-  
+        self.view = view
+    }
+    
+    @objc open func doJob()
+    {
+        fatalError("`doJob()` must be overridden by subclasses")
+    }
+}
