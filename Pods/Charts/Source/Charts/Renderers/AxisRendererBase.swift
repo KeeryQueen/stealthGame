@@ -189,3 +189,31 @@ open class AxisRendererBase: Renderer
                 axis.entries.append(Double(f))
                 
                 f += interval
+                i += 1
+            }
+        }
+        
+        // set decimals
+        if interval < 1
+        {
+            axis.decimals = Int(ceil(-log10(interval)))
+        }
+        else
+        {
+            axis.decimals = 0
+        }
+        
+        if axis.centerAxisLabelsEnabled
+        {
+            axis.centeredEntries.reserveCapacity(n)
+            axis.centeredEntries.removeAll()
+            
+            let offset: Double = interval / 2.0
+            
+            for i in 0 ..< n
+            {
+                axis.centeredEntries.append(axis.entries[i] + offset)
+            }
+        }
+    }
+}
