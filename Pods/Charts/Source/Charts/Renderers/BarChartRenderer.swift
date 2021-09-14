@@ -26,4 +26,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     ///
     /// Its use is apparent when there are multiple data sets, since we want to read bars in left to right order,
     /// irrespective of dataset. However, drawing is done per dataset, so using this array and then flattening it prevents us from needing to
-    /// re-ren
+    /// re-render for the sake of accessibility.
+    ///
+    /// In practise, its structure is:
+    ///
+    /// ````
+    ///     [
+    ///      [dataset1 element1, dataset2 element1],
+    ///      [dataset1 element2, dataset2 element2],
+    ///      [dataset1 element3, dataset2 element3]
+    ///     ...
+    ///     ]
+    /// ````
+    /// This is done to provide numerical inference across datasets to a screenreader user, in the same way that a si
