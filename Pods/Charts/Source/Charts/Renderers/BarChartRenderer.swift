@@ -20,4 +20,10 @@ import CoreGraphics
 import Cocoa
 #endif
 
-open class BarCh
+open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
+{
+    /// A nested array of elements ordered logically (i.e not in visual/drawing order) for use with VoiceOver
+    ///
+    /// Its use is apparent when there are multiple data sets, since we want to read bars in left to right order,
+    /// irrespective of dataset. However, drawing is done per dataset, so using this array and then flattening it prevents us from needing to
+    /// re-ren
