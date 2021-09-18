@@ -38,4 +38,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     ///     ...
     ///     ]
     /// ````
-    /// This is done to provide numerical inference across datasets to a screenreader user, in the same way that a si
+    /// This is done to provide numerical inference across datasets to a screenreader user, in the same way that a sighted individual
+    /// uses a multi-dataset bar chart.
+    ///
+    /// The ````internal```` specifier is to allow subclasses (HorizontalBar) to populate the same array
+    internal lazy var accessibilityOrderedElements: [[NSUIAccessibilityElement]] = accessibilityCreateEmptyOrderedElements()
+
+    private class Buffer
+    {
+        var rects = [CGRect]()
+    }
+    
+    @objc open weak var dataProvider: BarChartDataProvider?
+    
+    
