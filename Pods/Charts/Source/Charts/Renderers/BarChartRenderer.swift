@@ -65,4 +65,18 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     {
         if let barData = dataProvider?.barData
         {
-            // Matche buffers count to dataset c
+            // Matche buffers count to dataset count
+            if _buffers.count != barData.dataSetCount
+            {
+                while _buffers.count < barData.dataSetCount
+                {
+                    _buffers.append(Buffer())
+                }
+                while _buffers.count > barData.dataSetCount
+                {
+                    _buffers.removeLast()
+                }
+            }
+            
+            for i in stride(from: 0, to: barData.dataSetCount, by: 1)
+         
