@@ -51,4 +51,18 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     
     @objc open weak var dataProvider: BarChartDataProvider?
     
+    @objc public init(dataProvider: BarChartDataProvider, animator: Animator, viewPortHandler: ViewPortHandler)
+    {
+        super.init(animator: animator, viewPortHandler: viewPortHandler)
+        
+        self.dataProvider = dataProvider
+    }
     
+    // [CGRect] per dataset
+    private var _buffers = [Buffer]()
+    
+    open override func initBuffers()
+    {
+        if let barData = dataProvider?.barData
+        {
+            // Matche buffers count to dataset c
