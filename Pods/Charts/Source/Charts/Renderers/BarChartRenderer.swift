@@ -107,4 +107,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         var bufferIndex = 0
         let containsStacks = dataSet.isStacked
         
-        let isInverted = dataProvider.isInverted(axis: dat
+        let isInverted = dataProvider.isInverted(axis: dataSet.axisDependency)
+        let phaseY = animator.phaseY
+        var barRect = CGRect()
+        var x: Double
+        var y: Double
+
+        
+        for i in stride(from: 0, to: min(Int(ceil(Double(dataSet.entryCount) * animator.phaseX)), dataSet.entryCount), by: 1)
+        {
+            guard let e = dataSet.entryForIndex(i) as? BarChartDataEntry else { continue }
+            
+            let vals = e.
