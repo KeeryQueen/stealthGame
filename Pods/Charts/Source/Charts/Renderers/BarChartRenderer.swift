@@ -94,4 +94,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         }
     }
     
-    private func prepare
+    private func prepareBuffer(dataSet: IBarChartDataSet, index: Int)
+    {
+        guard
+            let dataProvider = dataProvider,
+            let barData = dataProvider.barData
+            else { return }
+        
+        let barWidthHalf = barData.barWidth / 2.0
+    
+        let buffer = _buffers[index]
+        var bufferIndex = 0
+        let containsStacks = dataSet.isStacked
+        
+        let isInverted = dataProvider.isInverted(axis: dat
