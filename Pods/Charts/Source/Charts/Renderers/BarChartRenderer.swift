@@ -79,4 +79,19 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             }
             
             for i in stride(from: 0, to: barData.dataSetCount, by: 1)
-         
+            {
+                let set = barData.dataSets[i] as! IBarChartDataSet
+                let size = set.entryCount * (set.isStacked ? set.stackSize : 1)
+                if _buffers[i].rects.count != size
+                {
+                    _buffers[i].rects = [CGRect](repeating: CGRect(), count: size)
+                }
+            }
+        }
+        else
+        {
+            _buffers.removeAll()
+        }
+    }
+    
+    private func prepare
