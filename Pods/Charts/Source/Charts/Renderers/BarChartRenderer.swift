@@ -118,4 +118,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         {
             guard let e = dataSet.entryForIndex(i) as? BarChartDataEntry else { continue }
             
-            let vals = e.
+            let vals = e.yValues
+
+            x = e.x
+            y = e.y
+
+            if !containsStacks || vals == nil
+            {
+                let left = CGFloat(x - barWidthHalf)
+                let right = CGFloat(x + barWidthHalf)
+                var top = isInverted
+                    ? (y <= 0.0 ? CGFloat(y) : 0)
+                    : (y >= 0.0 ? CGFloat(y) : 0)
+                var bottom = isInverted
+                    ? (y >= 0.0 ? CGF
