@@ -140,4 +140,8 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                  * This offset attempts to undo that unnecessary drawing when calculating barRects
                  *
                  * +---------------------------------------------------------------+---------------------------------------------------------------+
-                 * |      Situation 1:  (!inverted && y >= 0)                      |      Situation 3:  (inverted && y >
+                 * |      Situation 1:  (!inverted && y >= 0)                      |      Situation 3:  (inverted && y >= 0)                       |
+                 * |                                                               |                                                               |
+                 * |        y ->           +--+       <- top                       |        0 -> ---+--+---+--+------   <- top                     |
+                 * |                       |//|        } topOffset = y - max       |                |  |   |//|          } topOffset = min         |
+                 * |      max -> +----
