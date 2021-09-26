@@ -131,4 +131,9 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     ? (y <= 0.0 ? CGFloat(y) : 0)
                     : (y >= 0.0 ? CGFloat(y) : 0)
                 var bottom = isInverted
-                    ? (y >= 0.0 ? CGF
+                    ? (y >= 0.0 ? CGFloat(y) : 0)
+                    : (y <= 0.0 ? CGFloat(y) : 0)
+                
+                /* When drawing each bar, the renderer actually draws each bar from 0 to the required value.
+                 * This drawn bar is then clipped to the visible chart rect in BarLineChartViewBase's draw(rect:) using clipDataToContent.
+                 * While this works fine when calculating the bar rects for drawing, it causes the accessibilityFrames to be o
