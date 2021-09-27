@@ -155,4 +155,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                  * +---------------------------------------------------------------+---------------------------------------------------------------+
                  * |      Situation 2:  (!inverted && y < 0)                       |      Situation 4:  (inverted && y < 0)                        |
                  * |                                                               |                                                               |
-                 * |        0 -> ---+--+---+--+-----   <- top          
+                 * |        0 -> ---+--+---+--+-----   <- top                      |        y ->           +--+         <- top                     |
+                 * |                |  |   |//|         } topOffset = -max         |                       |//|          } topOffset = min - y     |
+                 * |      max -> +--+--+---+--+----+   <- top - topOffset          |      min -> +---------+--+----+    <- top + topOffset         |
+                 * |             |  |  | 
