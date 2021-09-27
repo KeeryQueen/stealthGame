@@ -158,4 +158,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                  * |        0 -> ---+--+---+--+-----   <- top                      |        y ->           +--+         <- top                     |
                  * |                |  |   |//|         } topOffset = -max         |                       |//|          } topOffset = min - y     |
                  * |      max -> +--+--+---+--+----+   <- top - topOffset          |      min -> +---------+--+----+    <- top + topOffset         |
-                 * |             |  |  | 
+                 * |             |  |  |   |//|    |                               |             |  +--+   |//|    |                               |
+                 * |             |  +--+   |//|    |                               |             |  |  |   |//|    |                               |
+                 * |             |         |//|    |                               |             |  |  |   |//|    |                               |
+                 * |      min -> +---------+--+----+   <
