@@ -164,4 +164,10 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                  * |      min -> +---------+--+----+   <- bottom + bottomOffset    |      max -> +--+--+---+--+----+    <- bottom - bottomOffset   |
                  * |                       |//|         } bottomOffset = min - y   |                |  |   |//|          } bottomOffset = -max     |
                  * |        y ->           +--+        <- bottom                   |        0 -> ---+--+---+--+-------  <- bottom                  |
-                 * |                       
+                 * |                                                               |                                                               |
+                 * +---------------------------------------------------------------+---------------------------------------------------------------+
+                 */
+                var topOffset: CGFloat = 0.0
+                var bottomOffset: CGFloat = 0.0
+                if let offsetView = dataProvider as? BarChartView
+                
