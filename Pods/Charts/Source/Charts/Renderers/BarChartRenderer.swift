@@ -180,4 +180,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                             topOffset = CGFloat(y - offsetAxis.axisMaximum)
                         }
                         if offsetAxis.axisMinimum > 0
-                   
+                        {
+                            bottomOffset = CGFloat(offsetAxis.axisMinimum)
+                        }
+                    }
+                    else // y < 0
+                    {
+                        //situation 2
+                        if offsetAxis.axisMaximum < 0
+                        {
+                            topOffset = CGFloat(offsetAxis.axisMaximum * -1)
+                        }
+                    
