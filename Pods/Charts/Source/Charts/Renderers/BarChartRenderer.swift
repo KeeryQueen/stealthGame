@@ -191,4 +191,14 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                         {
                             topOffset = CGFloat(offsetAxis.axisMaximum * -1)
                         }
-                    
+                        if offsetAxis.axisMinimum > y
+                        {
+                            bottomOffset = CGFloat(offsetAxis.axisMinimum - y)
+                        }
+                    }
+                    if isInverted
+                    {
+                        // situation 3 and 4
+                        // exchange topOffset/bottomOffset based on 1 and 2
+                        // see diagram above
+               
