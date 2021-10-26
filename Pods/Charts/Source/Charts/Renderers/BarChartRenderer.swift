@@ -201,4 +201,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                         // situation 3 and 4
                         // exchange topOffset/bottomOffset based on 1 and 2
                         // see diagram above
-               
+                        (topOffset, bottomOffset) = (bottomOffset, topOffset)
+                    }
+                }
+                //apply offset
+                top = isInverted ? top + topOffset : top - topOffset
+                bottom = isInverted ? bottom - bottomOffset : bottom + bottomOffset
+
+                // multiply the height of the rect with the phase
+                // explicitly add 0 + topOffset to indicate this is changed after adding acces
