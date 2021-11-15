@@ -222,4 +222,19 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 barRect.origin.x = left
                 barRect.origin.y = top
                 barRect.size.width = right - left
-                barRect.size.height = bottom - to
+                barRect.size.height = bottom - top
+                buffer.rects[bufferIndex] = barRect
+                bufferIndex += 1
+            }
+            else
+            {
+                var posY = 0.0
+                var negY = -e.negativeSum
+                var yStart = 0.0
+                
+                // fill the stack
+                for k in 0 ..< vals!.count
+                {
+                    let value = vals![k]
+                    
+                    if va
