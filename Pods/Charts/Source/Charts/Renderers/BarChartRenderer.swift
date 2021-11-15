@@ -237,4 +237,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 {
                     let value = vals![k]
                     
-                    if va
+                    if value == 0.0 && (posY == 0.0 || negY == 0.0)
+                    {
+                        // Take care of the situation of a 0.0 value, which overlaps a non-zero bar
+                        y = value
+                        yStart = y
+                    }
+                    else if value >= 0.0
+                    {
+                        y = posY
+                        yStart = posY + value
+                        posY = yStart
+                    }
+  
