@@ -249,4 +249,14 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                         yStart = posY + value
                         posY = yStart
                     }
-  
+                    else
+                    {
+                        y = negY
+                        yStart = negY + abs(value)
+                        negY += abs(value)
+                    }
+                    
+                    let left = CGFloat(x - barWidthHalf)
+                    let right = CGFloat(x + barWidthHalf)
+                    var top = isInverted
+                        ? (y <= yStart ? C
