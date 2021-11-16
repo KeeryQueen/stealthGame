@@ -300,4 +300,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             accessibleChartElements.append(element)
         }
 
-        // Populate logically ordered nested elements into accessibilityOrderedElements in 
+        // Populate logically ordered nested elements into accessibilityOrderedElements in drawDataSet()
+        for i in 0 ..< barData.dataSetCount
+        {
+            guard let set = barData.getDataSetByIndex(i) else { continue }
+            
+            if set.isVisible
+            {
+                if !(set is IBarChartDataSet)
+                {
+                    fatalError("Datasets for BarChartRenderer must conform to IBarChartDataset")
+                }
+                
+                drawDataSet(context: c
