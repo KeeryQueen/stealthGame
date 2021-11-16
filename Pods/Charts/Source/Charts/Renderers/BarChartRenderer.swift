@@ -267,4 +267,19 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     
                     // multiply the height of the rect with the phase
                     top *= CGFloat(phaseY)
-                    botto
+                    bottom *= CGFloat(phaseY)
+                    
+                    barRect.origin.x = left
+                    barRect.size.width = right - left
+                    barRect.origin.y = top
+                    barRect.size.height = bottom - top
+                    
+                    buffer.rects[bufferIndex] = barRect
+                    bufferIndex += 1
+                }
+            }
+        }
+    }
+
+    open override func drawData(context: CGContext)
+ 
