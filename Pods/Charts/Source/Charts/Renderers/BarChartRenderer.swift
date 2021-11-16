@@ -259,4 +259,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     let left = CGFloat(x - barWidthHalf)
                     let right = CGFloat(x + barWidthHalf)
                     var top = isInverted
-                        ? (y <= yStart ? C
+                        ? (y <= yStart ? CGFloat(y) : CGFloat(yStart))
+                        : (y >= yStart ? CGFloat(y) : CGFloat(yStart))
+                    var bottom = isInverted
+                        ? (y >= yStart ? CGFloat(y) : CGFloat(yStart))
+                        : (y <= yStart ? CGFloat(y) : CGFloat(yStart))
+                    
+                    // multiply the height of the rect with the phase
+                    top *= CGFloat(phaseY)
+                    botto
