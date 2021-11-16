@@ -293,4 +293,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         accessibilityOrderedElements = accessibilityCreateEmptyOrderedElements()
 
         // Make the chart header the first element in the accessible elements array
-  
+        if let chart = dataProvider as? BarChartView {
+            let element = createAccessibleHeader(usingChart: chart,
+                                                 andData: barData,
+                                                 withDefaultDescription: "Bar Chart")
+            accessibleChartElements.append(element)
+        }
+
+        // Populate logically ordered nested elements into accessibilityOrderedElements in 
