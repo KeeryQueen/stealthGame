@@ -347,4 +347,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             let barWidthHalf = barWidth / 2.0
             var x: Double = 0.0
             
-            for i in stride(from: 0, to: min(Int(ceil(Double(dataSet.entryCou
+            for i in stride(from: 0, to: min(Int(ceil(Double(dataSet.entryCount) * animator.phaseX)), dataSet.entryCount), by: 1)
+            {
+                guard let e = dataSet.entryForIndex(i) as? BarChartDataEntry else { continue }
+                
+                x = e.x
+                
+                _barShadowRectBuffer.origin.x = CGFloat(x - barWidthHalf)
+                _barShadowRectBuffer.size.width = CGFloat(barWidth)
+                
+                trans.rectValueToPi
