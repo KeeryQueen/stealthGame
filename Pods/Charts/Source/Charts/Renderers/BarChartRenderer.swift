@@ -334,4 +334,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
 
         let borderWidth = dataSet.barBorderWidth
         let borderColor = dataSet.barBorderColor
-        let drawBorder = border
+        let drawBorder = borderWidth > 0.0
+        
+        context.saveGState()
+        
+        // draw the bar shadow before the values
+        if dataProvider.isDrawBarShadowEnabled
+        {
+            guard let barData = dataProvider.barData else { return }
+            
+            let barWidth = barData.barWidth
+            let barWidthHalf = barWidth / 2.0
+            var x: Double = 0.0
+            
+            for i in stride(from: 0, to: min(Int(ceil(Double(dataSet.entryCou
