@@ -312,4 +312,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     fatalError("Datasets for BarChartRenderer must conform to IBarChartDataset")
                 }
                 
-                drawDataSet(context: c
+                drawDataSet(context: context, dataSet: set as! IBarChartDataSet, index: i)
+            }
+        }
+
+        // Merge nested ordered arrays into the single accessibleChartElements.
+        accessibleChartElements.append(contentsOf: accessibilityOrderedElements.flatMap { $0 } )
+        accessibilityPostLayoutChangedNotification()
+    }
+
+    private var _barShadowRectBuffer: CGRect = CGRect()
+
+    @objc open func drawDataSet(context: CGContext, data
