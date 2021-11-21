@@ -323,4 +323,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
 
     private var _barShadowRectBuffer: CGRect = CGRect()
 
-    @objc open func drawDataSet(context: CGContext, data
+    @objc open func drawDataSet(context: CGContext, dataSet: IBarChartDataSet, index: Int)
+    {
+        guard let dataProvider = dataProvider else { return }
+
+        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+
+        prepareBuffer(dataSet: dataSet, index: index)
+        trans.rectValuesToPixel(&_buffers[index].rects)
+
+        let borderWidth = dataSet.barBorderWidth
+        let borderColor = dataSet.barBorderColor
+        let drawBorder = border
