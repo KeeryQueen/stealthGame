@@ -368,4 +368,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     break
                 }
                 
-                _bar
+                _barShadowRectBuffer.origin.y = viewPortHandler.contentTop
+                _barShadowRectBuffer.size.height = viewPortHandler.contentHeight
+                
+                context.setFillColor(dataSet.barShadowColor.cgColor)
+                context.fill(_barShadowRectBuffer)
+            }
+        }
+
+        let buffer = _buffers[index]
+        
+        // draw the bar shadow before the values
+        if dataProvider.isDrawBarShadowEnabled
+        {
+   
