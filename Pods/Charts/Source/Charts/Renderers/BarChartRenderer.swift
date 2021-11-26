@@ -356,4 +356,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 _barShadowRectBuffer.origin.x = CGFloat(x - barWidthHalf)
                 _barShadowRectBuffer.size.width = CGFloat(barWidth)
                 
-                trans.rectValueToPi
+                trans.rectValueToPixel(&_barShadowRectBuffer)
+                
+                if !viewPortHandler.isInBoundsLeft(_barShadowRectBuffer.origin.x + _barShadowRectBuffer.size.width)
+                {
+                    continue
+                }
+                
+                if !viewPortHandler.isInBoundsRight(_barShadowRectBuffer.origin.x)
+                {
+                    break
+                }
+                
+                _bar
