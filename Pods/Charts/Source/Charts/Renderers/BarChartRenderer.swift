@@ -407,4 +407,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             context.setFillColor(dataSet.color(atIndex: 0).cgColor)
         }
 
-        // In case the chart is stacked, we need to accomodate individual bars wit
+        // In case the chart is stacked, we need to accomodate individual bars within accessibilityOrdereredElements
+        let isStacked = dataSet.isStacked
+        let stackSize = isStacked ? dataSet.stackSize : 1
+
+        for j in stride(from: 0, to: buffer.rects.count, by: 1)
+        {
+            let barRect = buffer.rects[j]
+
+            if (!viewPortHandler.isInBoundsLeft(barRect.origin.x + barRect.size.width))
+            {
+                continue
+            }
+            
+            if (!viewPortHandler.isIn
