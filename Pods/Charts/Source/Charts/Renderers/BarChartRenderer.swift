@@ -392,4 +392,19 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 
                 if (!viewPortHandler.isInBoundsRight(barRect.origin.x))
                 {
-          
+                    break
+                }
+                
+                context.setFillColor(dataSet.barShadowColor.cgColor)
+                context.fill(barRect)
+            }
+        }
+        
+        let isSingleColor = dataSet.colors.count == 1
+        
+        if isSingleColor
+        {
+            context.setFillColor(dataSet.color(atIndex: 0).cgColor)
+        }
+
+        // In case the chart is stacked, we need to accomodate individual bars wit
