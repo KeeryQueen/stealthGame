@@ -420,4 +420,19 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 continue
             }
             
-            if (!viewPortHandler.isIn
+            if (!viewPortHandler.isInBoundsRight(barRect.origin.x))
+            {
+                break
+            }
+            
+            if !isSingleColor
+            {
+                // Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
+                context.setFillColor(dataSet.color(atIndex: j).cgColor)
+            }
+            
+            context.fill(barRect)
+            
+            if drawBorder
+            {
+       
