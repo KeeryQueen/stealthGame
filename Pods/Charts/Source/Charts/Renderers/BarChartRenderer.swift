@@ -445,4 +445,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             {
                 let element = createAccessibleElement(withIndex: j,
                                                       container: chart,
-      
+                                                      dataSet: dataSet,
+                                                      dataSetIndex: index,
+                                                      stackSize: stackSize)
+                { (element) in
+                    element.accessibilityFrame = barRect
+                }
+
+                accessibilityOrderedElements[j/stackSize].append(element)
+            }
+        }
+        
+        context.restore
