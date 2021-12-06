@@ -456,4 +456,22 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             }
         }
         
-        context.restore
+        context.restoreGState()
+    }
+    
+    open func prepareBarHighlight(
+        x: Double,
+          y1: Double,
+          y2: Double,
+          barWidthHalf: Double,
+          trans: Transformer,
+          rect: inout CGRect)
+    {
+        let left = x - barWidthHalf
+        let right = x + barWidthHalf
+        let top = y1
+        let bottom = y2
+        
+        rect.origin.x = CGFloat(left)
+        rect.origin.y = CGFloat(top)
+        rect
