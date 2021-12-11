@@ -488,4 +488,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             guard
                 let dataProvider = dataProvider,
                 let barData = dataProvider.barData
- 
+                else { return }
+
+            let dataSets = barData.dataSets
+
+            let valueOffsetPlus: CGFloat = 4.5
+            var posOffset: CGFloat
+            var negOffset: CGFloat
+            let drawValueAboveBar = dataProvider.isDrawValueAboveBarEnabled
+            
+            for dataSetIndex in 0 ..< barData.dataSetCount
+            {
+                guard let
+                    dataSet = dataSe
