@@ -500,4 +500,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             for dataSetIndex in 0 ..< barData.dataSetCount
             {
                 guard let
-                    dataSet = dataSe
+                    dataSet = dataSets[dataSetIndex] as? IBarChartDataSet,
+                    shouldDrawValues(forDataSet: dataSet)
+                    else { continue }
+                
+                let isInverted = dataProvider.isInverted(axis: dataSet.axisDependency)
+                
+                // calculate the correct offset depending on the draw position of the value
+                let valueFont = dataSet.valueFont
+                let valueTextHeight = valueFont.lin
