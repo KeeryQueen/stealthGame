@@ -516,4 +516,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 {
                     posOffset = -posOffset - valueTextHeight
                     negOffset = -negOffset - valueTextHeight
-               
+                }
+                
+                let buffer = _buffers[dataSetIndex]
+                
+                guard let formatter = dataSet.valueFormatter else { continue }
+                
+                let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+                
+                let phaseY = animator.phaseY
+                
+                let iconsOffset = dataSet.iconsOffset
+        
+                // if only single values are draw
