@@ -549,4 +549,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                         {
                             continue
                         }
-    
+                        
+                        let val = e.y
+                        
+                        if dataSet.isDrawValuesEnabled
+                        {
+                            drawValue(
+                                context: context,
+                                value: formatter.stringForValue(
+                                    val,
+                                    entry: e,
+                                    dataSetIndex: dataSetIndex,
+ 
