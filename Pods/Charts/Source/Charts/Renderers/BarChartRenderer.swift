@@ -560,4 +560,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                     val,
                                     entry: e,
                                     dataSetIndex: dataSetIndex,
- 
+                                    viewPortHandler: viewPortHandler),
+                                xPos: x,
+                                yPos: val >= 0.0
+                                    ? (rect.origin.y + posOffset)
+                                    : (rect.origin.y + rect.size.height + negOffset),
+                                font: valueFont,
+                                align: .center,
+                                color:
