@@ -567,4 +567,14 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                     : (rect.origin.y + rect.size.height + negOffset),
                                 font: valueFont,
                                 align: .center,
-                                color:
+                                color: dataSet.valueTextColorAt(j))
+                        }
+                        
+                        if let icon = e.icon, dataSet.isDrawIconsEnabled
+                        {
+                            var px = x
+                            var py = val >= 0.0
+                                ? (rect.origin.y + posOffset)
+                                : (rect.origin.y + rect.size.height + negOffset)
+                            
+         
