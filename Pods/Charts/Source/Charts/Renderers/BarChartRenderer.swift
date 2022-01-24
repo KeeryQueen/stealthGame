@@ -587,4 +587,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                 y: py,
                                 size: icon.size)
                         }
-  
+                    }
+                }
+                else
+                {
+                    // if we have stacks
+                    
+                    var bufferIndex = 0
+                    
+                    for index in 0 ..< Int(ceil(Double(dataSet.entryCount) * animator.phaseX))
+                    {
+                        guard let e = dataSet.entryForIndex(index) as? BarChartDataEntry else { continue }
+                        
+                        
