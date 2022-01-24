@@ -599,4 +599,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     {
                         guard let e = dataSet.entryForIndex(index) as? BarChartDataEntry else { continue }
                         
+                        let vals = e.yValues
                         
+                        let rect = buffer.rects[bufferIndex]
+                        
+                        let x = rect.origin.x + rect.size.width / 2.0
+                        
+                        // we still draw stacked bars, but there is one non-stacked in between
+                        if vals == nil
+                        {
+                            if !
