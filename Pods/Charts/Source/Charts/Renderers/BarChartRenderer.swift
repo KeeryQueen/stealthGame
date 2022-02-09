@@ -618,4 +618,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                             {
                                 continue
                             }
-          
+                            
+                            if dataSet.isDrawValuesEnabled
+                            {
+                                drawValue(
+                                    context: context,
+                                    value: formatter.stringForValue(
+                                        e.y,
+                                        entry: e,
+                                        dataSetIndex: dataSetIndex,
+                 
