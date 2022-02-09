@@ -608,4 +608,14 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                         // we still draw stacked bars, but there is one non-stacked in between
                         if vals == nil
                         {
-                            if !
+                            if !viewPortHandler.isInBoundsRight(x)
+                            {
+                                break
+                            }
+                            
+                            if !viewPortHandler.isInBoundsY(rect.origin.y)
+                                || !viewPortHandler.isInBoundsLeft(x)
+                            {
+                                continue
+                            }
+          
