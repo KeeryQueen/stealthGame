@@ -633,4 +633,14 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                         (e.y >= 0 ? posOffset : negOffset),
                                     font: valueFont,
                                     align: .center,
-                                    color: dataSet.valueTextColorAt(inde
+                                    color: dataSet.valueTextColorAt(index))
+                            }
+                            
+                            if let icon = e.icon, dataSet.isDrawIconsEnabled
+                            {
+                                var px = x
+                                var py = rect.origin.y +
+                                    (e.y >= 0 ? posOffset : negOffset)
+                                
+                                px += iconsOffset.x
+ 
