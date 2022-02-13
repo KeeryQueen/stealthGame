@@ -643,4 +643,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                     (e.y >= 0 ? posOffset : negOffset)
                                 
                                 px += iconsOffset.x
- 
+                                py += iconsOffset.y
+                                
+                                ChartUtils.drawImage(
+                                    context: context,
+                                    image: icon,
+                                    x: px,
+                                    y: py,
+                                    size: icon.size)
+                            }
+        
