@@ -652,4 +652,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                     y: py,
                                     size: icon.size)
                             }
-        
+                        }
+                        else
+                        {
+                            // draw stack values
+                            
+                            let vals = vals!
+                            var transformed = [CGPoint]()
+                            
+                            var posY = 0.0
+                            var negY = -e.negativeSum
+                            
+       
