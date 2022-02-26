@@ -681,4 +681,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                 else
                                 {
                                     y = negY
-                         
+                                    negY -= value
+                                }
+                                
+                                transformed.append(CGPoint(x: 0.0, y: CGFloat(y * phaseY)))
+                            }
+                            
+                            trans.pointValuesToPixel(&transformed)
+                            
+                            for k in 0 ..< transformed.count
+                           
