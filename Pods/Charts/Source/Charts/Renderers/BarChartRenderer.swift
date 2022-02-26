@@ -670,4 +670,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                 
                                 if value == 0.0 && (posY == 0.0 || negY == 0.0)
                                 {
-                                    // Take care of the situation of a 0.0 value, which overlaps a non-z
+                                    // Take care of the situation of a 0.0 value, which overlaps a non-zero bar
+                                    y = value
+                                }
+                                else if value >= 0.0
+                                {
+                                    posY += value
+                                    y = posY
+                                }
+                                else
+                                {
+                                    y = negY
+                         
