@@ -663,4 +663,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                             var posY = 0.0
                             var negY = -e.negativeSum
                             
-       
+                            for k in 0 ..< vals.count
+                            {
+                                let value = vals[k]
+                                var y: Double
+                                
+                                if value == 0.0 && (posY == 0.0 || negY == 0.0)
+                                {
+                                    // Take care of the situation of a 0.0 value, which overlaps a non-z
