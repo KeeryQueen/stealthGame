@@ -690,4 +690,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                             trans.pointValuesToPixel(&transformed)
                             
                             for k in 0 ..< transformed.count
-                           
+                            {
+                                let val = vals[k]
+                                let drawBelow = (val == 0.0 && negY == 0.0 && posY > 0.0) || val < 0.0
+                                let y = transformed[k].y + (drawBelow ? negOffset : posOffset)
+                                
+                                if !viewPortHandler.isInBoundsRight(x)
+                                {
+                                    break
+                               
