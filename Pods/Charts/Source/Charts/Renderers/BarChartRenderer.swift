@@ -698,4 +698,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                 if !viewPortHandler.isInBoundsRight(x)
                                 {
                                     break
-                               
+                                }
+                                
+                                if !viewPortHandler.isInBoundsY(y) || !viewPortHandler.isInBoundsLeft(x)
+                                {
+                                    continue
+                                }
+                                
+                                if dataSet.isDrawValuesEnabled
+                       
