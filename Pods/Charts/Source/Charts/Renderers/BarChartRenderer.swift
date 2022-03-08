@@ -730,3 +730,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                         y: y + iconsOffset.y,
                                         size: icon.size)
                                 }
+                            }
+                        }
+                        
+                        bufferIndex = vals == nil ? (bufferIndex + 1) : (bufferIndex + vals!.count)
+                    }
+                }
+            }
+        }
+    }
+    
+    /// Draws a value at the specified x and y position.
+    @objc open func drawValue(context: CGContext, value: String, xPos: CGFloat, yPos: CGFloat, font: NSUIFont, align: NSTextAlignment, color: NSUIColor)
+    {
