@@ -721,4 +721,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                         color: dataSet.valueTextColorAt(index))
                                 }
                                 
-                                if let icon = e.icon, dataSet.isDraw
+                                if let icon = e.icon, dataSet.isDrawIconsEnabled
+                                {
+                                    ChartUtils.drawImage(
+                                        context: context,
+                                        image: icon,
+                                        x: x + iconsOffset.x,
+                                        y: y + iconsOffset.y,
+                                        size: icon.size)
+                                }
