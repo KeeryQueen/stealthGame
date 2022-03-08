@@ -713,4 +713,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                             vals[k],
                                             entry: e,
                                             dataSetIndex: dataSetIndex,
-                                            viewPortHandler: viewPortHandl
+                                            viewPortHandler: viewPortHandler),
+                                        xPos: x,
+                                        yPos: y,
+                                        font: valueFont,
+                                        align: .center,
+                                        color: dataSet.valueTextColorAt(index))
+                                }
+                                
+                                if let icon = e.icon, dataSet.isDraw
