@@ -755,4 +755,18 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     {
         guard
             let dataProvider = dataProvider,
-            let barData = dat
+            let barData = dataProvider.barData
+            else { return }
+        
+        context.saveGState()
+        
+        var barRect = CGRect()
+        
+        for high in indices
+        {
+            guard
+                let set = barData.getDataSetByIndex(high.dataSetIndex) as? IBarChartDataSet,
+                set.isHighlightEnabled
+                else { continue }
+            
+            if let e = set.entryForXValue(high.x, closestToY: high.y) as? BarChartData
