@@ -769,4 +769,16 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 set.isHighlightEnabled
                 else { continue }
             
-            if let e = set.entryForXValue(high.x, closestToY: high.y) as? BarChartData
+            if let e = set.entryForXValue(high.x, closestToY: high.y) as? BarChartDataEntry
+            {
+                if !isInBoundsX(entry: e, dataSet: set)
+                {
+                    continue
+                }
+                
+                let trans = dataProvider.getTransformer(forAxis: set.axisDependency)
+                
+                context.setFillColor(set.highlightColor.cgColor)
+                context.setAlpha(set.highlightAlpha)
+                
+               
