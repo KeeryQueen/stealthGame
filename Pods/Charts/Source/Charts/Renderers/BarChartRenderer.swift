@@ -781,4 +781,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 context.setFillColor(set.highlightColor.cgColor)
                 context.setAlpha(set.highlightAlpha)
                 
-               
+                let isStack = high.stackIndex >= 0 && e.isStacked
+                
+                let y1: Double
+                let y2: Double
+                
+                if isStack
+                {
+                    if dataProvider.isHighlightFullBarEnabled
+                    {
+                        y1 = e.positiveSum
+                        y2 = -e.negativeSum
+                    }
+                    else
+        
