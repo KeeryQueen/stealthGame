@@ -794,4 +794,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                         y2 = -e.negativeSum
                     }
                     else
-        
+                    {
+                        let range = e.ranges?[high.stackIndex]
+                        
+                        y1 = range?.from ?? 0.0
+                        y2 = range?.to ?? 0.0
+                    }
+                }
+                else
+                {
+                    y1 = e.y
+                    y2 = 0.0
+                }
+                
+                prepareBarHighlight(x: e.x, y1: y1, y2: y2, barWidthHalf: barData.barWidth / 2.0, tran
