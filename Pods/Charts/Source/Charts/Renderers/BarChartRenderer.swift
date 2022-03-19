@@ -807,4 +807,18 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     y2 = 0.0
                 }
                 
-                prepareBarHighlight(x: e.x, y1: y1, y2: y2, barWidthHalf: barData.barWidth / 2.0, tran
+                prepareBarHighlight(x: e.x, y1: y1, y2: y2, barWidthHalf: barData.barWidth / 2.0, trans: trans, rect: &barRect)
+                
+                setHighlightDrawPos(highlight: high, barRect: barRect)
+                
+                context.fill(barRect)
+            }
+        }
+        
+        context.restoreGState()
+    }
+
+    /// Sets the drawing position of the highlight object based on the given bar-rect.
+    internal func setHighlightDrawPos(highlight high: Highlight, barRect: CGRect)
+    {
+        high.s
