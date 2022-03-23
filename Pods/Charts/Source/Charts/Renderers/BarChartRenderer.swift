@@ -821,4 +821,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     /// Sets the drawing position of the highlight object based on the given bar-rect.
     internal func setHighlightDrawPos(highlight high: Highlight, barRect: CGRect)
     {
-        high.s
+        high.setDraw(x: barRect.midX, y: barRect.origin.y)
+    }
+
+    /// Creates a nested array of empty subarrays each of which will be populated with NSUIAccessibilityElements.
+    /// This is marked internal to support HorizontalBarChartRenderer as well.
+    internal func accessibilityCreateEmptyOrderedElements() -> [[NSUIAccessibilityElement]]
+    {
+        guard let chart = dataProvider as? BarChartView else { return [] }
+
+        // Unlike Bubble & Line charts, here we 
