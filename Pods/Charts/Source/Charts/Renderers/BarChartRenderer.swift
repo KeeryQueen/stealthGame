@@ -830,4 +830,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     {
         guard let chart = dataProvider as? BarChartView else { return [] }
 
-        // Unlike Bubble & Line charts, here we 
+        // Unlike Bubble & Line charts, here we use the maximum entry count to account for stacked bars
+        let maxEntryCount = chart.data?.maxEntryCountSet?.entryCount ?? 0
+
+        return Array(repeating: [NSUIAccessibilityElement](),
+                     count: maxEntryCount)
+    }
+
+    /// Creates an NSUIAccessibleElement representing the smallest meaningful bar of the chart
+    /// i.e. in case of a stacked chart, this returns each stack, not the combined bar.
+    /// Note that it is ma
