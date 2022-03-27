@@ -839,4 +839,10 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
 
     /// Creates an NSUIAccessibleElement representing the smallest meaningful bar of the chart
     /// i.e. in case of a stacked chart, this returns each stack, not the combined bar.
-    /// Note that it is ma
+    /// Note that it is marked internal to support subclass modification in the HorizontalBarChart.
+    internal func createAccessibleElement(withIndex idx: Int,
+                                          container: BarChartView,
+                                          dataSet: IBarChartDataSet,
+                                          dataSetIndex: Int,
+                                          stackSize: Int,
+                                        
