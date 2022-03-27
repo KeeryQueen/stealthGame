@@ -845,4 +845,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                           dataSet: IBarChartDataSet,
                                           dataSetIndex: Int,
                                           stackSize: Int,
-                                        
+                                          modifier: (NSUIAccessibilityElement) -> ()) -> NSUIAccessibilityElement
+    {
+        let element = NSUIAccessibilityElement(accessibilityContainer: container)
+        let xAxis = container.xAxis
+
+        guard let e = dataSet.entryForIndex(idx/stackSize) as? BarChartDataEntry else { return element }
+        guard let dataProvider = dataProvider else { return element }
+
+        // NOTE: The formatter can cause issues when the x-axis labels are conse
