@@ -860,4 +860,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
 
         var elementValueText = dataSet.valueFormatter?.stringForValue(
             e.y,
-            e
+            entry: e,
+            dataSetIndex: dataSetIndex,
+            viewPortHandler: viewPortHandler) ?? "\(e.y)"
+
+        if dataSet.isStacked, let vals = e.yValues
+        {
+            let labelCount = min(dataSet.colors.count, stackSize)
+
+            let stackLabel: String?
+            if (dataSet.stackLabels.count > 0 && labelCount > 0) {
+                let labelIndex = idx % labelCount
+                stackLabel = dataSet.sta
