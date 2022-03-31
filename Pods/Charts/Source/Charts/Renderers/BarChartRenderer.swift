@@ -871,4 +871,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             let stackLabel: String?
             if (dataSet.stackLabels.count > 0 && labelCount > 0) {
                 let labelIndex = idx % labelCount
-                stackLabel = dataSet.sta
+                stackLabel = dataSet.stackLabels.indices.contains(labelIndex) ? dataSet.stackLabels[labelIndex] : nil
+            } else {
+                stackLabel = nil
+            }
+            
+            //Handles empty array of yValues
+            let yValue = vals.isEmpty ? 0.0 : vals[idx % vals.count]
+            
+            elementValueText = dataSet.valueFormatter?.stringForValue(
+                yValue,
+                entry: e,
+               
