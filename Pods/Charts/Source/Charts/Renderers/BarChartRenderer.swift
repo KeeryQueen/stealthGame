@@ -882,4 +882,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             elementValueText = dataSet.valueFormatter?.stringForValue(
                 yValue,
                 entry: e,
-               
+                dataSetIndex: dataSetIndex,
+                viewPortHandler: viewPortHandler) ?? "\(e.y)"
+
+            if let stackLabel = stackLabel {
+                elementValueText = stackLabel + " \(elementValueText)"
+            } else {
+                elementValueText = "\(elementValueText)"
+            }
+        }
+
+        let dataSetCount = dataProvider.barData?.dataSetCount ?? -1
+        let doesContainMultipleDataSets = dataSetCount > 1
+
+    
