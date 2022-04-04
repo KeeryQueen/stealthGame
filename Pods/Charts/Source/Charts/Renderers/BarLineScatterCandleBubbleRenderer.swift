@@ -9,4 +9,17 @@
 //  https://github.com/danielgindi/Charts
 //
 
-impo
+import Foundation
+import CoreGraphics
+
+@objc(BarLineScatterCandleBubbleChartRenderer)
+open class BarLineScatterCandleBubbleRenderer: DataRenderer
+{
+    internal var _xBounds = XBounds() // Reusable XBounds object
+    
+    public override init(animator: Animator, viewPortHandler: ViewPortHandler)
+    {
+        super.init(animator: animator, viewPortHandler: viewPortHandler)
+    }
+    
+    /// Checks if the provided entry object is in bounds for drawing c
