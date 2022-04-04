@@ -30,4 +30,13 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
     }
 
     /// Calculates and returns the x-bounds for the given DataSet in terms of index in their values array.
-    /
+    /// This includes minimum and maximum visible x, as well as range.
+    internal func xBounds(chart: BarLineScatterCandleBubbleChartDataProvider,
+                          dataSet: IBarLineScatterCandleBubbleChartDataSet,
+                          animator: Animator?) -> XBounds
+    {
+        return XBounds(chart: chart, dataSet: dataSet, animator: animator)
+    }
+    
+    /// - Returns: `true` if the DataSet values should be drawn, `false` if not.
+    internal fu
