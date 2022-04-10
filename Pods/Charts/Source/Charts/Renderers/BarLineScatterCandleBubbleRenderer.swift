@@ -39,4 +39,16 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
     }
     
     /// - Returns: `true` if the DataSet values should be drawn, `false` if not.
-    internal fu
+    internal func shouldDrawValues(forDataSet set: IChartDataSet) -> Bool
+    {
+        return set.isVisible && (set.isDrawValuesEnabled || set.isDrawIconsEnabled)
+    }
+
+    /// Class representing the bounds of the current viewport in terms of indices in the values array of a DataSet.
+    open class XBounds
+    {
+        /// minimum visible entry index
+        open var min: Int = 0
+
+        /// maximum visible entry index
+        open var
