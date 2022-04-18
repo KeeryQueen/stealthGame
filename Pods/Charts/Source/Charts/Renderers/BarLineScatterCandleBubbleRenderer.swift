@@ -51,4 +51,21 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
         open var min: Int = 0
 
         /// maximum visible entry index
-        open var
+        open var max: Int = 0
+
+        /// range of visible entry indices
+        open var range: Int = 0
+
+        public init()
+        {
+            
+        }
+        
+        public init(chart: BarLineScatterCandleBubbleChartDataProvider,
+                    dataSet: IBarLineScatterCandleBubbleChartDataSet,
+                    animator: Animator?)
+        {
+            self.set(chart: chart, dataSet: dataSet, animator: animator)
+        }
+        
+        /// Calculates the
