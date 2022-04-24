@@ -84,4 +84,21 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
             self.min = entryFrom == nil ? 0 : dataSet.entryIndex(entry: entryFrom!)
             self.max = entryTo == nil ? 0 : dataSet.entryIndex(entry: entryTo!)
             range = Int(Double(self.max - self.min) * phaseX)
-    
+        }
+    }
+}
+
+extension BarLineScatterCandleBubbleRenderer.XBounds: RangeExpression {
+    public func relative<C>(to collection: C) -> Swift.Range<Int>
+        where C : Collection, Bound == C.Index
+    {
+        return Swift.Range<Int>(min...min + range)
+    }
+
+    public func contains(_ element: Int) -> Bool {
+        return (min...min + range).contains(element)
+    }
+}
+
+extension BarLineScatterCandleBubbleRenderer.XBounds: Sequence {
+    public st
