@@ -31,4 +31,12 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         guard
             let dataProvider = dataProvider,
             let bubbleData = dataProvider.bubbleData
-            else { r
+            else { return }
+        
+        // If we redraw the data, remove and repopulate accessible elements to update label values and frames
+        accessibleChartElements.removeAll()
+        accessibilityOrderedElements = accessibilityCreateEmptyOrderedElements()
+
+        // Make the chart header the first element in the accessible elements array
+        if let chart = dataProvider as? BubbleChartView {
+            let element = createAccessibl
