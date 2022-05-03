@@ -19,3 +19,16 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
 
     @objc open weak var dataProvider: BubbleChartDataProvider?
     
+    @objc public init(dataProvider: BubbleChartDataProvider, animator: Animator, viewPortHandler: ViewPortHandler)
+    {
+        super.init(animator: animator, viewPortHandler: viewPortHandler)
+        
+        self.dataProvider = dataProvider
+    }
+    
+    open override func drawData(context: CGContext)
+    {
+        guard
+            let dataProvider = dataProvider,
+            let bubbleData = dataProvider.bubbleData
+            else { r
