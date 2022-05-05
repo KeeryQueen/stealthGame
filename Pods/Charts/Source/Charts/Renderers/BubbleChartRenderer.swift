@@ -39,4 +39,12 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
 
         // Make the chart header the first element in the accessible elements array
         if let chart = dataProvider as? BubbleChartView {
-            let element = createAccessibl
+            let element = createAccessibleHeader(usingChart: chart,
+                                                 andData: bubbleData,
+                                                 withDefaultDescription: "Bubble Chart")
+            accessibleChartElements.append(element)
+        }
+
+        for (i, set) in (bubbleData.dataSets as! [IBubbleChartDataSet]).enumerated() where set.isVisible
+        {
+            drawDataSet(context: context, dataSet: set, dataSetIndex: 
