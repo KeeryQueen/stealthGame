@@ -47,4 +47,18 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
 
         for (i, set) in (bubbleData.dataSets as! [IBubbleChartDataSet]).enumerated() where set.isVisible
         {
-            drawDataSet(context: context, dataSet: set, dataSetIndex: 
+            drawDataSet(context: context, dataSet: set, dataSetIndex: i)
+        }
+
+        // Merge nested ordered arrays into the single accessibleChartElements.
+        accessibleChartElements.append(contentsOf: accessibilityOrderedElements.flatMap { $0 } )
+        accessibilityPostLayoutChangedNotification()
+    }
+    
+    private func getShapeSize(
+        entrySize: CGFloat,
+        maxSize: CGFloat,
+        reference: CGFloat,
+        normalizeSize: Bool) -> CGFloat
+    {
+  
