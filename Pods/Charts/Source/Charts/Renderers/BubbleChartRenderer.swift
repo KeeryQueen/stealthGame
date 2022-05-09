@@ -61,4 +61,15 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         reference: CGFloat,
         normalizeSize: Bool) -> CGFloat
     {
+        let factor: CGFloat = normalizeSize
+            ? ((maxSize == 0.0) ? 1.0 : sqrt(entrySize / maxSize))
+            : entrySize
+        let shapeSize: CGFloat = reference * factor
+        return shapeSize
+    }
+    
+    private var _pointBuffer = CGPoint()
+    private var _sizeBuffer = [CGPoint](repeating: CGPoint(), count: 2)
+    
+    @objc open func drawDataSet(context: CGContext, dataSet: IBubbleChartDataSet, dataSetIndex: Int)
   
