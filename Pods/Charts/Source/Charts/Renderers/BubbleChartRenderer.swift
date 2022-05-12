@@ -72,4 +72,16 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
     private var _sizeBuffer = [CGPoint](repeating: CGPoint(), count: 2)
     
     @objc open func drawDataSet(context: CGContext, dataSet: IBubbleChartDataSet, dataSetIndex: Int)
-  
+    {
+        guard let dataProvider = dataProvider else { return }
+        
+        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+        
+        let phaseY = animator.phaseY
+        
+        _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
+        
+        let valueToPixelMatrix = trans.valueToPixelMatrix
+    
+        _sizeBuffer[0].x = 0.0
+        _sizeBuffer[0].
