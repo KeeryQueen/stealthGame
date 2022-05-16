@@ -97,4 +97,13 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         
         // calcualte the full width of 1 step on the x-axis
         let maxBubbleWidth: CGFloat = abs(_sizeBuffer[1].x - _sizeBuffer[0].x)
-        let maxBubbleHeight: CGFloat = 
+        let maxBubbleHeight: CGFloat = abs(viewPortHandler.contentBottom - viewPortHandler.contentTop)
+        let referenceSize: CGFloat = min(maxBubbleHeight, maxBubbleWidth)
+        
+        for j in _xBounds
+        {
+            guard let entry = dataSet.entryForIndex(j) as? BubbleChartDataEntry else { continue }
+            
+            _pointBuffer.x = CGFloat(entry.x)
+            _pointBuffer.y = CGFloat(entry.y * phaseY)
+            _pointB
