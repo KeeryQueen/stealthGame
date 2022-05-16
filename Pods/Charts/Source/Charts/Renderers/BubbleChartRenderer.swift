@@ -84,4 +84,17 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         let valueToPixelMatrix = trans.valueToPixelMatrix
     
         _sizeBuffer[0].x = 0.0
-        _sizeBuffer[0].
+        _sizeBuffer[0].y = 0.0
+        _sizeBuffer[1].x = 1.0
+        _sizeBuffer[1].y = 0.0
+        
+        trans.pointValuesToPixel(&_sizeBuffer)
+        
+        context.saveGState()
+        defer { context.restoreGState() }
+        
+        let normalizeSize = dataSet.isNormalizeSizeEnabled
+        
+        // calcualte the full width of 1 step on the x-axis
+        let maxBubbleWidth: CGFloat = abs(_sizeBuffer[1].x - _sizeBuffer[0].x)
+        let maxBubbleHeight: CGFloat = 
