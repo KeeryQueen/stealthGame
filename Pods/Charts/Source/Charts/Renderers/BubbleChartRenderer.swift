@@ -124,4 +124,15 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             let rect = CGRect(
                 x: _pointBuffer.x - shapeHalf,
                 y: _pointBuffer.y - shapeHalf,
-                wid
+                width: shapeSize,
+                height: shapeSize
+            )
+
+            context.setFillColor(color.cgColor)
+            context.fillEllipse(in: rect)
+
+            // Create and append the corresponding accessibility element to accessibilityOrderedElements
+            if let chart = dataProvider as? BubbleChartView
+            {
+                let element = createAccessibleElement(withIndex: j,
+                             
