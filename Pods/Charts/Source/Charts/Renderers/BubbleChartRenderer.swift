@@ -113,4 +113,15 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             
             guard
                 viewPortHandler.isInBoundsTop(_pointBuffer.y + shapeHalf),
-                viewPortHandler.isInBoundsBottom(_poin
+                viewPortHandler.isInBoundsBottom(_pointBuffer.y - shapeHalf),
+                viewPortHandler.isInBoundsLeft(_pointBuffer.x + shapeHalf)
+                else { continue }
+
+            guard viewPortHandler.isInBoundsRight(_pointBuffer.x - shapeHalf) else { break }
+            
+            let color = dataSet.color(atIndex: j)
+            
+            let rect = CGRect(
+                x: _pointBuffer.x - shapeHalf,
+                y: _pointBuffer.y - shapeHalf,
+                wid
