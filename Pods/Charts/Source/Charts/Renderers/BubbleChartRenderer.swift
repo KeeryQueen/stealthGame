@@ -173,4 +173,15 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
 
             let alpha = phaseX == 1 ? phaseY : phaseX
 
-            _xBounds.set(chart: dataProvider, dataSet: dataS
+            _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
+
+            let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
+            let valueToPixelMatrix = trans.valueToPixelMatrix
+
+            let iconsOffset = dataSet.iconsOffset
+
+            for j in _xBounds
+            {
+                guard let e = dataSet.entryForIndex(j) as? BubbleChartDataEntry else { break }
+
+                let valueTextColor = dataSet.valueTextColorAt(j).withAlphaComp
