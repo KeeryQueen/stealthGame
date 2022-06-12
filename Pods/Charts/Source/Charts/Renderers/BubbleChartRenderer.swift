@@ -135,4 +135,13 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             if let chart = dataProvider as? BubbleChartView
             {
                 let element = createAccessibleElement(withIndex: j,
-                             
+                                                      container: chart,
+                                                      dataSet: dataSet,
+                                                      dataSetIndex: dataSetIndex,
+                                                      shapeSize: shapeSize)
+                { (element) in
+                    element.accessibilityFrame = rect
+                }
+
+                accessibilityOrderedElements[dataSetIndex].append(element)
+       
