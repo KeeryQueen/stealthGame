@@ -158,4 +158,19 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             else { return }
 
         let phaseX = max(0.0, min(1.0, animator.phaseX))
-        
+        let phaseY = animator.phaseY
+
+        var pt = CGPoint()
+
+        for i in 0..<dataSets.count
+        {
+            let dataSet = dataSets[i]
+
+            guard
+                shouldDrawValues(forDataSet: dataSet),
+                let formatter = dataSet.valueFormatter
+                else { continue }
+
+            let alpha = phaseX == 1 ? phaseY : phaseX
+
+            _xBounds.set(chart: dataProvider, dataSet: dataS
