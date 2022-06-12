@@ -144,4 +144,18 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
                 }
 
                 accessibilityOrderedElements[dataSetIndex].append(element)
-       
+            }
+        }
+    }
+    
+    open override func drawValues(context: CGContext)
+    {
+        guard let
+            dataProvider = dataProvider,
+            let bubbleData = dataProvider.bubbleData,
+            isDrawingValuesAllowed(dataProvider: dataProvider),
+            let dataSets = bubbleData.dataSets as? [IBubbleChartDataSet]
+            else { return }
+
+        let phaseX = max(0.0, min(1.0, animator.phaseX))
+        
