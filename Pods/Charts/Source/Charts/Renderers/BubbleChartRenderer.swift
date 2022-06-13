@@ -197,4 +197,17 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
                     viewPortHandler.isInBoundsY(pt.y)
                     else { continue }
 
-                let text = 
+                let text = formatter.stringForValue(
+                    Double(e.size),
+                    entry: e,
+                    dataSetIndex: i,
+                    viewPortHandler: viewPortHandler)
+
+                // Larger font for larger bubbles?
+                let valueFont = dataSet.valueFont
+                let lineHeight = valueFont.lineHeight
+
+                if dataSet.isDrawValuesEnabled
+                {
+                    ChartUtils.drawText(
+               
