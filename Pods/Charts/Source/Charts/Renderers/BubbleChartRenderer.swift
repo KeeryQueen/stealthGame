@@ -184,4 +184,17 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             {
                 guard let e = dataSet.entryForIndex(j) as? BubbleChartDataEntry else { break }
 
-                let valueTextColor = dataSet.valueTextColorAt(j).withAlphaComp
+                let valueTextColor = dataSet.valueTextColorAt(j).withAlphaComponent(CGFloat(alpha))
+
+                pt.x = CGFloat(e.x)
+                pt.y = CGFloat(e.y * phaseY)
+                pt = pt.applying(valueToPixelMatrix)
+
+                guard viewPortHandler.isInBoundsRight(pt.x) else { break }
+
+                guard
+                    viewPortHandler.isInBoundsLeft(pt.x),
+                    viewPortHandler.isInBoundsY(pt.y)
+                    else { continue }
+
+                let text = 
