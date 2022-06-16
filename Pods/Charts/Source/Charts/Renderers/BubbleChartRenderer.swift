@@ -236,4 +236,19 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         
     }
     
-    open override func 
+    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    {
+        guard
+            let dataProvider = dataProvider,
+            let bubbleData = dataProvider.bubbleData
+            else { return }
+
+        context.saveGState()
+        defer { context.restoreGState() }
+
+        let phaseY = animator.phaseY
+        
+        for high in indices
+        {
+            guard
+                let data
