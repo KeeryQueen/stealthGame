@@ -220,4 +220,20 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
                 }
 
                 if let icon = e.icon, dataSet.isDrawIconsEnabled
-       
+                {
+                    ChartUtils.drawImage(context: context,
+                                         image: icon,
+                                         x: pt.x + iconsOffset.x,
+                                         y: pt.y + iconsOffset.y,
+                                         size: icon.size)
+                }
+            }
+        }
+    }
+    
+    open override func drawExtras(context: CGContext)
+    {
+        
+    }
+    
+    open override func 
