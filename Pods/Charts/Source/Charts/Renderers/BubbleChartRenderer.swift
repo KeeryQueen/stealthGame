@@ -298,4 +298,16 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             originalColor.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
             
             let color = NSUIColor(hue: h, saturation: s, brightness: b * 0.5, alpha: a)
-            let rect
+            let rect = CGRect(
+                x: _pointBuffer.x - shapeHalf,
+                y: _pointBuffer.y - shapeHalf,
+                width: shapeSize,
+                height: shapeSize)
+            
+            context.setLineWidth(dataSet.highlightCircleWidth)
+            context.setStrokeColor(color.cgColor)
+            context.strokeEllipse(in: rect)
+            
+            high.setDraw(x: _pointBuffer.x, y: _pointBuffer.y)
+        }
+   
