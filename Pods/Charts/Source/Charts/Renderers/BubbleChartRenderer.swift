@@ -310,4 +310,14 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
             
             high.setDraw(x: _pointBuffer.x, y: _pointBuffer.y)
         }
-   
+    }
+
+    /// Creates a nested array of empty subarrays each of which will be populated with NSUIAccessibilityElements.
+    private func accessibilityCreateEmptyOrderedElements() -> [[NSUIAccessibilityElement]]
+    {
+        guard let chart = dataProvider as? BubbleChartView else { return [] }
+
+        let dataSetCount = chart.bubbleData?.dataSetCount ?? 0
+
+        return Array(repeating: [NSUIAccessibilityElement](),
+                     count
