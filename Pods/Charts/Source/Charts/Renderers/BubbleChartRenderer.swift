@@ -286,4 +286,16 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
                 viewPortHandler.isInBoundsLeft(_pointBuffer.x + shapeHalf)
             else { continue }
 
-            guard viewPortHandler.isInBoundsRight(_pointBuffer.x - shapeHalf)
+            guard viewPortHandler.isInBoundsRight(_pointBuffer.x - shapeHalf) else { break }
+
+            let originalColor = dataSet.color(atIndex: Int(entry.x))
+            
+            var h: CGFloat = 0.0
+            var s: CGFloat = 0.0
+            var b: CGFloat = 0.0
+            var a: CGFloat = 0.0
+            
+            originalColor.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+            
+            let color = NSUIColor(hue: h, saturation: s, brightness: b * 0.5, alpha: a)
+            let rect
