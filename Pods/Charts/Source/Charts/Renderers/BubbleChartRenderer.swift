@@ -320,4 +320,13 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         let dataSetCount = chart.bubbleData?.dataSetCount ?? 0
 
         return Array(repeating: [NSUIAccessibilityElement](),
-                     count
+                     count: dataSetCount)
+    }
+
+    /// Creates an NSUIAccessibleElement representing individual bubbles location and relative size.
+    private func createAccessibleElement(withIndex idx: Int,
+                                         container: BubbleChartView,
+                                         dataSet: IBubbleChartDataSet,
+                                         dataSetIndex: Int,
+                                         shapeSize: CGFloat,
+                          
