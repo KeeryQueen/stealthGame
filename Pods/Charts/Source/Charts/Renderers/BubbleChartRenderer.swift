@@ -329,4 +329,12 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
                                          dataSet: IBubbleChartDataSet,
                                          dataSetIndex: Int,
                                          shapeSize: CGFloat,
-                          
+                                         modifier: (NSUIAccessibilityElement) -> ()) -> NSUIAccessibilityElement
+    {
+        let element = NSUIAccessibilityElement(accessibilityContainer: container)
+        let xAxis = container.xAxis
+
+        guard let e = dataSet.entryForIndex(idx) else { return element }
+        guard let dataProvider = dataProvider else { return element }
+
+        // NOTE: The formatter can cause issues when the x-axis labe
