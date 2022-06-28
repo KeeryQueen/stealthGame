@@ -337,4 +337,10 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         guard let e = dataSet.entryForIndex(idx) else { return element }
         guard let dataProvider = dataProvider else { return element }
 
-        // NOTE: The formatter can cause issues when the x-axis labe
+        // NOTE: The formatter can cause issues when the x-axis labels are consecutive ints.
+        // i.e. due to the Double conversion, if there are more than one data set that are grouped,
+        // there is the possibility of some labels being rounded up. A floor() might fix this, but seems to be a brute force solution.
+        let label = xAxis.valueFormatter?.stringForValue(e.x, axis: xAxis) ?? "\(e.x)"
+
+        let elementValueText = dataSet.valueFormatter?.stringForValue(e.y,
+               
