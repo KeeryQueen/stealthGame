@@ -343,4 +343,11 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         let label = xAxis.valueFormatter?.stringForValue(e.x, axis: xAxis) ?? "\(e.x)"
 
         let elementValueText = dataSet.valueFormatter?.stringForValue(e.y,
-               
+                                                                      entry: e,
+                                                                      dataSetIndex: dataSetIndex,
+                                                                      viewPortHandler: viewPortHandler) ?? "\(e.y)"
+
+        let dataSetCount = dataProvider.bubbleData?.dataSetCount ?? -1
+        let doesContainMultipleDataSets = dataSetCount > 1
+
+        element.
