@@ -350,4 +350,10 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
         let dataSetCount = dataProvider.bubbleData?.dataSetCount ?? -1
         let doesContainMultipleDataSets = dataSetCount > 1
 
-        element.
+        element.accessibilityLabel = "\(doesContainMultipleDataSets ? (dataSet.label ?? "")  + ", " : "") \(label): \(elementValueText), bubble size: \(String(format: "%.2f", (shapeSize/dataSet.maxSize) * 100)) %"
+
+        modifier(element)
+
+        return element
+    }
+}
