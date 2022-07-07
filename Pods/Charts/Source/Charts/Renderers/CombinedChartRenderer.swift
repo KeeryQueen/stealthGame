@@ -42,4 +42,18 @@ open class CombinedChartRenderer: DataRenderer
         
         guard let chart = chart else { return }
 
-        for order in dra
+        for order in drawOrder
+        {
+            switch (order)
+            {
+            case .bar:
+                if chart.barData !== nil
+                {
+                    _renderers.append(BarChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
+                }
+                break
+                
+            case .line:
+                if chart.lineData !== nil
+                {
+                    _renderers.append(Lin
