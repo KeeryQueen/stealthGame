@@ -26,4 +26,20 @@ open class CombinedChartRenderer: DataRenderer
     
     internal var _drawOrder: [CombinedChartView.DrawOrder] = [.bar, .bubble, .line, .candle, .scatter]
     
-    @objc public init(chart: CombinedChartView, animator: Animator, viewPortHandler: ViewPortHandl
+    @objc public init(chart: CombinedChartView, animator: Animator, viewPortHandler: ViewPortHandler)
+    {
+        super.init(animator: animator, viewPortHandler: viewPortHandler)
+        
+        self.chart = chart
+        
+        createRenderers()
+    }
+    
+    /// Creates the renderers needed for this combined-renderer in the required order. Also takes the DrawOrder into consideration.
+    internal func createRenderers()
+    {
+        _renderers = [DataRenderer]()
+        
+        guard let chart = chart else { return }
+
+        for order in dra
