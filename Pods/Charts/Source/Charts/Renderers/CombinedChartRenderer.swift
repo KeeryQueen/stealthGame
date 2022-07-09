@@ -56,4 +56,14 @@ open class CombinedChartRenderer: DataRenderer
             case .line:
                 if chart.lineData !== nil
                 {
-                    _renderers.append(Lin
+                    _renderers.append(LineChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
+                }
+                break
+                
+            case .candle:
+                if chart.candleData !== nil
+                {
+                    _renderers.append(CandleStickChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
+                }
+                break
+       
