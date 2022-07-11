@@ -101,4 +101,10 @@ open class CombinedChartRenderer: DataRenderer
             // Make the chart header the first element in the accessible elements array
             let element = createAccessibleHeader(usingChart: combinedChart,
                                                  andData: data,
-                                     
+                                                 withDefaultDescription: "Combined Chart")
+            accessibleChartElements.append(element)
+        }
+
+        // TODO: Due to the potential complexity of data presented in Combined charts, a more usable way
+        // for VO accessibility would be to use axis based traversal rather than by dataset.
+        // Hence, accessibleChartElements is not populated below. (Individual renderers guard against dataSource b
