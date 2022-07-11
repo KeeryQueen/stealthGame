@@ -66,4 +66,15 @@ open class CombinedChartRenderer: DataRenderer
                     _renderers.append(CandleStickChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
                 break
-       
+                
+            case .scatter:
+                if chart.scatterData !== nil
+                {
+                    _renderers.append(ScatterChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
+                }
+                break
+                
+            case .bubble:
+                if chart.bubbleData !== nil
+                {
+                    _rendere
