@@ -77,4 +77,19 @@ open class CombinedChartRenderer: DataRenderer
             case .bubble:
                 if chart.bubbleData !== nil
                 {
-                    _rendere
+                    _renderers.append(BubbleChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
+                }
+                break
+            }
+        }
+
+    }
+    
+    open override func initBuffers()
+    {
+        _renderers.forEach { $0.initBuffers() }
+    }
+    
+    open override func drawData(context: CGContext)
+    {
+        // If we redraw the data, remove and repopulate accessible elements
