@@ -92,4 +92,13 @@ open class CombinedChartRenderer: DataRenderer
     
     open override func drawData(context: CGContext)
     {
-        // If we redraw the data, remove and repopulate accessible elements
+        // If we redraw the data, remove and repopulate accessible elements to update label values and frames
+        accessibleChartElements.removeAll()
+
+        if
+            let combinedChart = chart,
+            let data = combinedChart.data {
+            // Make the chart header the first element in the accessible elements array
+            let element = createAccessibleHeader(usingChart: combinedChart,
+                                                 andData: data,
+                                     
