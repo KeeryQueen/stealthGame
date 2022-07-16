@@ -121,4 +121,18 @@ open class CombinedChartRenderer: DataRenderer
         _renderers.forEach { $0.drawExtras(context: context) }
     }
     
-    open override func drawHighlighted(context: CGContext, indices:
+    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    {
+        for renderer in _renderers
+        {
+            var data: ChartData?
+            
+            if renderer is BarChartRenderer
+            {
+                data = (renderer as! BarChartRenderer).dataProvider?.barData
+            }
+            else if renderer is LineChartRenderer
+            {
+                data = (renderer as! LineChartRenderer).dataProvider?.lineData
+            }
+            else if 
