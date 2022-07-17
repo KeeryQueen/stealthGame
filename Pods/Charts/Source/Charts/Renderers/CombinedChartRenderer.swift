@@ -145,4 +145,16 @@ open class CombinedChartRenderer: DataRenderer
             }
             else if renderer is BubbleChartRenderer
             {
-                data = (render
+                data = (renderer as! BubbleChartRenderer).dataProvider?.bubbleData
+            }
+            
+            let dataIndex: Int? = {
+                guard let data = data else { return nil }
+                return (chart?.data as? CombinedChartData)?
+                    .allData
+                    .firstIndex(of: data)
+            }()
+            
+            let dataIndices = indices.filter{ $0.dataIndex == dataIndex || $0.dataIndex == -1 }
+            
+            renderer.dra
