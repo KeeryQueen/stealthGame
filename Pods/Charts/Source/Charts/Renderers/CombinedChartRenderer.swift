@@ -135,4 +135,14 @@ open class CombinedChartRenderer: DataRenderer
             {
                 data = (renderer as! LineChartRenderer).dataProvider?.lineData
             }
-            else if 
+            else if renderer is CandleStickChartRenderer
+            {
+                data = (renderer as! CandleStickChartRenderer).dataProvider?.candleData
+            }
+            else if renderer is ScatterChartRenderer
+            {
+                data = (renderer as! ScatterChartRenderer).dataProvider?.scatterData
+            }
+            else if renderer is BubbleChartRenderer
+            {
+                data = (render
