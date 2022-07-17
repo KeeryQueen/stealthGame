@@ -157,4 +157,22 @@ open class CombinedChartRenderer: DataRenderer
             
             let dataIndices = indices.filter{ $0.dataIndex == dataIndex || $0.dataIndex == -1 }
             
-            renderer.dra
+            renderer.drawHighlighted(context: context, indices: dataIndices)
+        }
+    }
+
+    /// - Returns: The sub-renderer object at the specified index.
+    @objc open func getSubRenderer(index: Int) -> DataRenderer?
+    {
+        if index >= _renderers.count || index < 0
+        {
+            return nil
+        }
+        else
+        {
+            return _renderers[index]
+        }
+    }
+
+    /// All sub-renderers.
+    @objc open var su
