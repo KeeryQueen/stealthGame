@@ -175,4 +175,16 @@ open class CombinedChartRenderer: DataRenderer
     }
 
     /// All sub-renderers.
-    @objc open var su
+    @objc open var subRenderers: [DataRenderer]
+    {
+        get { return _renderers }
+        set { _renderers = newValue }
+    }
+    
+    // MARK: Accessors
+    
+    /// `true` if drawing values above bars is enabled, `false` ifnot
+    @objc open var isDrawValueAboveBarEnabled: Bool { return drawValueAboveBarEnabled }
+    
+    /// `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
+    @objc open var isDrawBarShadow
