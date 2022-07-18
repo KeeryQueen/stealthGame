@@ -187,4 +187,13 @@ open class CombinedChartRenderer: DataRenderer
     @objc open var isDrawValueAboveBarEnabled: Bool { return drawValueAboveBarEnabled }
     
     /// `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
-    @objc open var isDrawBarShadow
+    @objc open var isDrawBarShadowEnabled: Bool { return drawBarShadowEnabled }
+    
+    /// the order in which the provided data objects should be drawn.
+    /// The earlier you place them in the provided array, the further they will be in the background.
+    /// e.g. if you provide [DrawOrder.Bar, DrawOrder.Line], the bars will be drawn behind the lines.
+    open var drawOrder: [CombinedChartView.DrawOrder]
+    {
+        get
+        {
+          
