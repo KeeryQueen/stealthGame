@@ -196,4 +196,14 @@ open class CombinedChartRenderer: DataRenderer
     {
         get
         {
-          
+            return _drawOrder
+        }
+        set
+        {
+            if newValue.count > 0
+            {
+                _drawOrder = newValue
+            }
+        }
+    }
+}
