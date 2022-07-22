@@ -35,4 +35,14 @@ open class LegendRenderer: Renderer
             var entries: [LegendEntry] = []
             
             // loop for building up the colors and labels used in the legend
-            fo
+            for i in 0..<data.dataSetCount
+            {
+                guard let dataSet = data.getDataSetByIndex(i) else { continue }
+                
+                let clrs: [NSUIColor] = dataSet.colors
+                let entryCount = dataSet.entryCount
+                
+                // if we have a barchart with stacked bars
+                if dataSet is IBarChartDataSet &&
+                    (dataSet as! IBarChartDataSet).isStacked
+      
