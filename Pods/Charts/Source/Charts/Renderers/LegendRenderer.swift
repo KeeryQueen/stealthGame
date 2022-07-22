@@ -21,4 +21,18 @@ open class LegendRenderer: Renderer
     @objc public init(viewPortHandler: ViewPortHandler, legend: Legend?)
     {
         super.init(viewPortHandler: viewPortHandler)
- 
+        
+        self.legend = legend
+    }
+
+    /// Prepares the legend and calculates all needed forms, labels and colors.
+    @objc open func computeLegend(data: ChartData)
+    {
+        guard let legend = legend else { return }
+        
+        if !legend.isLegendCustom
+        {
+            var entries: [LegendEntry] = []
+            
+            // loop for building up the colors and labels used in the legend
+            fo
