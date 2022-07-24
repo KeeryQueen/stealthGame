@@ -45,4 +45,14 @@ open class LegendRenderer: Renderer
                 // if we have a barchart with stacked bars
                 if dataSet is IBarChartDataSet &&
                     (dataSet as! IBarChartDataSet).isStacked
-      
+                {
+                    let bds = dataSet as! IBarChartDataSet
+                    let sLabels = bds.stackLabels
+                    let minEntries = min(clrs.count, bds.stackSize)
+
+                    for j in 0..<minEntries
+                    {
+                        let label: String?
+                        if (sLabels.count > 0)
+                        {
+                            let labelIndex = j % min
