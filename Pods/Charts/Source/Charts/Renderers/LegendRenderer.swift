@@ -55,4 +55,16 @@ open class LegendRenderer: Renderer
                         let label: String?
                         if (sLabels.count > 0)
                         {
-                            let labelIndex = j % min
+                            let labelIndex = j % minEntries
+                            label = sLabels.indices.contains(labelIndex) ? sLabels[labelIndex] : nil
+                        }
+                        else
+                        {
+                            label = nil
+                        }
+
+                        entries.append(
+                            LegendEntry(
+                                label: label,
+                                form: dataSet.form,
+                             
