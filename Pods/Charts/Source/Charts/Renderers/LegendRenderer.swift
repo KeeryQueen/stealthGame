@@ -86,4 +86,15 @@ open class LegendRenderer: Renderer
                                 form: .none,
                                 formSize: CGFloat.nan,
                                 formLineWidth: CGFloat.nan,
-                       
+                                formLineDashPhase: 0.0,
+                                formLineDashLengths: nil,
+                                formColor: nil
+                            )
+                        )
+                    }
+                }
+                else if dataSet is IPieChartDataSet
+                {
+                    let pds = dataSet as! IPieChartDataSet
+                    
+                    for j
