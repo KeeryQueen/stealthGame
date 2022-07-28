@@ -105,4 +105,13 @@ open class LegendRenderer: Renderer
                                 form: dataSet.form,
                                 formSize: dataSet.formSize,
                                 formLineWidth: dataSet.formLineWidth,
-                         
+                                formLineDashPhase: dataSet.formLineDashPhase,
+                                formLineDashLengths: dataSet.formLineDashLengths,
+                                formColor: clrs[j]
+                            )
+                        )
+                    }
+                    
+                    if dataSet.label != nil
+                    {
+                        // add the legend des
