@@ -97,4 +97,12 @@ open class LegendRenderer: Renderer
                 {
                     let pds = dataSet as! IPieChartDataSet
                     
-                    for j
+                    for j in 0..<min(clrs.count, entryCount)
+                    {
+                        entries.append(
+                            LegendEntry(
+                                label: (pds.entryForIndex(j) as? PieChartDataEntry)?.label,
+                                form: dataSet.form,
+                                formSize: dataSet.formSize,
+                                formLineWidth: dataSet.formLineWidth,
+                         
