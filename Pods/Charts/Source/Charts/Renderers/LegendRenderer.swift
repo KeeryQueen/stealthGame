@@ -114,4 +114,13 @@ open class LegendRenderer: Renderer
                     
                     if dataSet.label != nil
                     {
-                        // add the legend des
+                        // add the legend description label
+                        
+                        entries.append(
+                            LegendEntry(
+                                label: dataSet.label,
+                                form: .none,
+                                formSize: CGFloat.nan,
+                                formLineWidth: CGFloat.nan,
+                                formLineDashPhase: 0.0,
+                                formLineDashLen
