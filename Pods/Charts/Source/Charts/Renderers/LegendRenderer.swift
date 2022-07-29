@@ -123,4 +123,16 @@ open class LegendRenderer: Renderer
                                 formSize: CGFloat.nan,
                                 formLineWidth: CGFloat.nan,
                                 formLineDashPhase: 0.0,
-                                formLineDashLen
+                                formLineDashLengths: nil,
+                                formColor: nil
+                            )
+                        )
+                    }
+                }
+                else if dataSet is ICandleChartDataSet &&
+                    (dataSet as! ICandleChartDataSet).decreasingColor != nil
+                {
+                    let candleDataSet = dataSet as! ICandleChartDataSet
+                    
+                    entries.append(
+                        Le
