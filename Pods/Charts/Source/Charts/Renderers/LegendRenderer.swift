@@ -135,4 +135,11 @@ open class LegendRenderer: Renderer
                     let candleDataSet = dataSet as! ICandleChartDataSet
                     
                     entries.append(
-                        Le
+                        LegendEntry(
+                            label: nil,
+                            form: dataSet.form,
+                            formSize: dataSet.formSize,
+                            formLineWidth: dataSet.formLineWidth,
+                            formLineDashPhase: dataSet.formLineDashPhase,
+                            formLineDashLengths: dataSet.formLineDashLengths,
+                            formColor: candleDataSet
