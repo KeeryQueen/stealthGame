@@ -142,4 +142,14 @@ open class LegendRenderer: Renderer
                             formLineWidth: dataSet.formLineWidth,
                             formLineDashPhase: dataSet.formLineDashPhase,
                             formLineDashLengths: dataSet.formLineDashLengths,
-                            formColor: candleDataSet
+                            formColor: candleDataSet.decreasingColor
+                        )
+                    )
+                    
+                    entries.append(
+                        LegendEntry(
+                            label: dataSet.label,
+                            form: dataSet.form,
+                            formSize: dataSet.formSize,
+                            formLineWidth: dataSet.formLineWidth,
+                            formLineDashPhase: dataSet.for
