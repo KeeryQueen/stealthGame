@@ -152,4 +152,15 @@ open class LegendRenderer: Renderer
                             form: dataSet.form,
                             formSize: dataSet.formSize,
                             formLineWidth: dataSet.formLineWidth,
-                            formLineDashPhase: dataSet.for
+                            formLineDashPhase: dataSet.formLineDashPhase,
+                            formLineDashLengths: dataSet.formLineDashLengths,
+                            formColor: candleDataSet.increasingColor
+                        )
+                    )
+                }
+                else
+                { // all others
+                    
+                    for j in 0..<min(clrs.count, entryCount)
+                    {
+                      
