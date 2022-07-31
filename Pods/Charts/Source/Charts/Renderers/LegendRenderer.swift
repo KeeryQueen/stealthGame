@@ -163,4 +163,14 @@ open class LegendRenderer: Renderer
                     
                     for j in 0..<min(clrs.count, entryCount)
                     {
-                      
+                        let label: String?
+                        
+                        // if multiple colors are set for a DataSet, group them
+                        if j < clrs.count - 1 && j < entryCount - 1
+                        {
+                            label = nil
+                        }
+                        else
+                        { // add label to the last entry
+                            label = dataSet.label
+              
