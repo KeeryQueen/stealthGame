@@ -194,4 +194,19 @@ open class LegendRenderer: Renderer
         }
         
         // calculate all dimensions of the legend
-        legend.calculateDimensions(labelFont: legend.fon
+        legend.calculateDimensions(labelFont: legend.font, viewPortHandler: viewPortHandler)
+    }
+    
+    @objc open func renderLegend(context: CGContext)
+    {
+        guard let legend = legend else { return }
+        
+        if !legend.enabled
+        {
+            return
+        }
+        
+        let labelFont = legend.font
+        let labelTextColor = legend.textColor
+        let labelLineHeight = labelFont.lineHeight
+        le
