@@ -173,4 +173,13 @@ open class LegendRenderer: Renderer
                         else
                         { // add label to the last entry
                             label = dataSet.label
-              
+                        }
+                        
+                        entries.append(
+                            LegendEntry(
+                                label: label,
+                                form: dataSet.form,
+                                formSize: dataSet.formSize,
+                                formLineWidth: dataSet.formLineWidth,
+                                formLineDashPhase: dataSet.formLineDashPhase,
+                              
