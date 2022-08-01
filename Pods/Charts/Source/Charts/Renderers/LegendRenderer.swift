@@ -182,4 +182,16 @@ open class LegendRenderer: Renderer
                                 formSize: dataSet.formSize,
                                 formLineWidth: dataSet.formLineWidth,
                                 formLineDashPhase: dataSet.formLineDashPhase,
-                              
+                                formLineDashLengths: dataSet.formLineDashLengths,
+                                formColor: clrs[j]
+                            )
+                        )
+                    }
+                }
+            }
+            
+            legend.entries = entries + legend.extraEntries
+        }
+        
+        // calculate all dimensions of the legend
+        legend.calculateDimensions(labelFont: legend.fon
