@@ -238,4 +238,22 @@ open class LegendRenderer: Renderer
             {
                 originPosX = xoffset
             }
-   
+            else
+            {
+                originPosX = viewPortHandler.contentLeft + xoffset
+            }
+            
+            if direction == .rightToLeft
+            {
+                originPosX += legend.neededWidth
+            }
+            
+        case .right:
+            
+            if orientation == .vertical
+            {
+                originPosX = viewPortHandler.chartWidth - xoffset
+            }
+            else
+            {
+              
