@@ -220,4 +220,22 @@ open class LegendRenderer: Renderer
         
         let orientation = legend.orientation
         let horizontalAlignment = legend.horizontalAlignment
-        let verticalAlignment = legend.vertic
+        let verticalAlignment = legend.verticalAlignment
+        let direction = legend.direction
+
+        // space between the entries
+        let stackSpace = legend.stackSpace
+
+        let yoffset = legend.yOffset
+        let xoffset = legend.xOffset
+        var originPosX: CGFloat = 0.0
+        
+        switch horizontalAlignment
+        {
+        case .left:
+            
+            if orientation == .vertical
+            {
+                originPosX = xoffset
+            }
+   
