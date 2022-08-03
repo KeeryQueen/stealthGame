@@ -209,4 +209,15 @@ open class LegendRenderer: Renderer
         let labelFont = legend.font
         let labelTextColor = legend.textColor
         let labelLineHeight = labelFont.lineHeight
-        le
+        let formYOffset = labelLineHeight / 2.0
+
+        let entries = legend.entries
+        
+        let defaultFormSize = legend.formSize
+        let formToTextSpace = legend.formToTextSpace
+        let xEntrySpace = legend.xEntrySpace
+        let yEntrySpace = legend.yEntrySpace
+        
+        let orientation = legend.orientation
+        let horizontalAlignment = legend.horizontalAlignment
+        let verticalAlignment = legend.vertic
