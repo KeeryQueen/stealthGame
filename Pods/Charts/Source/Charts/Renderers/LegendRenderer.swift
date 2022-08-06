@@ -256,4 +256,20 @@ open class LegendRenderer: Renderer
             }
             else
             {
-              
+                originPosX = viewPortHandler.contentRight - xoffset
+            }
+            
+            if direction == .leftToRight
+            {
+                originPosX -= legend.neededWidth
+            }
+            
+        case .center:
+            
+            if orientation == .vertical
+            {
+                originPosX = viewPortHandler.chartWidth / 2.0
+            }
+            else
+            {
+                originPosX = viewPortHan
