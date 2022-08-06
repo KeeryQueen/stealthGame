@@ -283,3 +283,20 @@ open class LegendRenderer: Renderer
             // Horizontally layed out legends do the center offset on a line basis,
             // So here we offset the vertical ones only.
             if orientation == .vertical
+            {
+                if direction == .leftToRight
+                {
+                    originPosX -= legend.neededWidth / 2.0 - xoffset
+                }
+                else
+                {
+                    originPosX += legend.neededWidth / 2.0 - xoffset
+                }
+            }
+        }
+        
+        switch orientation
+        {
+        case .horizontal:
+            
+            let calculatedLineSizes 
