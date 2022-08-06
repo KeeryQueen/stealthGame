@@ -272,4 +272,14 @@ open class LegendRenderer: Renderer
             }
             else
             {
-                originPosX = viewPortHan
+                originPosX = viewPortHandler.contentLeft
+                    + viewPortHandler.contentWidth / 2.0
+            }
+            
+            originPosX += (direction == .leftToRight
+                    ? +xoffset
+                    : -xoffset)
+            
+            // Horizontally layed out legends do the center offset on a line basis,
+            // So here we offset the vertical ones only.
+            if orientation == .vertical
