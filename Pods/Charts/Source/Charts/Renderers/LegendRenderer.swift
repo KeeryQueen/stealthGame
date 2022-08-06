@@ -299,4 +299,16 @@ open class LegendRenderer: Renderer
         {
         case .horizontal:
             
-            let calculatedLineSizes 
+            let calculatedLineSizes = legend.calculatedLineSizes
+            let calculatedLabelSizes = legend.calculatedLabelSizes
+            let calculatedLabelBreakPoints = legend.calculatedLabelBreakPoints
+            
+            var posX: CGFloat = originPosX
+            var posY: CGFloat
+            
+            switch verticalAlignment
+            {
+            case .top:
+                posY = yoffset
+                
+  
