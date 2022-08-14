@@ -311,4 +311,16 @@ open class LegendRenderer: Renderer
             case .top:
                 posY = yoffset
                 
-  
+            case .bottom:
+                posY = viewPortHandler.chartHeight - yoffset - legend.neededHeight
+                
+            case .center:
+                posY = (viewPortHandler.chartHeight - legend.neededHeight) / 2.0 + yoffset
+            }
+            
+            var lineIndex: Int = 0
+            
+            for i in 0 ..< entries.count
+            {
+                let e = entries[i]
+                let drawingForm = 
