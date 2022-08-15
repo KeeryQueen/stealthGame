@@ -357,4 +357,17 @@ open class LegendRenderer: Renderer
                         x: posX,
                         y: posY + formYOffset,
                         entry: e,
-                  
+                        legend: legend)
+                    
+                    if direction == .leftToRight
+                    {
+                        posX += formSize
+                    }
+                }
+                
+                if !isStacked
+                {
+                    if drawingForm
+                    {
+                        posX += direction == .rightToLeft ? -formToTextSpace : formToTextSpace
+                    }
