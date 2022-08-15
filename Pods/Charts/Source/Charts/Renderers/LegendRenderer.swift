@@ -344,4 +344,17 @@ open class LegendRenderer: Renderer
                 }
                 
                 let isStacked = e.label == nil // grouped forms have null labels
-          
+                
+                if drawingForm
+                {
+                    if direction == .rightToLeft
+                    {
+                        posX -= formSize
+                    }
+                    
+                    drawForm(
+                        context: context,
+                        x: posX,
+                        y: posY + formYOffset,
+                        entry: e,
+                  
