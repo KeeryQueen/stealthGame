@@ -334,4 +334,14 @@ open class LegendRenderer: Renderer
                 }
                 
                 if posX == originPosX &&
-                    horiz
+                    horizontalAlignment == .center &&
+                    lineIndex < calculatedLineSizes.count
+                {
+                    posX += (direction == .rightToLeft
+                        ? calculatedLineSizes[lineIndex].width
+                        : -calculatedLineSizes[lineIndex].width) / 2.0
+                    lineIndex += 1
+                }
+                
+                let isStacked = e.label == nil // grouped forms have null labels
+          
