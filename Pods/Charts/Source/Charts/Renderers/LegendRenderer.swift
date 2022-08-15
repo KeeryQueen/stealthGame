@@ -323,4 +323,15 @@ open class LegendRenderer: Renderer
             for i in 0 ..< entries.count
             {
                 let e = entries[i]
-                let drawingForm = 
+                let drawingForm = e.form != .none
+                let formSize = e.formSize.isNaN ? defaultFormSize : e.formSize
+                
+                if i < calculatedLabelBreakPoints.count &&
+                    calculatedLabelBreakPoints[i]
+                {
+                    posX = originPosX
+                    posY += labelLineHeight + yEntrySpace
+                }
+                
+                if posX == originPosX &&
+                    horiz
