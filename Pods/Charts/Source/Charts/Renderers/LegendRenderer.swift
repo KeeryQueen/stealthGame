@@ -371,3 +371,16 @@ open class LegendRenderer: Renderer
                     {
                         posX += direction == .rightToLeft ? -formToTextSpace : formToTextSpace
                     }
+                    
+                    if direction == .rightToLeft
+                    {
+                        posX -= calculatedLabelSizes[i].width
+                    }
+                    
+                    drawLabel(
+                        context: context,
+                        x: posX,
+                        y: posY,
+                        label: e.label!,
+                        font: labelFont,
+                   
