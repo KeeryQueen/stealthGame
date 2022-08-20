@@ -395,3 +395,19 @@ open class LegendRenderer: Renderer
                 else
                 {
                     posX += direction == .rightToLeft ? -stackSpace : stackSpace
+                }
+            }
+            
+        case .vertical:
+            
+            // contains the stacked legend size in pixels
+            var stack = CGFloat(0.0)
+            var wasStacked = false
+            
+            var posY: CGFloat = 0.0
+            
+            switch verticalAlignment
+            {
+            case .top:
+                posY = (horizontalAlignment == .center
+                    ?
