@@ -383,4 +383,15 @@ open class LegendRenderer: Renderer
                         y: posY,
                         label: e.label!,
                         font: labelFont,
-                   
+                        textColor: labelTextColor)
+                    
+                    if direction == .leftToRight
+                    {
+                        posX += calculatedLabelSizes[i].width
+                    }
+                    
+                    posX += direction == .rightToLeft ? -xEntrySpace : xEntrySpace
+                }
+                else
+                {
+                    posX += direction == .rightToLeft ? -stackSpace : stackSpace
