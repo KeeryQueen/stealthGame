@@ -410,4 +410,16 @@ open class LegendRenderer: Renderer
             {
             case .top:
                 posY = (horizontalAlignment == .center
-                    ?
+                    ? 0.0
+                    : viewPortHandler.contentTop)
+                posY += yoffset
+                
+            case .bottom:
+                posY = (horizontalAlignment == .center
+                    ? viewPortHandler.chartHeight
+                    : viewPortHandler.contentBottom)
+                posY -= legend.neededHeight + yoffset
+                
+            case .center:
+                
+                posY = v
