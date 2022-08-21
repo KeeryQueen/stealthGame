@@ -434,4 +434,17 @@ open class LegendRenderer: Renderer
                 var posX = originPosX
                 
                 if drawingForm
-        
+                {
+                    if direction == .leftToRight
+                    {
+                        posX += stack
+                    }
+                    else
+                    {
+                        posX -= formSize - stack
+                    }
+                    
+                    drawForm(
+                        context: context,
+                        x: posX,
+                        y: posY + formYOf
