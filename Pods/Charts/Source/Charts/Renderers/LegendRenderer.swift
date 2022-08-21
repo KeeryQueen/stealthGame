@@ -422,4 +422,16 @@ open class LegendRenderer: Renderer
                 
             case .center:
                 
-                posY = v
+                posY = viewPortHandler.chartHeight / 2.0 - legend.neededHeight / 2.0 + legend.yOffset
+            }
+            
+            for i in 0 ..< entries.count
+            {
+                let e = entries[i]
+                let drawingForm = e.form != .none
+                let formSize = e.formSize.isNaN ? defaultFormSize : e.formSize
+                
+                var posX = originPosX
+                
+                if drawingForm
+        
