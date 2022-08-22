@@ -473,4 +473,11 @@ open class LegendRenderer: Renderer
                         posX -= (e.label! as NSString).size(withAttributes: [.font: labelFont]).width
                     }
                     
-                  
+                    if !wasStacked
+                    {
+                        drawLabel(context: context, x: posX, y: posY, label: e.label!, font: labelFont, textColor: labelTextColor)
+                    }
+                    else
+                    {
+                        posY += labelLineHeight + yEntrySpace
+                        drawLabel(context: context, x: posX, y: posY, label: e.label!, font: labelFont
