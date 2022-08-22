@@ -461,4 +461,16 @@ open class LegendRenderer: Renderer
                 {
                     if drawingForm && !wasStacked
                     {
-                        posX += direction == .leftToRight ? formTo
+                        posX += direction == .leftToRight ? formToTextSpace : -formToTextSpace
+                    }
+                    else if wasStacked
+                    {
+                        posX = originPosX
+                    }
+                    
+                    if direction == .rightToLeft
+                    {
+                        posX -= (e.label! as NSString).size(withAttributes: [.font: labelFont]).width
+                    }
+                    
+                  
