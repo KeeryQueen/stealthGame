@@ -447,4 +447,18 @@ open class LegendRenderer: Renderer
                     drawForm(
                         context: context,
                         x: posX,
-                        y: posY + formYOf
+                        y: posY + formYOffset,
+                        entry: e,
+                        legend: legend)
+                    
+                    if direction == .leftToRight
+                    {
+                        posX += formSize
+                    }
+                }
+                
+                if e.label != nil
+                {
+                    if drawingForm && !wasStacked
+                    {
+                        posX += direction == .leftToRight ? formTo
