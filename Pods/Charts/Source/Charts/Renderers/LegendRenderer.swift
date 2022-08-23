@@ -480,4 +480,20 @@ open class LegendRenderer: Renderer
                     else
                     {
                         posY += labelLineHeight + yEntrySpace
-                        drawLabel(context: context, x: posX, y: posY, label: e.label!, font: labelFont
+                        drawLabel(context: context, x: posX, y: posY, label: e.label!, font: labelFont, textColor: labelTextColor)
+                    }
+                    
+                    // make a step down
+                    posY += labelLineHeight + yEntrySpace
+                    stack = 0.0
+                }
+                else
+                {
+                    stack += formSize + stackSpace
+                    wasStacked = true
+                }
+            }
+        }
+    }
+
+    private var _formLineSegmentsBuffer
