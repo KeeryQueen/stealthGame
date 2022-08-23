@@ -496,4 +496,18 @@ open class LegendRenderer: Renderer
         }
     }
 
-    private var _formLineSegmentsBuffer
+    private var _formLineSegmentsBuffer = [CGPoint](repeating: CGPoint(), count: 2)
+    
+    /// Draws the Legend-form at the given position with the color at the given index.
+    @objc open func drawForm(
+        context: CGContext,
+        x: CGFloat,
+        y: CGFloat,
+        entry: LegendEntry,
+        legend: Legend)
+    {
+        guard
+            let formColor = entry.formColor,
+            formColor != NSUIColor.clear
+            else { return }
+     
