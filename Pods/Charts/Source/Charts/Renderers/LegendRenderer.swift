@@ -510,4 +510,22 @@ open class LegendRenderer: Renderer
             let formColor = entry.formColor,
             formColor != NSUIColor.clear
             else { return }
-     
+        
+        var form = entry.form
+        if form == .default
+        {
+            form = legend.form
+        }
+        
+        let formSize = entry.formSize.isNaN ? legend.formSize : entry.formSize
+        
+        context.saveGState()
+        defer { context.restoreGState() }
+        
+        switch form
+        {
+        case .none:
+            // Do nothing
+            break
+            
+    
