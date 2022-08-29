@@ -528,4 +528,17 @@ open class LegendRenderer: Renderer
             // Do nothing
             break
             
-    
+        case .empty:
+            // Do not draw, but keep space for the form
+            break
+            
+        case .default: fallthrough
+        case .circle:
+            
+            context.setFillColor(formColor.cgColor)
+            context.fillEllipse(in: CGRect(x: x, y: y - formSize / 2.0, width: formSize, height: formSize))
+            
+        case .square:
+            
+            context.setFillColor(formColor.cgColor)
+            context.fill(CGRect(x: x, y:
