@@ -541,4 +541,10 @@ open class LegendRenderer: Renderer
         case .square:
             
             context.setFillColor(formColor.cgColor)
-            context.fill(CGRect(x: x, y:
+            context.fill(CGRect(x: x, y: y - formSize / 2.0, width: formSize, height: formSize))
+            
+        case .line:
+            
+            let formLineWidth = entry.formLineWidth.isNaN ? legend.formLineWidth : entry.formLineWidth
+            let formLineDashPhase = entry.formLineDashPhase.isNaN ? legend.formLineDashPhase : entry.formLineDashPhase
+            let formLineDashLengths = entry.formLineDashLengths == nil ? legend.formLineDashLengths : entry.formLineDash
