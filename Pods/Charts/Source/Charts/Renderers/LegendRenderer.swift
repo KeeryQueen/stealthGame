@@ -560,4 +560,15 @@ open class LegendRenderer: Renderer
                 context.setLineDash(phase: 0.0, lengths: [])
             }
             
-            context.setStrokeColor
+            context.setStrokeColor(formColor.cgColor)
+            
+            _formLineSegmentsBuffer[0].x = x
+            _formLineSegmentsBuffer[0].y = y
+            _formLineSegmentsBuffer[1].x = x + formSize
+            _formLineSegmentsBuffer[1].y = y
+            context.strokeLineSegments(between: _formLineSegmentsBuffer)
+        }
+    }
+
+    /// Draws the provided label at the given position.
+    @objc open func drawL
