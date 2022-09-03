@@ -547,4 +547,17 @@ open class LegendRenderer: Renderer
             
             let formLineWidth = entry.formLineWidth.isNaN ? legend.formLineWidth : entry.formLineWidth
             let formLineDashPhase = entry.formLineDashPhase.isNaN ? legend.formLineDashPhase : entry.formLineDashPhase
-            let formLineDashLengths = entry.formLineDashLengths == nil ? legend.formLineDashLengths : entry.formLineDash
+            let formLineDashLengths = entry.formLineDashLengths == nil ? legend.formLineDashLengths : entry.formLineDashLengths
+            
+            context.setLineWidth(formLineWidth)
+            
+            if formLineDashLengths != nil && formLineDashLengths!.count > 0
+            {
+                context.setLineDash(phase: formLineDashPhase, lengths: formLineDashLengths!)
+            }
+            else
+            {
+                context.setLineDash(phase: 0.0, lengths: [])
+            }
+            
+            context.setStrokeColor
