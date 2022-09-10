@@ -49,4 +49,6 @@ open class LineRadarRenderer: LineScatterCandleRadarRenderer
         context.setFillColor(fillColor.cgColor)
         context.fillPath()
         
-        context.restoreG
+        context.restoreGState()
+    }
+}
