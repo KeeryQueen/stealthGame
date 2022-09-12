@@ -820,3 +820,123 @@ open class PieChartRenderer: DataRenderer
             }
 
             if drawInnerArc &&
+                (innerRadius > 0.0 || accountForSliceSpacing)
+            {
+                if accountForSliceSpacing
+                {
+                    var minSpacedRadius = sliceSpaceRadius
+                    if minSpacedRadius < 0.0
+                    {
+                        minSpacedRadius = -minSpacedRadius
+                    }
+                    innerRadius = min(max(innerRadius, minSpacedRadius), radius)
+                }
+
+                let sliceSpaceAngleInner = visibleAngleCount == 1 || innerRadius == 0.0 ?
+                    0.0 :
+                    sliceSpace / innerRadius.DEG2RAD
+                let startAngleInner = rotationAngle + (angle + sliceSpaceAngleInner / 2.0) * CGFloat(phaseY)
+                var sweepAngleInner = (sliceAngle - sliceSpaceAngleInner) * CGFloat(phaseY)
+                if sweepAngleInner < 0.0
+                {
+                    sweepAngleInner = 0.0
+                }
+                let endAngleInner = startAngleInner + sweepAngleInner
+
+                path.addLine(
+                    to: CGPoint(
+                        x: center.x + innerRadius * cos(endAngleInner.DEG2RAD),
+                        y: center.y + innerRadius * sin(endAngleInner.DEG2RAD)))
+
+                path.addRelativeArc(center: center, radius: innerRadius,
+                                    startAngle: endAngleInner.DEG2RAD,
+                                    delta: -sweepAngleInner.DEG2RAD)
+            }
+            else
+            {
+                if accountForSliceSpacing
+                {
+                    let angleMiddle = startAngleOuter + sweepAngleOuter / 2.0
+
+                    let arcEndPointX = center.x + sliceSpaceRadius * cos(angleMiddle.DEG2RAD)
+                    let arcEndPointY = center.y + sliceSpaceRadius * sin(angleMiddle.DEG2RAD)
+
+                    path.addLine(
+                        to: CGPoint(
+                            x: arcEndPointX,
+                            y: arcEndPointY))
+                }
+                else
+                {
+                    path.addLine(to: center)
+                }
+            }
+
+            path.closeSubpath()
+
+            context.beginPath()
+            context.addPath(path)
+            context.fillPath(using: .evenOdd)
+
+            let axElement = createAccessibleElement(withIndex: index,
+                                                    container: chart,
+                                                    dataSet: set)
+            { (element) in
+                element.accessibilityFrame = path.boundingBoxOfPath
+                element.isSelected = true
+            }
+
+            highlightedAccessibleElements.append(axElement)
+        }
+
+        // Prepend selected slices before the already rendered unselected ones.
+        // NOTE: - This relies on drawDataSet() being called before drawHighlighted in PieChartView.
+        if !accessibleChartElements.isEmpty {
+            accessibleChartElements.insert(contentsOf: highlightedAccessibleElements, at: 1)
+        }
+
+        context.restoreGState()
+    }
+
+    /// Creates an NSUIAccessibilityElement representing a slice of the PieChart.
+    /// The element only has it's container and label set based on the chart and dataSet. Use the modifier to alter traits and frame.
+    private func createAccessibleElement(withIndex idx: Int,
+                                         container: PieChartView,
+                                         dataSet: IPieChartDataSet,
+                                         modifier: (NSUIAccessibilityElement) -> ()) -> NSUIAccessibilityElement {
+
+        let element = NSUIAccessibilityElement(accessibilityContainer: container)
+
+        guard let e = dataSet.entryForIndex(idx) else { return element }
+        guard let formatter = dataSet.valueFormatter else { return element }
+        guard let data = container.data as? PieChartData else { return element }
+
+        var elementValueText = formatter.stringForValue(
+            e.y,
+            entry: e,
+            dataSetIndex: idx,
+            viewPortHandler: viewPortHandler)
+
+        if container.usePercentValuesEnabled {
+            let value = e.y / data.yValueSum * 100.0
+            let valueText = formatter.stringForValue(
+                value,
+                entry: e,
+                dataSetIndex: idx,
+                viewPortHandler: viewPortHandler)
+
+            elementValueText = valueText
+        }
+
+        let pieChartDataEntry = (dataSet.entryForIndex(idx) as? PieChartDataEntry)
+        let isCount = data.accessibilityEntryLabelSuffixIsCount
+        let prefix = data.accessibilityEntryLabelPrefix?.appending("\(idx + 1)") ?? pieChartDataEntry?.label ?? ""
+        let suffix = data.accessibilityEntryLabelSuffix ?? ""
+        element.accessibilityLabel = "\(prefix) : \(elementValueText) \(suffix  + (isCount ? (e.y == 1.0 ? "" : "s") : "") )"
+
+        // The modifier allows changing of traits and frame depending on highlight, rotation, etc
+        modifier(element)
+
+        return element
+    }
+}
