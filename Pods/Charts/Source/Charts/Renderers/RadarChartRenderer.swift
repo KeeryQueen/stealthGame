@@ -21,4 +21,21 @@ open class RadarChartRenderer: LineRadarRenderer
         let maxEntryCount = chart.data?.maxEntryCountSet?.entryCount ?? 0
         return stride(from: 0, to: maxEntryCount, by: 1).map {
             formatter.stringForValue(Double($0), axis: chart.xAxis)
+        }
+    }()
+
+    @objc open weak var chart: RadarChartView?
+
+    @objc public init(chart: RadarChartView, animator: Animator, viewPortHandler: ViewPortHandler)
+    {
+        super.init(animator: animator, viewPortHandler: viewPortHandler)
+        
+        self.chart = chart
+    }
+    
+    open override func drawData(context: CGContext)
+    {
+        guard let chart = chart else { return }
+        
+        let radarData = chart.data
       
