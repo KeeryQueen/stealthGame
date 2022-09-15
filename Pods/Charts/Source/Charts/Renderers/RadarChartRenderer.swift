@@ -38,4 +38,13 @@ open class RadarChartRenderer: LineRadarRenderer
         guard let chart = chart else { return }
         
         let radarData = chart.data
-      
+        
+        if radarData != nil
+        {
+            let mostEntries = radarData?.maxEntryCountSet?.entryCount ?? 0
+
+            // If we redraw the data, remove and repopulate accessible elements to update label values and frames
+            self.accessibleChartElements.removeAll()
+
+            // Make the chart header the first element in the accessible elements array
+            if let accessibilityHeaderData = radarData as
