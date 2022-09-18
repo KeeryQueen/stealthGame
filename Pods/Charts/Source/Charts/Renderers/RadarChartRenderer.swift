@@ -47,4 +47,11 @@ open class RadarChartRenderer: LineRadarRenderer
             self.accessibleChartElements.removeAll()
 
             // Make the chart header the first element in the accessible elements array
-            if let accessibilityHeaderData = radarData as
+            if let accessibilityHeaderData = radarData as? RadarChartData {
+                let element = createAccessibleHeader(usingChart: chart,
+                                                     andData: accessibilityHeaderData,
+                                                     withDefaultDescription: "Radar Chart")
+                self.accessibleChartElements.append(element)
+            }
+
+            for set in radarData!.dataSets as! [IRadarChartDataSet] where set.isVisib
