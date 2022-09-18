@@ -54,4 +54,19 @@ open class RadarChartRenderer: LineRadarRenderer
                 self.accessibleChartElements.append(element)
             }
 
-            for set in radarData!.dataSets as! [IRadarChartDataSet] where set.isVisib
+            for set in radarData!.dataSets as! [IRadarChartDataSet] where set.isVisible
+            {
+                drawDataSet(context: context, dataSet: set, mostEntries: mostEntries)
+            }
+        }
+    }
+    
+    /// Draws the RadarDataSet
+    ///
+    /// - Parameters:
+    ///   - context:
+    ///   - dataSet:
+    ///   - mostEntries: the entry count of the dataset with the most entries
+    internal func drawDataSet(context: CGContext, dataSet: IRadarChartDataSet, mostEntries: Int)
+    {
+        guard let cha
