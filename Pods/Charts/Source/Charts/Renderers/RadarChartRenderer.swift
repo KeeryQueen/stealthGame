@@ -69,4 +69,18 @@ open class RadarChartRenderer: LineRadarRenderer
     ///   - mostEntries: the entry count of the dataset with the most entries
     internal func drawDataSet(context: CGContext, dataSet: IRadarChartDataSet, mostEntries: Int)
     {
-        guard let cha
+        guard let chart = chart else { return }
+        
+        context.saveGState()
+        
+        let phaseX = animator.phaseX
+        let phaseY = animator.phaseY
+        
+        let sliceangle = chart.sliceAngle
+        
+        // calculate the factor that is needed for transforming the value to pixels
+        let factor = chart.factor
+        
+        let center = chart.centerOffsets
+        let entryCount = dataSet.entryCount
+        let path = CGMutable
