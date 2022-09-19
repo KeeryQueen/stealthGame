@@ -83,4 +83,13 @@ open class RadarChartRenderer: LineRadarRenderer
         
         let center = chart.centerOffsets
         let entryCount = dataSet.entryCount
-        let path = CGMutable
+        let path = CGMutablePath()
+        var hasMovedToPoint = false
+
+        let prefix: String = chart.data?.accessibilityEntryLabelPrefix ?? "Item"
+        let description = dataSet.label ?? ""
+
+        // Make a tuple of (xLabels, value, originalIndex) then sort it
+        // This is done, so that the labels are narrated in decreasing order of their corresponding value
+        // Otherwise, there is no non-visual logic to the data presented
+        let acce
