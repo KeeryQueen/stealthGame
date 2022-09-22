@@ -92,4 +92,7 @@ open class RadarChartRenderer: LineRadarRenderer
         // Make a tuple of (xLabels, value, originalIndex) then sort it
         // This is done, so that the labels are narrated in decreasing order of their corresponding value
         // Otherwise, there is no non-visual logic to the data presented
-        let acce
+        let accessibilityEntryValues =  Array(0 ..< entryCount).map { (dataSet.entryForIndex($0)?.y ?? 0, $0) }
+        let accessibilityAxisLabelValueTuples = zip(accessibilityXLabels, accessibilityEntryValues).map { ($0, $1.0, $1.1) }.sorted { $0.1 > $1.1 }
+        let accessibilityDataSetDescription: String = description + ". \(entryCount) \(prefix + (entryCount == 1 ? "" : "s")). "
+        let accessibilityFrameWidth: CGFloat = 22.0 // To allow
