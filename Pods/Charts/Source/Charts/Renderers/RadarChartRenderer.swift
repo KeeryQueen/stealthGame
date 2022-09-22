@@ -104,4 +104,22 @@ open class RadarChartRenderer: LineRadarRenderer
             guard let e = dataSet.entryForIndex(j) else { continue }
             
             let p = center.moving(distance: CGFloat((e.y - chart.chartYMin) * Double(factor) * phaseY),
-                                  atAngle: sliceangle * CGFloat(j) * CGFloat(phaseX) + cha
+                                  atAngle: sliceangle * CGFloat(j) * CGFloat(phaseX) + chart.rotationAngle)
+            
+            if p.x.isNaN
+            {
+                continue
+            }
+            
+            if !hasMovedToPoint
+            {
+                path.move(to: p)
+                hasMovedToPoint = true
+            }
+            else
+            {
+                path.addLine(to: p)
+            }
+
+            let accessibilityLabel = accessibilityAxisLabelValueTuples[j].0
+  
