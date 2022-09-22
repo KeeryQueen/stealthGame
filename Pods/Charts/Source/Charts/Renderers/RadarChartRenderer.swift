@@ -95,4 +95,13 @@ open class RadarChartRenderer: LineRadarRenderer
         let accessibilityEntryValues =  Array(0 ..< entryCount).map { (dataSet.entryForIndex($0)?.y ?? 0, $0) }
         let accessibilityAxisLabelValueTuples = zip(accessibilityXLabels, accessibilityEntryValues).map { ($0, $1.0, $1.1) }.sorted { $0.1 > $1.1 }
         let accessibilityDataSetDescription: String = description + ". \(entryCount) \(prefix + (entryCount == 1 ? "" : "s")). "
-        let accessibilityFrameWidth: CGFloat = 22.0 // To allow
+        let accessibilityFrameWidth: CGFloat = 22.0 // To allow a tap target of 44x44
+
+        var accessibilityEntryElements: [NSUIAccessibilityElement] = []
+
+        for j in 0 ..< entryCount
+        {
+            guard let e = dataSet.entryForIndex(j) else { continue }
+            
+            let p = center.moving(distance: CGFloat((e.y - chart.chartYMin) * Double(factor) * phaseY),
+                                  atAngle: sliceangle * CGFloat(j) * CGFloat(phaseX) + cha
