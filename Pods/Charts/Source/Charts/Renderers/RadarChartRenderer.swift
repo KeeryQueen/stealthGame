@@ -122,4 +122,10 @@ open class RadarChartRenderer: LineRadarRenderer
             }
 
             let accessibilityLabel = accessibilityAxisLabelValueTuples[j].0
-  
+            let accessibilityValue = accessibilityAxisLabelValueTuples[j].1
+            let accessibilityValueIndex = accessibilityAxisLabelValueTuples[j].2
+
+            let axp = center.moving(distance: CGFloat((accessibilityValue - chart.chartYMin) * Double(factor) * phaseY),
+                                    atAngle: sliceangle * CGFloat(accessibilityValueIndex) * CGFloat(phaseX) + chart.rotationAngle)
+
+            let axDescription = description +
