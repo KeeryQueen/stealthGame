@@ -128,4 +128,9 @@ open class RadarChartRenderer: LineRadarRenderer
             let axp = center.moving(distance: CGFloat((accessibilityValue - chart.chartYMin) * Double(factor) * phaseY),
                                     atAngle: sliceangle * CGFloat(accessibilityValueIndex) * CGFloat(phaseX) + chart.rotationAngle)
 
-            let axDescription = description +
+            let axDescription = description + " - " + accessibilityLabel + ": \(accessibilityValue) \(chart.data?.accessibilityEntryLabelSuffix ?? "")"
+            let axElement = createAccessibleElement(withDescription: axDescription,
+                                                    container: chart,
+                                                    dataSet: dataSet)
+            { (element) in
+                element.accessibilityFrame = CGRect(x: axp.x - accessibilityFrameWid
