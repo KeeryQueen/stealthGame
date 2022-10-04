@@ -157,3 +157,15 @@ open class RadarChartRenderer: LineRadarRenderer
             if dataSet.fill != nil
             {
                 drawFilledPath(context: context, path: path, fill: dataSet.fill!, fillAlpha: dataSet.fillAlpha)
+            }
+            else
+            {
+                drawFilledPath(context: context, path: path, fillColor: dataSet.fillColor, fillAlpha: dataSet.fillAlpha)
+            }
+        }
+        
+        // draw the line (only if filled is disabled or alpha is below 255)
+        if !dataSet.isDrawFilledEnabled || dataSet.fillAlpha < 1.0
+        {
+            context.setStrokeColor(dataSet.color(atIndex: 0).cgColor)
+   
