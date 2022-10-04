@@ -133,4 +133,14 @@ open class RadarChartRenderer: LineRadarRenderer
                                                     container: chart,
                                                     dataSet: dataSet)
             { (element) in
-                element.accessibilityFrame = CGRect(x: axp.x - accessibilityFrameWid
+                element.accessibilityFrame = CGRect(x: axp.x - accessibilityFrameWidth,
+                                                    y: axp.y - accessibilityFrameWidth,
+                                                    width: 2 * accessibilityFrameWidth,
+                                                    height: 2 * accessibilityFrameWidth)
+            }
+
+            accessibilityEntryElements.append(axElement)
+        }
+        
+        // if this is the largest set, close it
+        if
