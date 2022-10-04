@@ -143,4 +143,17 @@ open class RadarChartRenderer: LineRadarRenderer
         }
         
         // if this is the largest set, close it
-        if
+        if dataSet.entryCount < mostEntries
+        {
+            // if this is not the largest set, draw a line to the center before closing
+            path.addLine(to: center)
+        }
+        
+        path.closeSubpath()
+        
+        // draw filled
+        if dataSet.isDrawFilledEnabled
+        {
+            if dataSet.fill != nil
+            {
+                drawFilledPath(context: context, path: path, fill: dataSet.fill!, fillAlpha: dataSet.fillAlpha)
