@@ -168,4 +168,14 @@ open class RadarChartRenderer: LineRadarRenderer
         if !dataSet.isDrawFilledEnabled || dataSet.fillAlpha < 1.0
         {
             context.setStrokeColor(dataSet.color(atIndex: 0).cgColor)
-   
+            context.setLineWidth(dataSet.lineWidth)
+            context.setAlpha(1.0)
+
+            context.beginPath()
+            context.addPath(path)
+            context.strokePath()
+
+            let axElement = createAccessibleElement(withDescription: accessibilityDataSetDescription,
+                                                    container: chart,
+                                                    dataSet: dataSet)
+           
