@@ -178,4 +178,18 @@ open class RadarChartRenderer: LineRadarRenderer
             let axElement = createAccessibleElement(withDescription: accessibilityDataSetDescription,
                                                     container: chart,
                                                     dataSet: dataSet)
-           
+            { (element) in
+                element.isHeader = true
+                element.accessibilityFrame = path.boundingBoxOfPath
+            }
+
+            accessibleChartElements.append(axElement)
+            accessibleChartElements.append(contentsOf: accessibilityEntryElements)
+        }
+        
+        accessibilityPostLayoutChangedNotification()
+
+        context.restoreGState()
+    }
+    
+    open override func drawVa
