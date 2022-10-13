@@ -192,4 +192,20 @@ open class RadarChartRenderer: LineRadarRenderer
         context.restoreGState()
     }
     
-    open override func drawVa
+    open override func drawValues(context: CGContext)
+    {
+        guard
+            let chart = chart,
+            let data = chart.data
+            else { return }
+        
+        let phaseX = animator.phaseX
+        let phaseY = animator.phaseY
+        
+        let sliceangle = chart.sliceAngle
+        
+        // calculate the factor that is needed for transforming the value to pixels
+        let factor = chart.factor
+        
+        let center = chart.centerOffsets
+     
