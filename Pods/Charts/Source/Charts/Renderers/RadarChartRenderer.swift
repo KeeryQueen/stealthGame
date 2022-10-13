@@ -222,4 +222,11 @@ open class RadarChartRenderer: LineRadarRenderer
             
             let iconsOffset = dataSet.iconsOffset
             
-  
+            for j in 0 ..< entryCount
+            {
+                guard let e = dataSet.entryForIndex(j) else { continue }
+                
+                let p = center.moving(distance: CGFloat(e.y - chart.chartYMin) * factor * CGFloat(phaseY),
+                                      atAngle: sliceangle * CGFloat(j) * CGFloat(phaseX) + chart.rotationAngle)
+                
+                let valueFont = dataSet
