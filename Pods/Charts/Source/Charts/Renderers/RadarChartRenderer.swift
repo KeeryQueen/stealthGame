@@ -208,4 +208,18 @@ open class RadarChartRenderer: LineRadarRenderer
         let factor = chart.factor
         
         let center = chart.centerOffsets
-     
+        
+        let yoffset = CGFloat(5.0)
+        
+        for i in 0 ..< data.dataSetCount
+        {
+            guard let
+                dataSet = data.getDataSetByIndex(i) as? IRadarChartDataSet,
+                shouldDrawValues(forDataSet: dataSet)
+                else { continue }
+            
+            let entryCount = dataSet.entryCount
+            
+            let iconsOffset = dataSet.iconsOffset
+            
+  
