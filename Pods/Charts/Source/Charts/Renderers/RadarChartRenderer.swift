@@ -229,4 +229,16 @@ open class RadarChartRenderer: LineRadarRenderer
                 let p = center.moving(distance: CGFloat(e.y - chart.chartYMin) * factor * CGFloat(phaseY),
                                       atAngle: sliceangle * CGFloat(j) * CGFloat(phaseX) + chart.rotationAngle)
                 
-                let valueFont = dataSet
+                let valueFont = dataSet.valueFont
+                
+                guard let formatter = dataSet.valueFormatter else { continue }
+                
+                if dataSet.isDrawValuesEnabled
+                {
+                    ChartUtils.drawText(
+                        context: context,
+                        text: formatter.stringForValue(
+                            e.y,
+                            entry: e,
+                            dataSetIndex: i,
+                         
