@@ -250,4 +250,10 @@ open class RadarChartRenderer: LineRadarRenderer
                 }
                 
                 if let icon = e.icon, dataSet.isDrawIconsEnabled
-     
+                {
+                    var pIcon = center.moving(distance: CGFloat(e.y) * factor * CGFloat(phaseY) + iconsOffset.y,
+                                              atAngle: sliceangle * CGFloat(j) * CGFloat(phaseX) + chart.rotationAngle)
+                    pIcon.y += iconsOffset.x
+                    
+                    ChartUtils.drawImage(context: context,
+                                         ima
