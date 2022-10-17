@@ -256,4 +256,20 @@ open class RadarChartRenderer: LineRadarRenderer
                     pIcon.y += iconsOffset.x
                     
                     ChartUtils.drawImage(context: context,
-                                         ima
+                                         image: icon,
+                                         x: pIcon.x,
+                                         y: pIcon.y,
+                                         size: icon.size)
+                }
+            }
+        }
+    }
+    
+    open override func drawExtras(context: CGContext)
+    {
+        drawWeb(context: context)
+    }
+    
+    private var _webLineSegmentsBuffer = [CGPoint](repeating: CGPoint(), count: 2)
+    
+   
