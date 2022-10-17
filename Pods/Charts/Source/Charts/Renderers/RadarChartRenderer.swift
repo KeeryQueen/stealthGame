@@ -272,4 +272,20 @@ open class RadarChartRenderer: LineRadarRenderer
     
     private var _webLineSegmentsBuffer = [CGPoint](repeating: CGPoint(), count: 2)
     
-   
+    @objc open func drawWeb(context: CGContext)
+    {
+        guard
+            let chart = chart,
+            let data = chart.data
+            else { return }
+        
+        let sliceangle = chart.sliceAngle
+        
+        context.saveGState()
+        
+        // calculate the factor that is needed for transforming the value to
+        // pixels
+        let factor = chart.factor
+        let rotationangle = chart.rotationAngle
+        
+        l
