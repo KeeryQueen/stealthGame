@@ -288,4 +288,16 @@ open class RadarChartRenderer: LineRadarRenderer
         let factor = chart.factor
         let rotationangle = chart.rotationAngle
         
-        l
+        let center = chart.centerOffsets
+        
+        // draw the web lines that come from the center
+        context.setLineWidth(chart.webLineWidth)
+        context.setStrokeColor(chart.webColor.cgColor)
+        context.setAlpha(chart.webAlpha)
+        
+        let xIncrements = 1 + chart.skipWebLineCount
+        let maxEntryCount = chart.data?.maxEntryCountSet?.entryCount ?? 0
+
+        for i in stride(from: 0, to: maxEntryCount, by: xIncrements)
+        {
+         
