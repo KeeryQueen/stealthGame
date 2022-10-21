@@ -300,4 +300,15 @@ open class RadarChartRenderer: LineRadarRenderer
 
         for i in stride(from: 0, to: maxEntryCount, by: xIncrements)
         {
-         
+            let p = center.moving(distance: CGFloat(chart.yRange) * factor,
+                                  atAngle: sliceangle * CGFloat(i) + rotationangle)
+            
+            _webLineSegmentsBuffer[0].x = center.x
+            _webLineSegmentsBuffer[0].y = center.y
+            _webLineSegmentsBuffer[1].x = p.x
+            _webLineSegmentsBuffer[1].y = p.y
+            
+            context.strokeLineSegments(between: _webLineSegmentsBuffer)
+        }
+        
+ 
