@@ -324,4 +324,11 @@ open class RadarChartRenderer: LineRadarRenderer
             {
                 let r = CGFloat(chart.yAxis.entries[j] - chart.chartYMin) * factor
 
-                let 
+                let p1 = center.moving(distance: r, atAngle: sliceangle * CGFloat(i) + rotationangle)
+                let p2 = center.moving(distance: r, atAngle: sliceangle * CGFloat(i + 1) + rotationangle)
+                
+                _webLineSegmentsBuffer[0].x = p1.x
+                _webLineSegmentsBuffer[0].y = p1.y
+                _webLineSegmentsBuffer[1].x = p2.x
+                _webLineSegmentsBuffer[1].y = p2.y
+             
