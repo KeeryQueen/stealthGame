@@ -331,4 +331,23 @@ open class RadarChartRenderer: LineRadarRenderer
                 _webLineSegmentsBuffer[0].y = p1.y
                 _webLineSegmentsBuffer[1].x = p2.x
                 _webLineSegmentsBuffer[1].y = p2.y
-             
+                
+                context.strokeLineSegments(between: _webLineSegmentsBuffer)
+            }
+        }
+        
+        context.restoreGState()
+    }
+    
+    private var _highlightPointBuffer = CGPoint()
+
+    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    {
+        guard
+            let chart = chart,
+            let radarData = chart.data as? RadarChartData
+            else { return }
+        
+        context.saveGState()
+        
+  
