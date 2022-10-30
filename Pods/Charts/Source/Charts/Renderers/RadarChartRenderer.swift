@@ -350,4 +350,17 @@ open class RadarChartRenderer: LineRadarRenderer
         
         context.saveGState()
         
-  
+        let sliceangle = chart.sliceAngle
+        
+        // calculate the factor that is needed for transforming the value pixels
+        let factor = chart.factor
+        
+        let center = chart.centerOffsets
+        
+        for high in indices
+        {
+            guard
+                let set = chart.data?.getDataSetByIndex(high.dataSetIndex) as? IRadarChartDataSet,
+                set.isHighlightEnabled
+                else { continue }
+     
