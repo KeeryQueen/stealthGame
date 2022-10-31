@@ -375,4 +375,15 @@ open class RadarChartRenderer: LineRadarRenderer
             context.setLineWidth(radarData.highlightLineWidth)
             if radarData.highlightLineDashLengths != nil
             {
-           
+                context.setLineDash(phase: radarData.highlightLineDashPhase, lengths: radarData.highlightLineDashLengths!)
+            }
+            else
+            {
+                context.setLineDash(phase: 0.0, lengths: [])
+            }
+            
+            context.setStrokeColor(set.highlightColor.cgColor)
+            
+            let y = e.y - chart.chartYMin
+            
+            _highlightPointBuffer = center.moving(distance: C
