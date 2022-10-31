@@ -363,4 +363,16 @@ open class RadarChartRenderer: LineRadarRenderer
                 let set = chart.data?.getDataSetByIndex(high.dataSetIndex) as? IRadarChartDataSet,
                 set.isHighlightEnabled
                 else { continue }
-     
+            
+            guard let e = set.entryForIndex(Int(high.x)) as? RadarChartDataEntry
+                else { continue }
+            
+            if !isInBoundsX(entry: e, dataSet: set)
+            {
+                continue
+            }
+            
+            context.setLineWidth(radarData.highlightLineWidth)
+            if radarData.highlightLineDashLengths != nil
+            {
+           
