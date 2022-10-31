@@ -386,4 +386,13 @@ open class RadarChartRenderer: LineRadarRenderer
             
             let y = e.y - chart.chartYMin
             
-            _highlightPointBuffer = center.moving(distance: C
+            _highlightPointBuffer = center.moving(distance: CGFloat(y) * factor * CGFloat(animator.phaseY),
+                                                  atAngle: sliceangle * CGFloat(high.x) * CGFloat(animator.phaseX) + chart.rotationAngle)
+            
+            high.setDraw(pt: _highlightPointBuffer)
+            
+            // draw the lines
+            drawHighlightLines(context: context, point: _highlightPointBuffer, set: set)
+            
+            if set.isDrawHighlightCircleEnabled
+    
