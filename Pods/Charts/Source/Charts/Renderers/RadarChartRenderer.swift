@@ -395,4 +395,14 @@ open class RadarChartRenderer: LineRadarRenderer
             drawHighlightLines(context: context, point: _highlightPointBuffer, set: set)
             
             if set.isDrawHighlightCircleEnabled
-    
+            {
+                if !_highlightPointBuffer.x.isNaN && !_highlightPointBuffer.y.isNaN
+                {
+                    var strokeColor = set.highlightCircleStrokeColor
+                    if strokeColor == nil
+                    {
+                        strokeColor = set.color(atIndex: 0)
+                    }
+                    if set.highlightCircleStrokeAlpha < 1.0
+                    {
+                        st
