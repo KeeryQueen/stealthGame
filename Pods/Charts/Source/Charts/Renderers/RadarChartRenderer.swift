@@ -428,4 +428,16 @@ open class RadarChartRenderer: LineRadarRenderer
         atPoint point: CGPoint,
         innerRadius: CGFloat,
         outerRadius: CGFloat,
-        fillColor:
+        fillColor: NSUIColor?,
+        strokeColor: NSUIColor?,
+        strokeWidth: CGFloat)
+    {
+        context.saveGState()
+        
+        if let fillColor = fillColor
+        {
+            context.beginPath()
+            context.addEllipse(in: CGRect(x: point.x - outerRadius, y: point.y - outerRadius, width: outerRadius * 2.0, height: outerRadius * 2.0))
+            if innerRadius > 0.0
+            {
+              
