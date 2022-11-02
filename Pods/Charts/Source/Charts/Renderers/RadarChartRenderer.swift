@@ -413,4 +413,19 @@ open class RadarChartRenderer: LineRadarRenderer
                         atPoint: _highlightPointBuffer,
                         innerRadius: set.highlightCircleInnerRadius,
                         outerRadius: set.highlightCircleOuterRadius,
-             
+                        fillColor: set.highlightCircleFillColor,
+                        strokeColor: strokeColor,
+                        strokeWidth: set.highlightCircleStrokeWidth)
+                }
+            }
+        }
+        
+        context.restoreGState()
+    }
+    
+    internal func drawHighlightCircle(
+        context: CGContext,
+        atPoint point: CGPoint,
+        innerRadius: CGFloat,
+        outerRadius: CGFloat,
+        fillColor:
