@@ -405,4 +405,12 @@ open class RadarChartRenderer: LineRadarRenderer
                     }
                     if set.highlightCircleStrokeAlpha < 1.0
                     {
-                        st
+                        strokeColor = strokeColor?.withAlphaComponent(set.highlightCircleStrokeAlpha)
+                    }
+                    
+                    drawHighlightCircle(
+                        context: context,
+                        atPoint: _highlightPointBuffer,
+                        innerRadius: set.highlightCircleInnerRadius,
+                        outerRadius: set.highlightCircleOuterRadius,
+             
