@@ -440,4 +440,14 @@ open class RadarChartRenderer: LineRadarRenderer
             context.addEllipse(in: CGRect(x: point.x - outerRadius, y: point.y - outerRadius, width: outerRadius * 2.0, height: outerRadius * 2.0))
             if innerRadius > 0.0
             {
-              
+                context.addEllipse(in: CGRect(x: point.x - innerRadius, y: point.y - innerRadius, width: innerRadius * 2.0, height: innerRadius * 2.0))
+            }
+            
+            context.setFillColor(fillColor.cgColor)
+            context.fillPath(using: .evenOdd)
+        }
+            
+        if let strokeColor = strokeColor
+        {
+            context.beginPath()
+            context.addEllipse(in: CGRect
