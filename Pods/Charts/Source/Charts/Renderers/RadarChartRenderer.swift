@@ -468,4 +468,8 @@ open class RadarChartRenderer: LineRadarRenderer
         element.accessibilityLabel = description
 
         // The modifier allows changing of traits and frame depending on highlight, rotation, etc
-        modifi
+        modifier(element)
+
+        return element
+    }
+}
