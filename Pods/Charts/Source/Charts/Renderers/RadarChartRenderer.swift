@@ -450,4 +450,14 @@ open class RadarChartRenderer: LineRadarRenderer
         if let strokeColor = strokeColor
         {
             context.beginPath()
-            context.addEllipse(in: CGRect
+            context.addEllipse(in: CGRect(x: point.x - outerRadius, y: point.y - outerRadius, width: outerRadius * 2.0, height: outerRadius * 2.0))
+            context.setStrokeColor(strokeColor.cgColor)
+            context.setLineWidth(strokeWidth)
+            context.strokePath()
+        }
+        
+        context.restoreGState()
+    }
+
+    private func createAccessibleElement(withDescription description: String,
+                                         container: RadarChartVie
