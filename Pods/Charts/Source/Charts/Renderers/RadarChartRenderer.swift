@@ -460,4 +460,12 @@ open class RadarChartRenderer: LineRadarRenderer
     }
 
     private func createAccessibleElement(withDescription description: String,
-                                         container: RadarChartVie
+                                         container: RadarChartView,
+                                         dataSet: IRadarChartDataSet,
+                                         modifier: (NSUIAccessibilityElement) -> ()) -> NSUIAccessibilityElement {
+
+        let element = NSUIAccessibilityElement(accessibilityContainer: container)
+        element.accessibilityLabel = description
+
+        // The modifier allows changing of traits and frame depending on highlight, rotation, etc
+        modifi
