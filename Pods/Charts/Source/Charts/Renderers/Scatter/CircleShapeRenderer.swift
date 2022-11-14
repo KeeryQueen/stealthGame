@@ -25,4 +25,14 @@ open class CircleShapeRenderer : NSObject, IShapeRenderer
         let shapeHoleSizeHalf = dataSet.scatterShapeHoleRadius
         let shapeHoleSize = shapeHoleSizeHalf * 2.0
         let shapeHoleColor = dataSet.scatterShapeHoleColor
-        let shapeStrokeSize = (sha
+        let shapeStrokeSize = (shapeSize - shapeHoleSize) / 2.0
+        let shapeStrokeSizeHalf = shapeStrokeSize / 2.0
+        
+        if shapeHoleSize > 0.0
+        {
+            context.setStrokeColor(color.cgColor)
+            context.setLineWidth(shapeStrokeSize)
+            var rect = CGRect()
+            rect.origin.x = point.x - shapeHoleSizeHalf - shapeStrokeSizeHalf
+            rect.origin.y = point.y - shapeHoleSizeHalf - shapeStrokeSizeHalf
+            rec
