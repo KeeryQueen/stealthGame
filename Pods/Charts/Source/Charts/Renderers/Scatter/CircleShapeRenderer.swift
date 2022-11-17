@@ -45,4 +45,19 @@ open class CircleShapeRenderer : NSObject, IShapeRenderer
                 rect.origin.x = point.x - shapeHoleSizeHalf
                 rect.origin.y = point.y - shapeHoleSizeHalf
                 rect.size.width = shapeHoleSize
-                rect.size.heigh
+                rect.size.height = shapeHoleSize
+                context.fillEllipse(in: rect)
+            }
+        }
+        else
+        {
+            context.setFillColor(color.cgColor)
+            var rect = CGRect()
+            rect.origin.x = point.x - shapeHalf
+            rect.origin.y = point.y - shapeHalf
+            rect.size.width = shapeSize
+            rect.size.height = shapeSize
+            context.fillEllipse(in: rect)
+        }
+    }
+}
