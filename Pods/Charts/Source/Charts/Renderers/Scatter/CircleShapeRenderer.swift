@@ -35,4 +35,14 @@ open class CircleShapeRenderer : NSObject, IShapeRenderer
             var rect = CGRect()
             rect.origin.x = point.x - shapeHoleSizeHalf - shapeStrokeSizeHalf
             rect.origin.y = point.y - shapeHoleSizeHalf - shapeStrokeSizeHalf
-            rec
+            rect.size.width = shapeHoleSize + shapeStrokeSize
+            rect.size.height = shapeHoleSize + shapeStrokeSize
+            context.strokeEllipse(in: rect)
+            
+            if let shapeHoleColor = shapeHoleColor
+            {
+                context.setFillColor(shapeHoleColor.cgColor)
+                rect.origin.x = point.x - shapeHoleSizeHalf
+                rect.origin.y = point.y - shapeHoleSizeHalf
+                rect.size.width = shapeHoleSize
+                rect.size.heigh
