@@ -26,4 +26,11 @@ open class XShapeRenderer : NSObject, IShapeRenderer
         context.setLineWidth(1.0)
         context.setStrokeColor(color.cgColor)
         
-     
+        context.beginPath()
+        context.move(to: CGPoint(x: point.x - shapeHalf, y: point.y - shapeHalf))
+        context.addLine(to: CGPoint(x: point.x + shapeHalf, y: point.y + shapeHalf))
+        context.move(to: CGPoint(x: point.x + shapeHalf, y: point.y - shapeHalf))
+        context.addLine(to: CGPoint(x: point.x - shapeHalf, y: point.y + shapeHalf))
+        context.strokePath()
+    }
+}
