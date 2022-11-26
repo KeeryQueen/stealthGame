@@ -20,4 +20,17 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
     {
         super.init(viewPortHandler: viewPortHandler, xAxis: xAxis, transformer: transformer)
         
-        self.chart = c
+        self.chart = chart
+    }
+    
+    open override func computeAxis(min: Double, max: Double, inverted: Bool)
+    {
+        var min = min, max = max
+        
+        if let transformer = self.transformer
+        {
+            // calculate the starting and entry point of the y-labels (depending on
+            // zoom / contentrect bounds)
+            if viewPortHandler.contentWidth > 10 && !viewPortHandler.isFullyZoomedOutY
+            {
+                let p1 = transfor
