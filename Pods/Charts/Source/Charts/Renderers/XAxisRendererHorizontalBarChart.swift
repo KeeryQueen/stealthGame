@@ -33,4 +33,14 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             // zoom / contentrect bounds)
             if viewPortHandler.contentWidth > 10 && !viewPortHandler.isFullyZoomedOutY
             {
-                let p1 = transfor
+                let p1 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentBottom))
+                let p2 = transformer.valueForTouchPoint(CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop))
+                
+                if inverted
+                {
+                    min = Double(p2.y)
+                    max = Double(p1.y)
+                }
+                else
+                {
+          
