@@ -43,4 +43,21 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
                 }
                 else
                 {
-          
+                    min = Double(p1.y)
+                    max = Double(p2.y)
+                }
+            }
+        }
+        
+        computeAxisValues(min: min, max: max)
+    }
+    
+    open override func computeSize()
+    {
+        guard let
+            xAxis = self.axis as? XAxis
+            else { return }
+       
+        let longest = xAxis.getLongestLabel() as NSString
+        
+        let labelSize = longest.size(withAttributes: [NSAttribut
