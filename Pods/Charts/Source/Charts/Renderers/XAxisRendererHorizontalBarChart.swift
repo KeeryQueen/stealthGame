@@ -68,4 +68,21 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
 
         xAxis.labelWidth = labelWidth
         xAxis.labelHeight = labelHeight
-        xAxis.labelRotatedWidth = round(labelRotatedS
+        xAxis.labelRotatedWidth = round(labelRotatedSize.width + xAxis.xOffset * 3.5)
+        xAxis.labelRotatedHeight = round(labelRotatedSize.height)
+    }
+
+    open override func renderAxisLabels(context: CGContext)
+    {
+        guard
+            let xAxis = self.axis as? XAxis
+            else { return }
+        
+        if !xAxis.isEnabled || !xAxis.isDrawLabelsEnabled || chart?.data === nil
+        {
+            return
+        }
+        
+        let xoffset = xAxis.xOffset
+        
+        if xAxis.labelPosi
