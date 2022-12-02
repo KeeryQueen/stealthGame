@@ -95,4 +95,13 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
         }
         else if xAxis.labelPosition == .bottom
         {
-            drawLabels(context: context, po
+            drawLabels(context: context, pos: viewPortHandler.contentLeft - xoffset, anchor: CGPoint(x: 1.0, y: 0.5))
+        }
+        else if xAxis.labelPosition == .bottomInside
+        {
+            drawLabels(context: context, pos: viewPortHandler.contentLeft + xoffset, anchor: CGPoint(x: 0.0, y: 0.5))
+        }
+        else
+        { // BOTH SIDED
+            drawLabels(context: context, pos: viewPortHandler.contentRight + xoffset, anchor: CGPoint(x: 0.0, y: 0.5))
+    
