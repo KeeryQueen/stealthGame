@@ -104,4 +104,16 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
         else
         { // BOTH SIDED
             drawLabels(context: context, pos: viewPortHandler.contentRight + xoffset, anchor: CGPoint(x: 0.0, y: 0.5))
-    
+            drawLabels(context: context, pos: viewPortHandler.contentLeft - xoffset, anchor: CGPoint(x: 1.0, y: 0.5))
+        }
+    }
+
+    /// draws the x-labels on the specified y-position
+    open override func drawLabels(context: CGContext, pos: CGFloat, anchor: CGPoint)
+    {
+        guard
+            let xAxis = self.axis as? XAxis,
+            let transformer = self.transformer
+            else { return }
+        
+        let l
