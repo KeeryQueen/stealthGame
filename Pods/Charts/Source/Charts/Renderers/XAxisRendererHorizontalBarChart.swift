@@ -85,4 +85,14 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
         
         let xoffset = xAxis.xOffset
         
-        if xAxis.labelPosi
+        if xAxis.labelPosition == .top
+        {
+            drawLabels(context: context, pos: viewPortHandler.contentRight + xoffset, anchor: CGPoint(x: 0.0, y: 0.5))
+        }
+        else if xAxis.labelPosition == .topInside
+        {
+            drawLabels(context: context, pos: viewPortHandler.contentRight - xoffset, anchor: CGPoint(x: 1.0, y: 0.5))
+        }
+        else if xAxis.labelPosition == .bottom
+        {
+            drawLabels(context: context, po
