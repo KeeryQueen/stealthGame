@@ -116,4 +116,17 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             let transformer = self.transformer
             else { return }
         
-        let l
+        let labelFont = xAxis.labelFont
+        let labelTextColor = xAxis.labelTextColor
+        let labelRotationAngleRadians = xAxis.labelRotationAngle.DEG2RAD
+        
+        let centeringEnabled = xAxis.isCenterAxisLabelsEnabled
+        
+        // pre allocate to save performance (dont allocate in loop)
+        var position = CGPoint(x: 0.0, y: 0.0)
+        
+        for i in stride(from: 0, to: xAxis.entryCount, by: 1)
+        {
+            // only fill x values
+            
+ 
