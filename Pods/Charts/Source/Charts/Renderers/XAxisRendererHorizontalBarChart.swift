@@ -129,4 +129,19 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
         {
             // only fill x values
             
- 
+            position.x = 0.0
+            
+            if centeringEnabled
+            {
+                position.y = CGFloat(xAxis.centeredEntries[i])
+            }
+            else
+            {
+                position.y = CGFloat(xAxis.entries[i])
+            }
+            
+            transformer.pointValueToPixel(&position)
+            
+            if viewPortHandler.isInBoundsY(position.y)
+            {
+                if let l
