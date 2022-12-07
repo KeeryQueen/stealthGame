@@ -144,4 +144,13 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             
             if viewPortHandler.isInBoundsY(position.y)
             {
-                if let l
+                if let label = xAxis.valueFormatter?.stringForValue(xAxis.entries[i], axis: xAxis)
+                {
+                    drawLabel(
+                        context: context,
+                        formattedLabel: label,
+                        x: pos,
+                        y: position.y,
+                        attributes: [NSAttributedString.Key.font: labelFont, NSAttributedString.Key.foregroundColor: labelTextColor],
+                        anchor: anchor,
+             
