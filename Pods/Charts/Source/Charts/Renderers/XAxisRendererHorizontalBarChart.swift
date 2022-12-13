@@ -153,4 +153,21 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
                         y: position.y,
                         attributes: [NSAttributedString.Key.font: labelFont, NSAttributedString.Key.foregroundColor: labelTextColor],
                         anchor: anchor,
-             
+                        angleRadians: labelRotationAngleRadians)
+                }
+            }
+        }
+    }
+    
+    @objc open func drawLabel(
+        context: CGContext,
+        formattedLabel: String,
+        x: CGFloat,
+        y: CGFloat,
+        attributes: [NSAttributedString.Key : Any],
+        anchor: CGPoint,
+        angleRadians: CGFloat)
+    {
+        ChartUtils.drawText(
+            context: context,
+            text
