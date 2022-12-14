@@ -186,4 +186,14 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
         return contentRect
     }
     
-   
+    private var _gridLineSegmentsBuffer = [CGPoint](repeating: CGPoint(), count: 2)
+    
+    open override func drawGridLine(context: CGContext, x: CGFloat, y: CGFloat)
+    {
+        if viewPortHandler.isInBoundsY(y)
+        {
+            context.beginPath()
+            context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: y))
+            context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: y))
+            context.strokePath()
+     
