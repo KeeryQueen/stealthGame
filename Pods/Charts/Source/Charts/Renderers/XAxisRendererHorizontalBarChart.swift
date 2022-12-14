@@ -212,4 +212,18 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
         
         context.setStrokeColor(xAxis.axisLineColor.cgColor)
         context.setLineWidth(xAxis.axisLineWidth)
-        if
+        if xAxis.axisLineDashLengths != nil
+        {
+            context.setLineDash(phase: xAxis.axisLineDashPhase, lengths: xAxis.axisLineDashLengths)
+        }
+        else
+        {
+            context.setLineDash(phase: 0.0, lengths: [])
+        }
+        
+        if xAxis.labelPosition == .top ||
+            xAxis.labelPosition == .topInside ||
+            xAxis.labelPosition == .bothSided
+        {
+            context.beginPath()
+            conte
