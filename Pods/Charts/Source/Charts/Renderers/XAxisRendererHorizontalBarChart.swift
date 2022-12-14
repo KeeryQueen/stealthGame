@@ -196,4 +196,20 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: y))
             context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: y))
             context.strokePath()
-     
+        }
+    }
+    
+    open override func renderAxisLine(context: CGContext)
+    {
+        guard let xAxis = self.axis as? XAxis else { return }
+        
+        if !xAxis.isEnabled || !xAxis.isDrawAxisLineEnabled
+        {
+            return
+        }
+        
+        context.saveGState()
+        
+        context.setStrokeColor(xAxis.axisLineColor.cgColor)
+        context.setLineWidth(xAxis.axisLineWidth)
+        if
