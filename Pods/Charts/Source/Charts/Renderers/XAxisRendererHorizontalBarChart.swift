@@ -226,4 +226,14 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             xAxis.labelPosition == .bothSided
         {
             context.beginPath()
-            conte
+            context.move(to: CGPoint(x: viewPortHandler.contentRight, y: viewPortHandler.contentTop))
+            context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: viewPortHandler.contentBottom))
+            context.strokePath()
+        }
+        
+        if xAxis.labelPosition == .bottom ||
+            xAxis.labelPosition == .bottomInside ||
+            xAxis.labelPosition == .bothSided
+        {
+            context.beginPath()
+            context.move(to: CGPoin
