@@ -236,4 +236,16 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             xAxis.labelPosition == .bothSided
         {
             context.beginPath()
-            context.move(to: CGPoin
+            context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentTop))
+            context.addLine(to: CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentBottom))
+            context.strokePath()
+        }
+        
+        context.restoreGState()
+    }
+    
+    open override func renderLimitLines(context: CGContext)
+    {
+        guard
+            let xAxis = self.axis as? XAxis,
+            let transformer = self.transf
