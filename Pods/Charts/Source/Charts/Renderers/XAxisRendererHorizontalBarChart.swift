@@ -248,4 +248,24 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
     {
         guard
             let xAxis = self.axis as? XAxis,
-            let transformer = self.transf
+            let transformer = self.transformer
+            else { return }
+        
+        let limitLines = xAxis.limitLines
+        
+        if limitLines.count == 0
+        {
+            return
+        }
+        
+        let trans = transformer.valueToPixelMatrix
+        
+        var position = CGPoint(x: 0.0, y: 0.0)
+        
+        for i in 0 ..< limitLines.count
+        {
+            let l = limitLines[i]
+            
+            if !l.isEnabled
+            {
+ 
