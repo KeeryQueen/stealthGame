@@ -305,4 +305,14 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             // if drawing the limit-value label is enabled
             if l.drawLabelEnabled && label.count > 0
             {
-      
+                let labelLineHeight = l.valueFont.lineHeight
+                
+                let xOffset: CGFloat = 4.0 + l.xOffset
+                let yOffset: CGFloat = l.lineWidth + labelLineHeight + l.yOffset
+                
+                if l.labelPosition == .topRight
+                {
+                    ChartUtils.drawText(context: context,
+                        text: label,
+                        point: CGPoint(
+ 
