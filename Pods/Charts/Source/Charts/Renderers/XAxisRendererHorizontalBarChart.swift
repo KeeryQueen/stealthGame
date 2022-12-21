@@ -281,4 +281,14 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
 
             position.x = 0.0
             position.y = CGFloat(l.limit)
-            position = position.applyi
+            position = position.applying(trans)
+            
+            context.beginPath()
+            context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: position.y))
+            context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: position.y))
+            
+            context.setStrokeColor(l.lineColor.cgColor)
+            context.setLineWidth(l.lineWidth)
+            if l.lineDashLengths != nil
+            {
+ 
