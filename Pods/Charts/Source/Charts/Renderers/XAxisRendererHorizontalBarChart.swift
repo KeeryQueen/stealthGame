@@ -291,4 +291,18 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
             context.setLineWidth(l.lineWidth)
             if l.lineDashLengths != nil
             {
- 
+                context.setLineDash(phase: l.lineDashPhase, lengths: l.lineDashLengths!)
+            }
+            else
+            {
+                context.setLineDash(phase: 0.0, lengths: [])
+            }
+            
+            context.strokePath()
+            
+            let label = l.label
+            
+            // if drawing the limit-value label is enabled
+            if l.drawLabelEnabled && label.count > 0
+            {
+      
