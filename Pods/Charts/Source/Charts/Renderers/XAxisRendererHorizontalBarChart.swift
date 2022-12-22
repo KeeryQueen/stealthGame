@@ -322,4 +322,12 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
                 }
                 else if l.labelPosition == .bottomRight
                 {
-                  
+                    ChartUtils.drawText(context: context,
+                        text: label,
+                        point: CGPoint(
+                            x: viewPortHandler.contentRight - xOffset,
+                            y: position.y + yOffset - labelLineHeight),
+                        align: .right,
+                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
+                }
+   
