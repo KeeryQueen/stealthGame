@@ -338,4 +338,12 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
                             x: viewPortHandler.contentLeft + xOffset,
                             y: position.y - yOffset),
                         align: .left,
-                  
+                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
+                }
+                else
+                {
+                    ChartUtils.drawText(context: context,
+                        text: label,
+                        point: CGPoint(
+                            x: viewPortHandler.contentLeft + xOffset,
+                            y: position.y + yOffset - labelLine
