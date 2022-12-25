@@ -346,4 +346,11 @@ open class XAxisRendererHorizontalBarChart: XAxisRenderer
                         text: label,
                         point: CGPoint(
                             x: viewPortHandler.contentLeft + xOffset,
-                            y: position.y + yOffset - labelLine
+                            y: position.y + yOffset - labelLineHeight),
+                        align: .left,
+                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
+                }
+            }
+        }
+    }
+}
