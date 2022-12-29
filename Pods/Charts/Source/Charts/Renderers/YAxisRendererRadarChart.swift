@@ -26,4 +26,21 @@ open class YAxisRendererRadarChart: YAxisRenderer
     
     @objc public init(viewPortHandler: ViewPortHandler, yAxis: YAxis?, chart: RadarChartView)
     {
-        super.init(viewPortHandler: viewPortHandler, yAxis: yAxis, tra
+        super.init(viewPortHandler: viewPortHandler, yAxis: yAxis, transformer: nil)
+        
+        self.chart = chart
+    }
+    
+    open override func computeAxisValues(min yMin: Double, max yMax: Double)
+    {
+        guard let
+            axis = axis as? YAxis
+            else { return }
+        
+        let labelCount = axis.labelCount
+        let range = abs(yMax - yMin)
+        
+        if labelCount == 0 || range <= 0 || range.isInfinite
+        {
+            axis.entries = [Double]()
+            a
