@@ -53,4 +53,15 @@ open class YAxisRendererRadarChart: YAxisRenderer
         
         // If granularity is enabled, then do not allow the interval to go below specified granularity.
         // This is used to avoid repeated values when rounding values for display.
- 
+        if axis.isGranularityEnabled
+        {
+            interval = interval < axis.granularity ? axis.granularity : interval
+        }
+        
+        // Normalize interval
+        let intervalMagnitude = pow(10.0, floor(log10(interval))).roundedToNextSignficant()
+        let intervalSigDigit = Int(interval / intervalMagnitude)
+        
+        if intervalSigDigit > 5
+        {
+            // Use one order of magnitude higher, to avoid intervals like 0.9 o
