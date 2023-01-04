@@ -120,3 +120,22 @@ open class YAxisRendererRadarChart: YAxisRenderer
             
             var f = first
             var i = 0
+            while i < n
+            {
+                if f == 0.0
+                {
+                    // Fix for IEEE negative zero case (Where value == -0.0, and 0.0 == -0.0)
+                    f = 0.0
+                }
+
+                axis.entries.append(Double(f))
+                
+                f += interval
+                i += 1
+            }
+        }
+        
+        // set decimals
+        if interval < 1
+        {
+            axis.de
