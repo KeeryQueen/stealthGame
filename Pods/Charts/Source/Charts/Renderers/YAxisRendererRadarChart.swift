@@ -106,4 +106,17 @@ open class YAxisRendererRadarChart: YAxisRenderer
             
             if interval != 0.0
             {
-              
+                for _ in stride(from: first, through: last, by: interval)
+                {
+                    n += 1
+                }
+            }
+            
+            n += 1
+            
+            // Ensure stops contains at least n elements.
+            axis.entries.removeAll(keepingCapacity: true)
+            axis.entries.reserveCapacity(labelCount)
+            
+            var f = first
+            var i = 0
