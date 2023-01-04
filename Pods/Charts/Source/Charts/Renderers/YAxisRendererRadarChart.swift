@@ -89,4 +89,21 @@ open class YAxisRendererRadarChart: YAxisRenderer
                 v += step
             }
             
-    
+            n = labelCount
+        }
+        else
+        {
+            // no forced count
+            
+            var first = interval == 0.0 ? 0.0 : ceil(yMin / interval) * interval
+            
+            if centeringEnabled
+            {
+                first -= interval
+            }
+
+            let last = interval == 0.0 ? 0.0 : (floor(yMax / interval) * interval).nextUp
+            
+            if interval != 0.0
+            {
+              
