@@ -75,4 +75,18 @@ open class YAxisRendererRadarChart: YAxisRenderer
         // force label count
         if axis.isForceLabelsEnabled
         {
-            let step = Doub
+            let step = Double(range) / Double(labelCount - 1)
+            
+            // Ensure stops contains at least n elements.
+            axis.entries.removeAll(keepingCapacity: true)
+            axis.entries.reserveCapacity(labelCount)
+            
+            var v = yMin
+            
+            for _ in 0 ..< labelCount
+            {
+                axis.entries.append(v)
+                v += step
+            }
+            
+    
