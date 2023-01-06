@@ -138,4 +138,20 @@ open class YAxisRendererRadarChart: YAxisRenderer
         // set decimals
         if interval < 1
         {
-            axis.de
+            axis.decimals = Int(ceil(-log10(interval)))
+        }
+        else
+        {
+            axis.decimals = 0
+        }
+        
+        if centeringEnabled
+        {
+            axis.centeredEntries.reserveCapacity(n)
+            axis.centeredEntries.removeAll()
+            
+            let offset = (axis.entries[1] - axis.entries[0]) / 2.0
+            
+            for i in 0 ..< n
+            {
+                axis.centeredEntries.append(axis.entries[i] + offset)
