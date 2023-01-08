@@ -155,3 +155,19 @@ open class YAxisRendererRadarChart: YAxisRenderer
             for i in 0 ..< n
             {
                 axis.centeredEntries.append(axis.entries[i] + offset)
+            }
+        }
+        
+        axis._axisMinimum = axis.entries[0]
+        axis._axisMaximum = axis.entries[n-1]
+        axis.axisRange = abs(axis._axisMaximum - axis._axisMinimum)
+    }
+    
+    open override func renderAxisLabels(context: CGContext)
+    {
+        guard let
+            yAxis = axis as? YAxis,
+            let chart = chart
+            else { return }
+        
+        if !yAxis.isE
