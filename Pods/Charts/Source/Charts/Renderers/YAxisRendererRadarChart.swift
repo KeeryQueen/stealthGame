@@ -170,4 +170,18 @@ open class YAxisRendererRadarChart: YAxisRenderer
             let chart = chart
             else { return }
         
-        if !yAxis.isE
+        if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled
+        {
+            return
+        }
+        
+        let labelFont = yAxis.labelFont
+        let labelTextColor = yAxis.labelTextColor
+        
+        let center = chart.centerOffsets
+        let factor = chart.factor
+        
+        let labelLineHeight = yAxis.labelFont.lineHeight
+        
+        let from = yAxis.isDrawBottomYLabelEntryEnabled ? 0 : 1
+        let to = yAxis.isDrawTopYLabelEntryE
