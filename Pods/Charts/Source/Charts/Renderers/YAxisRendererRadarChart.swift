@@ -184,4 +184,14 @@ open class YAxisRendererRadarChart: YAxisRenderer
         let labelLineHeight = yAxis.labelFont.lineHeight
         
         let from = yAxis.isDrawBottomYLabelEntryEnabled ? 0 : 1
-        let to = yAxis.isDrawTopYLabelEntryE
+        let to = yAxis.isDrawTopYLabelEntryEnabled ? yAxis.entryCount : (yAxis.entryCount - 1)
+
+        let alignment: NSTextAlignment = yAxis.labelAlignment
+        let xOffset = yAxis.labelXOffset
+        
+        for j in stride(from: from, to: to, by: 1)
+        {
+            let r = CGFloat(yAxis.entries[j] - yAxis._axisMinimum) * factor
+            
+            let p = center.moving(distance: r, atAngle: chart.rotationAngle)
+            
