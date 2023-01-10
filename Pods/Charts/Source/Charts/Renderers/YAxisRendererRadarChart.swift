@@ -204,4 +204,24 @@ open class YAxisRendererRadarChart: YAxisRenderer
                 align: alignment,
                 attributes: [
                     NSAttributedString.Key.font: labelFont,
-                    NSAttributedString.Key.for
+                    NSAttributedString.Key.foregroundColor: labelTextColor
+                ])
+        }
+    }
+    
+    open override func renderLimitLines(context: CGContext)
+    {
+        guard
+            let yAxis = axis as? YAxis,
+            let chart = chart,
+            let data = chart.data
+            else { return }
+        
+        let limitLines = yAxis.limitLines
+        
+        if limitLines.count == 0
+        {
+            return
+        }
+        
+      
