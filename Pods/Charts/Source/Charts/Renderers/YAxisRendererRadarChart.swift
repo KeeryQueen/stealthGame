@@ -195,3 +195,13 @@ open class YAxisRendererRadarChart: YAxisRenderer
             
             let p = center.moving(distance: r, atAngle: chart.rotationAngle)
             
+            let label = yAxis.getFormattedLabel(j)
+            
+            ChartUtils.drawText(
+                context: context,
+                text: label,
+                point: CGPoint(x: p.x + xOffset, y: p.y - labelLineHeight),
+                align: alignment,
+                attributes: [
+                    NSAttributedString.Key.font: labelFont,
+                    NSAttributedString.Key.for
