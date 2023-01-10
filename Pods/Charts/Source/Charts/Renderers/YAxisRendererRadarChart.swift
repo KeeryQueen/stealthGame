@@ -224,4 +224,18 @@ open class YAxisRendererRadarChart: YAxisRenderer
             return
         }
         
-      
+        context.saveGState()
+        
+        let sliceangle = chart.sliceAngle
+        
+        // calculate the factor that is needed for transforming the value to pixels
+        let factor = chart.factor
+        
+        let center = chart.centerOffsets
+        
+        for i in 0 ..< limitLines.count
+        {
+            let l = limitLines[i]
+            
+            if !l.isEnabled
+           
