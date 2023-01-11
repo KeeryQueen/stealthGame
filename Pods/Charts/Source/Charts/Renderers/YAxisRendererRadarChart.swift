@@ -238,4 +238,18 @@ open class YAxisRendererRadarChart: YAxisRenderer
             let l = limitLines[i]
             
             if !l.isEnabled
-           
+            {
+                continue
+            }
+            
+            context.setStrokeColor(l.lineColor.cgColor)
+            context.setLineWidth(l.lineWidth)
+            if l.lineDashLengths != nil
+            {
+                context.setLineDash(phase: l.lineDashPhase, lengths: l.lineDashLengths!)
+            }
+            else
+            {
+                context.setLineDash(phase: 0.0, lengths: [])
+            }
+      
