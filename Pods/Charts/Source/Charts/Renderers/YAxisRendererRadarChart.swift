@@ -252,4 +252,15 @@ open class YAxisRendererRadarChart: YAxisRenderer
             {
                 context.setLineDash(phase: 0.0, lengths: [])
             }
-      
+            
+            let r = CGFloat(l.limit - chart.chartYMin) * factor
+            
+            context.beginPath()
+            
+            for j in 0 ..< (data.maxEntryCountSet?.entryCount ?? 0)
+            {
+                let p = center.moving(distance: r, atAngle: sliceangle * CGFloat(j) + chart.rotationAngle)
+                
+                if j == 0
+                {
+                    context.move(to: CGPoint(x: p.x, y: p.y)
