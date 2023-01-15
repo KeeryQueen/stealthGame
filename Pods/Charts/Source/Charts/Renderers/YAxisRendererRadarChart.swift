@@ -263,4 +263,19 @@ open class YAxisRendererRadarChart: YAxisRenderer
                 
                 if j == 0
                 {
-                    context.move(to: CGPoint(x: p.x, y: p.y)
+                    context.move(to: CGPoint(x: p.x, y: p.y))
+                }
+                else
+                {
+                    context.addLine(to: CGPoint(x: p.x, y: p.y))
+                }
+            }
+            
+            context.closePath()
+            
+            context.strokePath()
+        }
+        
+        context.restoreGState()
+    }
+}
