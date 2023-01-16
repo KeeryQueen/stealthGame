@@ -155,3 +155,45 @@ open class ChartColorTemplates: NSObject
             var a: Float = 1.0
             var r: Int32 = 0
             var g: Int32 = 0
+            var b: Int32 = 0
+            let scanner: Scanner = Scanner(string: colorString)
+            scanner.scanString("argb", into: nil)
+            scanner.scanCharacters(from: leftParenCharset, into: nil)
+            scanner.scanFloat(&a)
+            scanner.scanCharacters(from: commaCharset, into: nil)
+            scanner.scanInt32(&r)
+            scanner.scanCharacters(from: commaCharset, into: nil)
+            scanner.scanInt32(&g)
+            scanner.scanCharacters(from: commaCharset, into: nil)
+            scanner.scanInt32(&b)
+            return NSUIColor(
+                red: CGFloat(r) / 255.0,
+                green: CGFloat(g) / 255.0,
+                blue: CGFloat(b) / 255.0,
+                alpha: CGFloat(a)
+            )
+        }
+        else if colorString.hasPrefix("rgb")
+        {
+            var r: Int32 = 0
+            var g: Int32 = 0
+            var b: Int32 = 0
+            let scanner: Scanner = Scanner(string: colorString)
+            scanner.scanString("rgb", into: nil)
+            scanner.scanCharacters(from: leftParenCharset, into: nil)
+            scanner.scanInt32(&r)
+            scanner.scanCharacters(from: commaCharset, into: nil)
+            scanner.scanInt32(&g)
+            scanner.scanCharacters(from: commaCharset, into: nil)
+            scanner.scanInt32(&b)
+            return NSUIColor(
+                red: CGFloat(r) / 255.0,
+                green: CGFloat(g) / 255.0,
+                blue: CGFloat(b) / 255.0,
+                alpha: 1.0
+            )
+        }
+        
+        return NSUIColor.clear
+    }
+}
