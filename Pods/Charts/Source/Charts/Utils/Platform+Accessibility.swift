@@ -129,3 +129,88 @@ open class NSUIAccessibilityElement: NSAccessibilityElement
 
     final var isHeader: Bool = false
     {
+        didSet
+        {
+            setAccessibilityRole(isHeader ? .staticText : .none)
+        }
+    }
+
+    final var isSelected: Bool = false
+    {
+        didSet
+        {
+            setAccessibilitySelected(isSelected)
+        }
+    }
+
+    open var accessibilityLabel: String
+    {
+        get
+        {
+            return accessibilityLabel() ?? ""
+        }
+
+        set
+        {
+            setAccessibilityLabel(newValue)
+        }
+    }
+
+    open var accessibilityFrame: NSRect
+    {
+        get
+        {
+            return accessibilityFrame()
+        }
+
+        set
+        {
+            guard let containerView = containerView else { return }
+
+            let bounds = NSAccessibility.screenRect(fromView: containerView, rect: newValue)
+
+            // This works, but won't auto update if the window is resized or moved.
+            // setAccessibilityFrame(bounds)
+
+            // using FrameInParentSpace allows for automatic updating of frame when windows are moved and resized.
+            // However, there seems to be a bug right now where using it causes an offset in the frame.
+            // This is a slightly hacky workaround that calculates the offset and removes it from frame calculation.
+            setAccessibilityFrameInParentSpace(bounds)
+            let axFrame = accessibilityFrame()
+            let widthOffset = abs(axFrame.origin.x - bounds.origin.x)
+            let heightOffset = abs(axFrame.origin.y - bounds.origin.y)
+            let rect = NSRect(x: bounds.origin.x - widthOffset,
+                              y: bounds.origin.y - heightOffset,
+                              width: bounds.width,
+                              height: bounds.height)
+            setAccessibilityFrameInParentSpace(rect)
+        }
+    }
+
+    public init(accessibilityContainer container: Any)
+    {
+        // We can force unwrap since all chart views are subclasses of NSView
+        containerView = (container as! NSView)
+
+        super.init()
+
+        setAccessibilityParent(containerView)
+        setAccessibilityRole(.row)
+    }
+}
+
+/// - Note: setAccessibilityRole(.list) is called at init. See Platform.swift.
+extension NSUIView: NSAccessibilityGroup
+{
+    open override func accessibilityLabel() -> String?
+    {
+        return "Chart View"
+    }
+
+    open override func accessibilityRows() -> [Any]?
+    {
+        return accessibilityChildren()
+    }
+}
+
+#endif
