@@ -15,3 +15,35 @@ public typealias NSUIScreen = UIScreen
 public typealias NSUIDisplayLink = CADisplayLink
 
 open class NSUIView: UIView
+{
+    @objc var nsuiLayer: CALayer?
+    {
+        return self.layer
+    }
+}
+
+extension UIScrollView
+{
+    @objc var nsuiIsScrollEnabled: Bool
+        {
+        get { return isScrollEnabled }
+        set { isScrollEnabled = newValue }
+    }
+}
+
+extension UIScreen
+{
+    @objc final var nsuiScale: CGFloat
+    {
+        return self.scale
+    }
+}
+
+#endif
+
+#if os(OSX)
+import Cocoa
+import Quartz
+
+public typealias NSUIFont = NSFont
+public typealia
