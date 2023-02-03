@@ -114,3 +114,51 @@ func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ 
     var scale = scale
     if scale == 0.0
     {
+        scale = NSScreen.main?.backingScaleFactor ?? 1.0
+    }
+
+    let width = Int(size.width * scale)
+    let height = Int(size.height * scale)
+
+    if width > 0 && height > 0
+    {
+        imageContextStack.append(scale)
+
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+
+        guard let ctx = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 4*width, space: colorSpace, bitmapInfo: (opaque ?  CGImageAlphaInfo.noneSkipFirst.rawValue : CGImageAlphaInfo.premultipliedFirst.rawValue))
+            else { return }
+
+        ctx.concatenate(CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(height)))
+        ctx.scaleBy(x: scale, y: scale)
+        NSUIGraphicsPushContext(ctx)
+    }
+}
+
+func NSUIGraphicsGetImageFromCurrentImageContext() -> NSUIImage?
+{
+    if !imageContextStack.isEmpty
+    {
+        guard let ctx = NSUIGraphicsGetCurrentContext()
+            else { return nil }
+
+        let scale = imageContextStack.last!
+        if let theCGImage = ctx.makeImage()
+        {
+            let size = CGSize(width: CGFloat(ctx.width) / scale, height: CGFloat(ctx.height) / scale)
+            let image = NSImage(cgImage: theCGImage, size: size)
+            return image
+        }
+    }
+    return nil
+}
+
+func NSUIGraphicsEndImageContext()
+{
+    if imageContextStack.last != nil
+    {
+        imageContextStack.removeLast()
+        NSUIGraphicsPopContext()
+    }
+}
+#endif
