@@ -46,4 +46,19 @@ import Cocoa
 import Quartz
 
 public typealias NSUIFont = NSFont
-public typealia
+public typealias NSUIImage = NSImage
+public typealias NSUIScrollView = NSScrollView
+public typealias NSUIScreen = NSScreen
+
+/** On OS X there is no CADisplayLink. Use a 60 fps timer to render the animations. */
+public class NSUIDisplayLink
+{
+    private var timer: Timer?
+    private var displayLink: CVDisplayLink?
+    private var _timestamp: CFTimeInterval = 0.0
+
+    private weak var _target: AnyObject?
+    private var _selector: Selector
+
+    public var timestamp: CFTimeInterval
+    
