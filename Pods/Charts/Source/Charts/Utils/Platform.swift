@@ -61,4 +61,18 @@ public class NSUIDisplayLink
     private var _selector: Selector
 
     public var timestamp: CFTimeInterval
-    
+    {
+        return _timestamp
+    }
+
+		init(target: Any, selector: Selector)
+    {
+        _target = target as AnyObject
+        _selector = selector
+
+        if CVDisplayLinkCreateWithActiveCGDisplays(&displayLink) == kCVReturnSuccess
+        {
+
+            CVDisplayLinkSetOutputCallback(displayLink!, { (displayLink, inNow, inOutputTime, flagsIn, flagsOut, userData) -> CVReturn in
+
+                let _self = unsafeBitCast(userData, to: NSUIDisplayLink.self)
