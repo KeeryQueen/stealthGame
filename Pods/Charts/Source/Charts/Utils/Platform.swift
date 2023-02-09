@@ -148,4 +148,29 @@ open class NSUIView: NSView
     /// (See Platform+Accessibility for details)
     private let role: NSAccessibility.Role = .list
 
-    public override init(frame frameRect: NSRec
+    public override init(frame frameRect: NSRect)
+    {
+        super.init(frame: frameRect)
+        setAccessibilityRole(role)
+    }
+
+    required public init?(coder decoder: NSCoder)
+    {
+        super.init(coder: decoder)
+        setAccessibilityRole(role)
+    }
+
+    public final override var isFlipped: Bool
+    {
+        return true
+    }
+
+    func setNeedsDisplay()
+    {
+        self.setNeedsDisplay(self.bounds)
+    }
+
+
+    open var backgroundColor: NSUIColor?
+        {
+        ge
