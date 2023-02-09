@@ -85,4 +85,27 @@ public class NSUIDisplayLink
         }
         else
         {
-            timer = Timer(timeInterval: 1.0 / 60.0, target: target, selector: s
+            timer = Timer(timeInterval: 1.0 / 60.0, target: target, selector: selector, userInfo: nil, repeats: true)
+        }
+		}
+
+    deinit
+    {
+        stop()
+    }
+
+    open func add(to runloop: RunLoop, forMode mode: RunLoop.Mode)
+    {
+        if displayLink != nil
+        {
+            CVDisplayLinkStart(displayLink!)
+        }
+        else if timer != nil
+        {
+            runloop.add(timer!, forMode: mode)
+        }
+    }
+
+    open func remove(from: RunLoop, forMode: RunLoop.Mode)
+    {
+      
