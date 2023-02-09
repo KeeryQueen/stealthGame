@@ -108,4 +108,30 @@ public class NSUIDisplayLink
 
     open func remove(from: RunLoop, forMode: RunLoop.Mode)
     {
-      
+        stop()
+    }
+
+    private func stop()
+    {
+        if displayLink != nil
+        {
+            CVDisplayLinkStop(displayLink!)
+        }
+        if timer != nil
+        {
+            timer?.invalidate()
+        }
+    }
+}
+
+extension NSView
+{
+    final var nsuiGestureRecognizers: [NSGestureRecognizer]?
+    {
+        return self.gestureRecognizers
+    }
+}
+
+extension NSScrollView
+{
+    var nsuiIsScrollEnabled: Bool
