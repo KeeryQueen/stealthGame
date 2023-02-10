@@ -195,3 +195,28 @@ open class NSUIView: NSView
 extension NSFont
 {
     var lineHeight: CGFloat
+    {
+        // Not sure if this is right, but it looks okay
+        return self.boundingRectForFont.size.height
+    }
+}
+
+extension NSScreen
+{
+    final var nsuiScale: CGFloat
+    {
+        return self.backingScaleFactor
+    }
+}
+
+extension NSImage
+{
+    var cgImage: CGImage?
+    {
+        return self.cgImage(forProposedRect: nil, context: nil, hints: nil)
+    }
+}
+
+extension NSScrollView
+{
+    /// NOTE: Unable to disabl
