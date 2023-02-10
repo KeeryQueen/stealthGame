@@ -219,4 +219,22 @@ extension NSImage
 
 extension NSScrollView
 {
-    /// NOTE: Unable to disabl
+    /// NOTE: Unable to disable scrolling in macOS
+    var scrollEnabled: Bool
+    {
+        get
+        {
+            return true
+        }
+        set
+        {
+        }
+    }
+}
+
+#endif
+
+extension NSUIScreen
+{
+    class var nsuiMain: NSUIScreen? { .main }
+}
