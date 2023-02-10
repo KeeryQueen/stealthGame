@@ -173,4 +173,25 @@ open class NSUIView: NSView
 
     open var backgroundColor: NSUIColor?
         {
-        ge
+        get
+        {
+            return self.layer?.backgroundColor == nil
+                ? nil
+                : NSColor(cgColor: self.layer!.backgroundColor!)
+        }
+        set
+        {
+            self.wantsLayer = true
+            self.layer?.backgroundColor = newValue == nil ? nil : newValue!.cgColor
+        }
+    }
+
+    final var nsuiLayer: CALayer?
+    {
+        return self.layer
+    }
+}
+
+extension NSFont
+{
+    var lineHeight: CGFloat
