@@ -343,3 +343,269 @@ open class ViewPortHandler: NSObject
         {
             newMax = CGFloat.greatestFiniteMagnitude
         }
+        
+        _minScaleX = newMin
+        _maxScaleX = maxScaleX
+        
+        limitTransAndScale(matrix: &_touchMatrix, content: _contentRect)
+    }
+    
+    /// Sets the minimum scale factor for the y-axis
+    @objc open func setMinimumScaleY(_ yScale: CGFloat)
+    {
+        var newValue = yScale
+        
+        if newValue < 1.0
+        {
+            newValue = 1.0
+        }
+        
+        _minScaleY = newValue
+        
+        limitTransAndScale(matrix: &_touchMatrix, content: _contentRect)
+    }
+    
+    /// Sets the maximum scale factor for the y-axis
+    @objc open func setMaximumScaleY(_ yScale: CGFloat)
+    {
+        var newValue = yScale
+        
+        if newValue == 0.0
+        {
+            newValue = CGFloat.greatestFiniteMagnitude
+        }
+        
+        _maxScaleY = newValue
+        
+        limitTransAndScale(matrix: &_touchMatrix, content: _contentRect)
+    }
+    
+    @objc open func setMinMaxScaleY(minScaleY: CGFloat, maxScaleY: CGFloat)
+    {
+        var minScaleY = minScaleY, maxScaleY = maxScaleY
+        
+        if minScaleY < 1.0
+        {
+            minScaleY = 1.0
+        }
+        
+        if maxScaleY == 0.0
+        {
+            maxScaleY = CGFloat.greatestFiniteMagnitude
+        }
+        
+        _minScaleY = minScaleY
+        _maxScaleY = maxScaleY
+        
+        limitTransAndScale(matrix: &_touchMatrix, content: _contentRect)
+    }
+
+    @objc open var touchMatrix: CGAffineTransform
+    {
+        return _touchMatrix
+    }
+    
+    // MARK: - Boundaries Check
+    
+    @objc open func isInBoundsX(_ x: CGFloat) -> Bool
+    {
+        return isInBoundsLeft(x) && isInBoundsRight(x)
+    }
+    
+    @objc open func isInBoundsY(_ y: CGFloat) -> Bool
+    {
+        return isInBoundsTop(y) && isInBoundsBottom(y)
+    }
+    
+    /**
+     A method to check whether coordinate lies within the viewport.
+     
+     - Parameters:
+         - point: a coordinate.
+     */
+    @objc open func isInBounds(point: CGPoint) -> Bool
+    {
+        return isInBounds(x: point.x, y: point.y)
+    }
+    
+    @objc open func isInBounds(x: CGFloat, y: CGFloat) -> Bool
+    {
+        return isInBoundsX(x) && isInBoundsY(y)
+    }
+    
+    @objc open func isInBoundsLeft(_ x: CGFloat) -> Bool
+    {
+        return _contentRect.origin.x <= x + 1.0
+    }
+    
+    @objc open func isInBoundsRight(_ x: CGFloat) -> Bool
+    {
+        let x = floor(x * 100.0) / 100.0
+        return (_contentRect.origin.x + _contentRect.size.width) >= x - 1.0
+    }
+    
+    @objc open func isInBoundsTop(_ y: CGFloat) -> Bool
+    {
+        return _contentRect.origin.y <= y
+    }
+    
+    @objc open func isInBoundsBottom(_ y: CGFloat) -> Bool
+    {
+        let normalizedY = floor(y * 100.0) / 100.0
+        return (_contentRect.origin.y + _contentRect.size.height) >= normalizedY
+    }
+    
+    /**
+     A method to check whether a line between two coordinates intersects with the view port  by using a linear function.
+     
+        Linear function (calculus): `y = ax + b`
+            
+        Note: this method will not check for collision with the right edge of the view port, as we assume lines run from left
+        to right (e.g. `startPoint < endPoint`).
+     
+     - Parameters:
+        - startPoint: the start coordinate of the line.
+        - endPoint: the end coordinate of the line.
+     */
+    @objc open func isIntersectingLine(from startPoint: CGPoint, to endPoint: CGPoint) -> Bool
+    {
+        // If start- and/or endpoint fall within the viewport, bail out early.
+        if isInBounds(point: startPoint) || isInBounds(point: endPoint) { return true }
+        // check if x in bound when it's a vertical line
+        if startPoint.x == endPoint.x { return isInBoundsX(startPoint.x) }
+        
+        // Calculate the slope (`a`) of the line (e.g. `a = (y2 - y1) / (x2 - x1)`).
+        let a = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x)
+        // Calculate the y-correction (`b`) of the line (e.g. `b = y1 - (a * x1)`).
+        let b = startPoint.y - (a * startPoint.x)
+        
+        // Check for colission with the left edge of the view port (e.g. `y = (a * minX) + b`).
+        // if a is 0, it's a horizontal line; checking b here is still valid, as b is `point.y` all the time
+        if isInBoundsY((a * contentRect.minX) + b) { return true }
+
+        // Skip unnecessary check for collision with the right edge of the view port
+        // (e.g. `y = (a * maxX) + b`), as such a line will either begin inside the view port,
+        // or intersect the left, top or bottom edges of the view port. Leaving this logic here for clarity's sake:
+        // if isInBoundsY((a * contentRect.maxX) + b) { return true }
+        
+        // While slope `a` can theoretically never be `0`, we should protect against division by zero.
+        guard a != 0 else { return false }
+        
+        // Check for collision with the bottom edge of the view port (e.g. `x = (maxY - b) / a`).
+        if isInBoundsX((contentRect.maxY - b) / a) { return true }
+        
+        // Check for collision with the top edge of the view port (e.g. `x = (minY - b) / a`).
+        if isInBoundsX((contentRect.minY - b) / a) { return true }
+
+        // This line does not intersect the view port.
+        return false
+    }
+    
+    /// The current x-scale factor
+    @objc open var scaleX: CGFloat
+    {
+        return _scaleX
+    }
+    
+    /// The current y-scale factor
+    @objc open var scaleY: CGFloat
+    {
+        return _scaleY
+    }
+    
+    /// The minimum x-scale factor
+    @objc open var minScaleX: CGFloat
+    {
+        return _minScaleX
+    }
+    
+    /// The minimum y-scale factor
+    @objc open var minScaleY: CGFloat
+    {
+        return _minScaleY
+    }
+    
+    /// The minimum x-scale factor
+    @objc open var maxScaleX: CGFloat
+    {
+        return _maxScaleX
+    }
+    
+    /// The minimum y-scale factor
+    @objc open var maxScaleY: CGFloat
+    {
+        return _maxScaleY
+    }
+    
+    /// The translation (drag / pan) distance on the x-axis
+    @objc open var transX: CGFloat
+    {
+        return _transX
+    }
+    
+    /// The translation (drag / pan) distance on the y-axis
+    @objc open var transY: CGFloat
+    {
+        return _transY
+    }
+    
+    /// if the chart is fully zoomed out, return true
+    @objc open var isFullyZoomedOut: Bool
+    {
+        return isFullyZoomedOutX && isFullyZoomedOutY
+    }
+    
+    /// `true` if the chart is fully zoomed out on it's y-axis (vertical).
+    @objc open var isFullyZoomedOutY: Bool
+    {
+        return !(_scaleY > _minScaleY || _minScaleY > 1.0)
+    }
+    
+    /// `true` if the chart is fully zoomed out on it's x-axis (horizontal).
+    @objc open var isFullyZoomedOutX: Bool
+    {
+        return !(_scaleX > _minScaleX || _minScaleX > 1.0)
+    }
+    
+    /// Set an offset in pixels that allows the user to drag the chart over it's bounds on the x-axis.
+    @objc open func setDragOffsetX(_ offset: CGFloat)
+    {
+        _transOffsetX = offset
+    }
+    
+    /// Set an offset in pixels that allows the user to drag the chart over it's bounds on the y-axis.
+    @objc open func setDragOffsetY(_ offset: CGFloat)
+    {
+        _transOffsetY = offset
+    }
+    
+    /// `true` if both drag offsets (x and y) are zero or smaller.
+    @objc open var hasNoDragOffset: Bool
+    {
+        return _transOffsetX <= 0.0 && _transOffsetY <= 0.0
+    }
+    
+    /// `true` if the chart is not yet fully zoomed out on the x-axis
+    @objc open var canZoomOutMoreX: Bool
+    {
+        return _scaleX > _minScaleX
+    }
+    
+    /// `true` if the chart is not yet fully zoomed in on the x-axis
+    @objc open var canZoomInMoreX: Bool
+    {
+        return _scaleX < _maxScaleX
+    }
+    
+    /// `true` if the chart is not yet fully zoomed out on the y-axis
+    @objc open var canZoomOutMoreY: Bool
+    {
+        return _scaleY > _minScaleY
+    }
+    
+    /// `true` if the chart is not yet fully zoomed in on the y-axis
+    @objc open var canZoomInMoreY: Bool
+    {
+        return _scaleY < _maxScaleY
+    }
+}
