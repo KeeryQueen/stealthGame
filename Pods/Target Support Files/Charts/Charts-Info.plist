@@ -18,4 +18,9 @@
   <string>3.6.0</string>
   <key>CFBundleSignature</key>
   <string>????</string>
-  <key>CFBundleVe
+  <key>CFBundleVersion</key>
+  <string>${CURRENT_PROJECT_VERSION}</string>
+  <key>NSPrincipalClass</key>
+  <string></string>
+</dict>
+</plist>
