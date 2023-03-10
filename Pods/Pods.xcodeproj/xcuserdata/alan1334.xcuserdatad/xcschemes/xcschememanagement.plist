@@ -15,4 +15,11 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<k
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict/>
+</dict>
+</plist>
