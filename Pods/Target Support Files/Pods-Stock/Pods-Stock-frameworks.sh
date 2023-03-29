@@ -33,4 +33,17 @@ install_framework()
     local source="${BUILT_PRODUCTS_DIR}/$1"
   elif [ -r "${BUILT_PRODUCTS_DIR}/$(basename "$1")" ]; then
     local source="${BUILT_PRODUCTS_DIR}/$(basename "$1")"
-  elif [ -r
+  elif [ -r "$1" ]; then
+    local source="$1"
+  fi
+
+  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+
+  if [ -L "${source}" ]; then
+    echo "Symlinked..."
+    source="$(readlink "${source}")"
+  fi
+
+  if [ -d "${source}/${BCSYMBOLMAP_DIR}" ]; then
+    # Locate and install any .bcsymbolmaps if present, and remove them from the .framework before the framework is copied
+    find "${source}/${BCSYMBOLMAP_DIR}" -name "*
