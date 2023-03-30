@@ -75,4 +75,12 @@ install_framework()
     strip_invalid_archs "$binary"
   fi
 
-  # Resign the code if required by the
+  # Resign the code if required by the build settings to avoid unstable apps
+  code_sign_if_enabled "${destination}/$(basename "$1")"
+
+  # Embed linked Swift runtime libraries. No longer necessary as of Xcode 7.
+  if [ "${XCODE_VERSION_MAJOR}" -lt 7 ]; then
+    local swift_runtime_libs
+    swift_runtime_libs=$(xcrun otool -LX "$binary" | grep --color=never @rpath/libswift | sed -E s/@rpath\\/\(.+dylib\).*/\\1/g | uniq -u)
+    for lib in $swift_runtime_libs; do
+      echo "rsy
