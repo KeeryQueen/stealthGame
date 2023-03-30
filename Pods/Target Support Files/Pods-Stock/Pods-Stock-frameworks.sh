@@ -63,3 +63,16 @@ install_framework()
   binary="${destination}/${basename}.framework/${basename}"
 
   if ! [ -r "$binary" ]; then
+    binary="${destination}/${basename}"
+  elif [ -L "${binary}" ]; then
+    echo "Destination binary is symlinked..."
+    dirname="$(dirname "${binary}")"
+    binary="${dirname}/$(readlink "${binary}")"
+  fi
+
+  # Strip invalid architectures so "fat" simulator / device frameworks work on device
+  if [[ "$(file "$binary")" == *"dynamically linked shared library"* ]]; then
+    strip_invalid_archs "$binary"
+  fi
+
+  # Resign the code if required by the
