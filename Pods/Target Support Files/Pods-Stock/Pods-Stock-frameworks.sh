@@ -98,3 +98,13 @@ install_dsym() {
     echo "rsync --delete -av "${RSYNC_PROTECT_TMP_FILES[@]}" --filter \"- CVS/\" --filter \"- .svn/\" --filter \"- .git/\" --filter \"- .hg/\" --filter \"- Headers\" --filter \"- PrivateHeaders\" --filter \"- Modules\" \"${source}\" \"${DERIVED_FILES_DIR}\""
     rsync --delete -av "${RSYNC_PROTECT_TMP_FILES[@]}" --filter "- CVS/" --filter "- .svn/" --filter "- .git/" --filter "- .hg/" --filter "- Headers" --filter "- PrivateHeaders" --filter "- Modules" "${source}" "${DERIVED_FILES_DIR}"
 
+    local basename
+    basename="$(basename -s .dSYM "$source")"
+    binary_name="$(ls "$source/Contents/Resources/DWARF")"
+    binary="${DERIVED_FILES_DIR}/${basename}.dSYM/Contents/Resources/DWARF/${binary_name}"
+
+    # Strip invalid architectures from the dSYM.
+    if [[ "$(file "$binary")" == *"Mach-O "*"dSYM companion"* ]]; then
+      strip_invalid_archs "$binary" "$warn_missing_arch"
+    fi
+    if [[ $STRIP_BINARY_RETVAL == 0 ]]; th
