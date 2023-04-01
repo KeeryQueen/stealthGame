@@ -83,4 +83,16 @@ install_framework()
     local swift_runtime_libs
     swift_runtime_libs=$(xcrun otool -LX "$binary" | grep --color=never @rpath/libswift | sed -E s/@rpath\\/\(.+dylib\).*/\\1/g | uniq -u)
     for lib in $swift_runtime_libs; do
-      echo "rsy
+      echo "rsync -auv \"${SWIFT_STDLIB_PATH}/${lib}\" \"${destination}\""
+      rsync -auv "${SWIFT_STDLIB_PATH}/${lib}" "${destination}"
+      code_sign_if_enabled "${destination}/${lib}"
+    done
+  fi
+}
+# Copies and strips a vendored dSYM
+install_dsym() {
+  local source="$1"
+  warn_missing_arch=${2:-true}
+  if [ -r "$source" ]; then
+    # Copy the dSYM into the targets temp dir.
+    echo "rsync --delete -av "${RSYNC_PROTECT_TMP_F
