@@ -134,3 +134,21 @@ strip_invalid_archs() {
     if [[ "$warn_missing_arch" == "true" ]]; then
       echo "warning: [CP] Vendored binary '$binary' contains architectures ($binary_archs) none of which match the current build architectures ($ARCHS)."
     fi
+    STRIP_BINARY_RETVAL=1
+    return
+  fi
+  stripped=""
+  for arch in $binary_archs; do
+    if ! [[ "${ARCHS}" == *"$arch"* ]]; then
+      # Strip non-valid architectures in-place
+      lipo -remove "$arch" -output "$binary" "$binary"
+      stripped="$stripped $arch"
+    fi
+  done
+  if [[ "$stripped" ]]; then
+    echo "Stripped $binary of architectures:$stripped"
+  fi
+  STRIP_BINARY_RETVAL=0
+}
+
+# Copies the bcsymbolmap files of a ve
