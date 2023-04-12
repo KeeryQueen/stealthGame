@@ -14,4 +14,17 @@ struct Stock: Codable {
 
 struct Meta: Codable {
     let symbol: String
-    let cu
+    let currency: String
+    let exchange: String
+}
+
+struct Value: Codable {
+    let datetime: String
+    let open: String
+    let high: String
+    let low: String
+    let close: String
+    let volume: String
+}
+
+
