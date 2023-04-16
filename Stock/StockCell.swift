@@ -12,4 +12,21 @@ class StockCell: UITableViewCell {
     static let reuseID = "StockCell"
     let codenameLabel = UILabel()
     let typeCurrencyLabel = UILabel()
-    let fullnameLabel
+    let fullnameLabel = UILabel()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func set(data: Data) {
+        codenameLabel.text =  
