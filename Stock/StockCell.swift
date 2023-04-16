@@ -40,4 +40,13 @@ class StockCell: UITableViewCell {
         contentView.addSubview(fullnameLabel)
         
         codenameLabel.translatesAutoresizingMaskIntoConstraints = false
-        typeCurrencyLabel.translat
+        typeCurrencyLabel.translatesAutoresizingMaskIntoConstraints = false
+        fullnameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        codenameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        codenameLabel.textAlignment = .left
+        
+        typeCurrencyLabel.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        typeCurrencyLabel.textAlignment = .left
+        
+        full
