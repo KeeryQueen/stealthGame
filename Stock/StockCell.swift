@@ -29,4 +29,15 @@ class StockCell: UITableViewCell {
     }
     
     func set(data: Data) {
-        codenameLabel.text =  
+        codenameLabel.text =  "     " + data.symbol
+        typeCurrencyLabel.text = "      " + data.type + " " + data.currency
+        fullnameLabel.text = data.name
+    }
+    
+    private func configureUI() {
+        contentView.addSubview(codenameLabel)
+        contentView.addSubview(typeCurrencyLabel)
+        contentView.addSubview(fullnameLabel)
+        
+        codenameLabel.translatesAutoresizingMaskIntoConstraints = false
+        typeCurrencyLabel.translat
