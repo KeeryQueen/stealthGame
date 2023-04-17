@@ -59,4 +59,9 @@ class StockCell: UITableViewCell {
         let padding: CGFloat = 10
         
         NSLayoutConstraint.activate([
-            codenameLabel.topAnchor.constraint
+            codenameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            codenameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            codenameLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width / 2),
+            codenameLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height / 2),
+            
+            typeCurrencyLabel.topAnchor.constra
