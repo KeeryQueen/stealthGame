@@ -49,4 +49,14 @@ class StockCell: UITableViewCell {
         typeCurrencyLabel.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
         typeCurrencyLabel.textAlignment = .left
         
-        full
+        fullnameLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        fullnameLabel.textAlignment = .left
+        fullnameLabel.lineBreakMode = .byClipping
+        fullnameLabel.numberOfLines = 3
+        fullnameLabel.minimumScaleFactor = 0.8
+        fullnameLabel.adjustsFontSizeToFitWidth = true
+        
+        let padding: CGFloat = 10
+        
+        NSLayoutConstraint.activate([
+            codenameLabel.topAnchor.constraint
