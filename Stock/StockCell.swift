@@ -64,4 +64,9 @@ class StockCell: UITableViewCell {
             codenameLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width / 2),
             codenameLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height / 2),
             
-            typeCurrencyLabel.topAnchor.constra
+            typeCurrencyLabel.topAnchor.constraint(equalTo: codenameLabel.bottomAnchor, constant: 2),
+            typeCurrencyLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            typeCurrencyLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width / 2),
+            typeCurrencyLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height / 2),
+            
+            fullnameLabel.topAnchor.constraint(equalTo: co
