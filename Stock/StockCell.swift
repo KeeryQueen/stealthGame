@@ -69,4 +69,13 @@ class StockCell: UITableViewCell {
             typeCurrencyLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width / 2),
             typeCurrencyLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height / 2),
             
-            fullnameLabel.topAnchor.constraint(equalTo: co
+            fullnameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            fullnameLabel.leadingAnchor.constraint(equalTo: codenameLabel.trailingAnchor,constant: 75),
+            fullnameLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width / 2 - 25),
+            fullnameLabel.heightAnchor.constraint(equalToConstant: 50),
+        ])
+        
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selec
