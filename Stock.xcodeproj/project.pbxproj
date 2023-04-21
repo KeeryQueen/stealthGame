@@ -457,3 +457,21 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DBC93C702643E62E00213C0A /* Debug */,
+				DBC93C712643E62E00213C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DBC93C722643E62E00213C0A /* Build configuration list for PBXNativeTarget "Stock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBC93C732643E62E00213C0A /* Debug */,
+				DBC93C742643E62E00213C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DBC93C562643E62800213C0A /* Project object */;
+}
